@@ -1,3 +1,5 @@
+import '../styles/bars.css'
+
 import LeftBar from './LeftBar';
 import RightBar from './RightBar';
 

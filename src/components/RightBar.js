@@ -1,3 +1,5 @@
+import '../styles/rightBar.css'
+
 const RightBar = () => {
 
     return (
