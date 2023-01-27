@@ -1,12 +1,21 @@
+/*--------------------------------- ROOT --------------------------------*/
+
 .center {
     z-index: 1000;
     position: relative;
 
     width: 100%;
     height: 100%;
-
-    /* box-shadow: -1px 0 1px #808080; */
 }
+
+
+
+
+
+
+
+
+/*-------------------------------- HEADER -------------------------------*/
 
 .center header {
     z-index: 1010;
@@ -20,36 +29,48 @@
     color: #000;
     font-size: 1.3rem;
     font-weight: 500;
+    user-select: none;
 
     width: calc(100% - 30px);
     height: 60px;
     margin: 0 15px;
     padding-left: 50px;
 
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border-left: 1px solid rgba(209, 209, 209, 1);
     border-right: 1px solid rgba(209, 209, 209, 1);
     border-bottom: 1px solid rgba(209, 209, 209, 1);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .dark .center header {
     color: #fff;
+
     box-shadow: 0 4px 30px rgba(209, 209, 209, 0.1);
     border-left: 1px solid rgb(131, 131, 131);
     border-right: 1px solid rgb(131, 131, 131);
     border-bottom: 1px solid rgb(131, 131, 131);
 }
 
+
+
+
+
+
+
+
+/*--------------------------------- MAIN --------------------------------*/
+
 .center main {
+    overflow-x: hidden;
+    overflow-y: auto;
+
     width: 100%;
     height: 100vh;
     padding: 0 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 .center main::-webkit-scrollbar {
@@ -62,11 +83,8 @@
 
     width: 100%;
     height: 260px;
-    margin-top: 80px;
-    margin-bottom: 20px;
+    margin: 80px 0 20px 0;
 }
-
-.dark .center main .new-post {}
 
 .center main .new-post .avatar {
     display: flex;
@@ -75,7 +93,7 @@
 
     width: 100%;
     height: 100%;
-    padding-top: 20px;
+    padding: 20px 0 0 0;
 }
 
 .center main .new-post .avatar .avatar-image {
@@ -87,14 +105,27 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.center main .new-post .avatar .anon-image {
+    width: 60px;
+    height: 60px;
+
+    background-image: url('./img/anon5.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+
     cursor: pointer;
 }
 
 .center main .new-post .text-field {
     width: 100%;
     height: 100%;
-    padding-top: 20px;
-    padding-right: 30px;
+    padding: 20px 30px 0 0;
 }
 
 .center main .new-post .text-field textarea {
@@ -105,12 +136,12 @@
     height: 90%;
     padding: 10px;
 
+    background-color: transparent;
     border: 0;
     outline: none;
+
     resize: none;
     overflow: hidden;
-
-    background-color: transparent;
 }
 
 .dark .center main .new-post .text-field textarea {
@@ -125,10 +156,12 @@
     align-items: center;
     gap: 30px;
 
+    user-select: none;
+
     width: calc(100% - 40px);
     height: 100%;
-    margin-right: 40px;
-    padding-right: 40px;
+    margin: 0 40px 0 0;
+    padding: 0 40px 0 0;
 
     border-top: 1px solid #b9b9b9;
 }
@@ -147,43 +180,55 @@
     height: 38px;
 
     background-color: #000;
-    outline: none;
-    cursor: pointer;
     border-radius: 16px;
+    outline: none;
+
+    cursor: pointer;
 }
 
 .dark .center main .new-post .options button {
     color: #000;
+
     background-color: #fff;
 }
 
 .center main .new-post .options input[type=checkbox] {
     position: relative;
-    cursor: pointer;
+
     margin-right: 5px;
+
+    cursor: pointer;
 }
 
 .center main .new-post .options input[type=checkbox]:before {
-    content: "";
-    display: block;
     position: absolute;
-    width: 12px;
-    height: 12px;
     top: 0;
     left: 0;
+
+    display: block;
+
+    content: "";
+
+    width: 12px;
+    height: 12px;
+
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 4px;
 }
 
 .center main .new-post .options input[type=checkbox]:checked:before {
-    content: "";
-    display: block;
     position: absolute;
-    width: 12px;
-    height: 12px;
     top: 0;
     left: 0;
+
+    display: block;
+
+    content: "";
+
+    width: 12px;
+    height: 12px;
+
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 4px;
@@ -196,34 +241,44 @@
 }
 
 .center main .new-post .options input[type=checkbox]:checked:after {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 16px;
-    border: solid #000;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
     position: absolute;
     top: -8px;
     left: 3px;
+
+    display: block;
+
+    content: "";
+
+    width: 8px;
+    height: 16px;
+
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
     border-radius: 2px;
 }
 
 .dark .center main .new-post .options input[type=checkbox]:checked:after {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 16px;
-    border: solid #fff;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
     position: absolute;
     top: -8px;
     left: 3px;
+
+    display: block;
+
+    content: "";
+
+    width: 8px;
+    height: 16px;
+
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
 }
 
 .center main .post {
@@ -258,6 +313,7 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
@@ -271,6 +327,7 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+
     cursor: pointer;
 }
 
@@ -283,14 +340,15 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
 
 .center main .post .avatar .avatar-image:hover,
 .center main .post .avatar .user-image:hover {
-    border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
     backdrop-filter: blur(7.6px);
     -webkit-backdrop-filter: blur(7.6px);
 }
@@ -303,8 +361,8 @@
 
     width: calc(100% - 130px);
     height: 100%;
-    margin-right: 130px;
-    padding-left: 5px;
+    margin: 0 130px 0 0;
+    padding: 0 0 0 5px;
 
     border-bottom: 1px solid #b9b9b9;
 }
@@ -324,16 +382,17 @@
 .center main .post .content {
     grid-area: 2 / 2;
 
-    text-align: left;
     font-size: 1.5rem;
     font-weight: 400;
+    text-align: left;
+
     width: 100%;
     height: 100%;
-    padding-top: 10px;
-    padding-right: 50px;
+    padding: 10px 50px 0 0;
 }
 
 .center main .post .footer {
+    user-select: none;
     grid-area: 3 / 2 / -1 / -1;
 
     display: flex;
@@ -344,8 +403,7 @@
 
     width: 100%;
     height: 100%;
-    padding-top: 15px;
-    padding-right: 30px;
+    padding: 15px 30px 0 0;
 }
 
 .center main .post .footer .element {
@@ -370,12 +428,6 @@
     color: var(--clr);
 }
 
-
-
-
-
-
-
 .center main .loading {
     display: flex;
     justify-content: center;
@@ -389,10 +441,18 @@
     width: 80px;
     height: 80px;
 
-    border-radius: 50%;
     border: 1px solid #666666;
+    border-radius: 50%;
 }
 
+
+
+
+
+
+
+
+/*-------------------------------- MEDIA --------------------------------*/
 
 @media screen and (max-width: 1050px) {
     .center {
@@ -402,25 +462,40 @@
         width: 100vw;
     }
 
+
+
+
+
+
+
+
     .center header {
         width: 100%;
         height: 60px;
         margin: 0 0;
 
-        border-radius: 0;
         box-shadow: 0 0 0 #000;
-        border-left: 0 solid rgb(56, 56, 56);
         border-right: 0 solid rgb(56, 56, 56);
+        border-left: 0 solid rgb(56, 56, 56);
         border-bottom: 1px solid rgb(179, 179, 179);
+        border-radius: 0;
     }
 
     .dark .center header {
         color: #fff;
+
         box-shadow: 0 0 0 #000;
-        border-left: 0 solid rgb(56, 56, 56);
         border-right: 0 solid rgb(56, 56, 56);
+        border-left: 0 solid rgb(56, 56, 56);
         border-bottom: 1px solid rgb(56, 56, 56);
     }
+
+
+
+
+
+
+
 
     .center main {
         width: 100%;
@@ -437,10 +512,11 @@
         margin: 0 0 40px 0;
         padding: 0 0;
 
-        cursor: default;
         border-top: 0;
-        border-left: 0;
         border-right: 0;
+        border-left: 0;
+
+        cursor: default;
     }
 
     .center main .post .avatar {
@@ -456,6 +532,7 @@
 
     .center main .post .title {
         gap: 3px;
+
         font-size: .8rem;
 
         width: calc(100% - 10px);
@@ -465,9 +542,8 @@
 
     .center main .post .content {
         font-size: .9rem;
-        padding-top: 10px;
-        padding-right: 10px;
-        padding-bottom: 5px;
+
+        padding: 10px 10px 50px 0;
     }
 
     .center main .post .footer {
@@ -477,12 +553,8 @@
 
         width: calc(100% - 20px);
         height: calc(100% - 10px);
-        margin-left: 10px;
-        margin-top: 10px;
-        margin-right: 10px;
-        padding-left: 20px;
-        padding-top: 3px;
-        padding-right: 0;
+        margin: 10px 10px 0 10px;
+        padding: 3px 0 0 20px;
 
         border-top: 1px solid #b9b9b9;
     }

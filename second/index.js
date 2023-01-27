@@ -14,3 +14,16 @@ switchx.onclick = () => {
         switchx.style.backgroundColor = "#000"
     }
 }
+
+
+const avatar = document.querySelector('.new-post .avatar .avatar-image')
+const checkbox = document.querySelector('input#anon')
+
+checkbox.onchange = () => {
+    if (checkbox.checked) {
+        avatar.className = 'anon-image'
+    }
+    else {
+        avatar.className = 'avatar-image'
+    }
+}
