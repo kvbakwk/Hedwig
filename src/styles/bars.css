@@ -1,8 +1,0 @@
-.bars {
-    position: fixed;
-
-    display: grid;
-    grid-template: 1fr / 1fr 800px 1fr;
-
-    width: 100vw;
-}

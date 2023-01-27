@@ -1,0 +1,321 @@
+.center {
+    z-index: 1000;
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    /* box-shadow: -1px 0 1px #808080; */
+}
+
+.center header {
+    z-index: 1010;
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 500;
+
+    width: 100%;
+    height: 60px;
+    padding-left: 50px;
+
+    background-color: #fffe;
+    box-shadow: 0 0 2px #808080;
+}
+
+.center main {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.center main::-webkit-scrollbar {
+    width: 0;
+}
+
+.center main .new-post {
+    display: grid;
+    grid-template: 80% 20% / 100px 1fr;
+
+    width: 100%;
+    height: 240px;
+    margin-top: 60px;
+
+    border-top: 1px solid #b9b9b9;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+.center main .new-post .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.center main .new-post .avatar .avatar-image {
+    width: 60px;
+    height: 60px;
+
+    background-image: url('./img/profile.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.center main .new-post .text-field {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.center main .new-post .text-field textarea {
+    font-size: 1.4rem;
+
+    width: 100%;
+    height: 90%;
+    padding: 10px;
+
+    border: 0;
+    outline: none;
+    resize: none;
+}
+
+.center main .new-post .options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: right;
+    align-items: center;
+    gap: 30px;
+
+    width: calc(100% - 40px);
+    height: 100%;
+    margin-right: 40px;
+    padding-right: 40px;
+
+    border-top: 1px solid #b9b9b9;
+}
+
+.center main .new-post .options button {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+
+    width: 95px;
+    height: 38px;
+
+    background-color: #000;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.center main .new-post .options input[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.center main .new-post .options input[type=checkbox]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.center main .new-post .options input[type=checkbox]:checked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.center main .new-post .options input[type=checkbox]:checked:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 16px;
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: -8px;
+    left: 3px;
+}
+
+.center main .post {
+    display: grid;
+    grid-template: 40px 1fr 60px / 100px 1fr;
+
+    width: 100%;
+
+    border-bottom: 1px solid #b9b9b9;
+    cursor: pointer;
+}
+
+.center main .post .avatar {
+    grid-area: 1 / 1 / 2 / -2;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.center main .post .avatar .avatar-image {
+    width: 60px;
+    height: 60px;
+
+    background-image: url('./img/profile.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.center main .post .avatar .anon-image {
+    width: 60px;
+    height: 60px;
+
+    background-image: url('./img/anon5.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.center main .post .avatar .user-image {
+    width: 60px;
+    height: 60px;
+
+    background-image: url('./img/user.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.center main .post .title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+
+    width: calc(100% - 130px);
+    height: 100%;
+    margin-right: 130px;
+    padding-left: 5px;
+
+    border-bottom: 1px solid #b9b9b9;
+}
+
+.center main .post .title span {
+    font-weight: 300;
+}
+
+.center main .post .title span:first-child {
+    font-weight: 500;
+}
+
+.center main .post .content {
+    grid-area: 2 / 2;
+
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 400;
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    padding-right: 50px;
+}
+
+.center main .post .footer {
+    grid-area: 3 / 2 / -1 / -1;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+
+    width: 100%;
+    height: 100%;
+    padding-top: 15px;
+    padding-right: 30px;
+}
+
+.center main .post .footer .element {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 7px;
+
+    font-size: .8rem;
+    font-weight: 700;
+
+    height: 100%;
+}
+
+.center main .post .footer .element {
+    transition: .2s ease-in-out;
+}
+
+.center main .post .footer .element:hover {
+    color: var(--clr);
+}
+
+
+
+
+
+
+
+.center main .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 200px;
+}
+
+.center main .loading .circle {
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+    border: 1px solid #666666;
+}
