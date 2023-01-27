@@ -72,6 +72,8 @@ img {
 
 .glass-hover {
     border: 1px solid transparent;
+    transition: all .1s ease-in-out;
+    border-radius: 16px;
 }
 
 .glass-hover:hover {
@@ -82,6 +84,7 @@ img {
     backdrop-filter: blur(7.6px);
     -webkit-backdrop-filter: blur(7.6px);
     border: 1px solid rgba(209, 209, 209, 1);
+    transition: all .2s ease-in-out;
 }
 
 .dark .glass-hover:hover {
@@ -109,6 +112,16 @@ img {
     backdrop-filter: blur(10.7px);
     -webkit-backdrop-filter: blur(10.7px);
     border: 1px solid rgb(131, 131, 131);
+}
+
+.disabled,
+.disabled:hover {
+    background: transparent;
+    border-radius: 16px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    border: 0;
 }
 
 @media screen and (max-width: 1000px) {
