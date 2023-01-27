@@ -394,8 +394,7 @@
 }
 
 
-
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1050px) {
     .center {
         z-index: 1000;
         position: relative;
