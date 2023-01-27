@@ -186,3 +186,13 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+
+
+
+
+@media screen and (max-width: 1100px) {
+    .left {
+        display: none;
+    }
+}
