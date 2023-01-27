@@ -18,14 +18,14 @@
 <body>
     <div class="container">
         <div class="left">
-            <header>
+            <header class="glass">
                 <!-- S<span>p</span>o<span>t</span>t<span>e</span>d -->
                 <!-- Spot<span>ted</span> -->
                 Spotted
             </header>
             <nav>
-                <div class="element active">
-                    <div class="icon" style="--clr: #000">
+                <div class="element glass-hover active">
+                    <div class="icon" style="--clr: #000; --clrd: #fff">
                         <span class="material-symbols-outlined">
                             home
                         </span>
@@ -34,8 +34,8 @@
                         <span class="name">Główna</span>
                     </div>
                 </div>
-                <div class="element">
-                    <div class="icon" style="--clr: #333388">
+                <div class="element glass-hover">
+                    <div class="icon" style="--clr: #333388; --clrd: #333388">
                         <span class="material-symbols-outlined">
                             auto_stories
                         </span>
@@ -44,8 +44,8 @@
                         <span class="name">Kiermasz</span>
                     </div>
                 </div>
-                <div class="element">
-                    <div class="icon" style="--clr: #ee3333">
+                <div class="element glass-hover">
+                    <div class="icon" style="--clr: #ee3333; --clrd: #ee3333">
                         <span class="material-symbols-outlined">
                             favorite
                         </span>
@@ -54,8 +54,8 @@
                         <span class="name">Polubione</span>
                     </div>
                 </div>
-                <div class="element">
-                    <div class="icon" style="--clr: #336633">
+                <div class="element glass-hover">
+                    <div class="icon" style="--clr: #336633; --clrd: #336633">
                         <span class="material-symbols-outlined">
                             bookmarks
                         </span>
@@ -64,8 +64,8 @@
                         <span class="name">Zapisane</span>
                     </div>
                 </div>
-                <div class="element admin">
-                    <div class="icon" style="--clr: #aa0000">
+                <div class="element glass-hover admin">
+                    <div class="icon" style="--clr: #aa0000; --clrd: #aa0000">
                         <span class="material-symbols-outlined">
                             lock
                         </span>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="profile">
+            <div class="profile glass">
                 <div class="avatar">
                     <div class="avatar-image"></div>
                 </div>
@@ -93,7 +93,7 @@
                 Główna
             </header>
             <main>
-                <div class="new-post">
+                <div class="new-post glass">
                     <div class="avatar">
                         <div class="avatar-image"></div>
                     </div>
@@ -103,14 +103,16 @@
                     <div></div>
                     <div class="options">
                         <div class="anon">
-                            <input type="checkbox" name="anon" id=""> Anonimowo
+                            <label for="anon">
+                                <input type="checkbox" name="anon" id="anon">
+                                Anonimowo</label>
                         </div>
                         <div class="send">
                             <button>Wstaw</button>
                         </div>
                     </div>
                 </div>
-                <div class="post">
+                <div class="post glass-hover">
                     <div class="avatar">
                         <div class="avatar-image"></div>
                     </div>
@@ -122,7 +124,7 @@
                     </div>
                     <div class="content">Siemano widzowie</div>
                     <div class="footer">
-                        <div class="element" style="--clr: #4dd1ff">
+                        <div class="element" style="--clr: #1ed760">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -140,7 +142,7 @@
                             </span>
                             <span>1</span>
                         </div>
-                        <div class="element" style="--clr: #1ed760">
+                        <div class="element" style="--clr: #4dd1ff">
                             <span class="material-symbols-outlined">
                                 visibility
                             </span>
@@ -158,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="post">
+                <div class="post glass-hover">
                     <div class="avatar">
                         <div class="anon-image"></div>
                     </div>
@@ -172,7 +174,7 @@
                         A zaistniał incydent, dzięki któremu nie będziemy musieli znosić pewnego człowieka. Dziękuję,
                         dobranoc.</div>
                     <div class="footer">
-                        <div class="element" style="--clr: #4dd1ff">
+                        <div class="element" style="--clr: #1ed760">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -190,7 +192,7 @@
                             </span>
                             <span>50</span>
                         </div>
-                        <div class="element" style="--clr: #1ed760">
+                        <div class="element" style="--clr: #4dd1ff">
                             <span class="material-symbols-outlined">
                                 visibility
                             </span>
@@ -208,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="post">
+                <div class="post glass-hover">
                     <div class="avatar">
                         <div class="anon-image"></div>
                     </div>
@@ -219,7 +221,7 @@
                     </div>
                     <div class="content">aha</div>
                     <div class="footer">
-                        <div class="element" style="--clr: #4dd1ff">
+                        <div class="element" style="--clr: #1ed760">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -237,7 +239,7 @@
                             </span>
                             <span>0</span>
                         </div>
-                        <div class="element" style="--clr: #1ed760">
+                        <div class="element" style="--clr: #4dd1ff">
                             <span class="material-symbols-outlined">
                                 visibility
                             </span>
@@ -255,7 +257,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="post">
+                <div class="post glass-hover">
                     <div class="avatar">
                         <div class="user-image"></div>
                     </div>
@@ -267,7 +269,7 @@
                     </div>
                     <div class="content">zgubiłem coś obok automatu, help</div>
                     <div class="footer">
-                        <div class="element" style="--clr: #4dd1ff">
+                        <div class="element" style="--clr: #1ed760">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -285,7 +287,7 @@
                             </span>
                             <span>1</span>
                         </div>
-                        <div class="element" style="--clr: #1ed760">
+                        <div class="element" style="--clr: #4dd1ff">
                             <span class="material-symbols-outlined">
                                 visibility
                             </span>
@@ -303,7 +305,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="post">
+                <div class="post glass-hover">
                     <div class="avatar">
                         <div class="anon-image"></div>
                     </div>
@@ -319,7 +321,7 @@
                             ddddddddddddddddddddddddddddddddddddddddd ddddddddddddddddddddd</span>
                     </div>
                     <div class="footer">
-                        <div class="element" style="--clr: #4dd1ff">
+                        <div class="element" style="--clr: #1ed760">
                             <span class="material-symbols-outlined">
                                 thumb_up
                             </span>
@@ -337,11 +339,58 @@
                             </span>
                             <span>4</span>
                         </div>
-                        <div class="element" style="--clr: #1ed760">
+                        <div class="element" style="--clr: #4dd1ff">
                             <span class="material-symbols-outlined">
                                 visibility
                             </span>
                             <span>52</span>
+                        </div>
+                        <div class="element" style="--clr: #3392e0">
+                            <span class="material-symbols-outlined">
+                                share
+                            </span>
+                        </div>
+                        <div class="element" style="--clr: #ff3333">
+                            <span class="material-symbols-outlined">
+                                report
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="post glass-hover">
+                    <div class="avatar">
+                        <div class="anon-image"></div>
+                    </div>
+                    <div class="title">
+                        <span>Anonimowy</span>
+                        <span>·</span>
+                        <span>2d</span>
+                    </div>
+                    <div class="content">kocham</div>
+                    <div class="footer">
+                        <div class="element" style="--clr: #1ed760">
+                            <span class="material-symbols-outlined">
+                                thumb_up
+                            </span>
+                            <span>782</span>
+                        </div>
+                        <div class="element" style="--clr: #e43f32">
+                            <span class="material-symbols-outlined">
+                                thumb_down
+                            </span>
+                            <span>735</span>
+                        </div>
+                        <div class="element" style="--clr: #af3cd4">
+                            <span class="material-symbols-outlined">
+                                forum
+                            </span>
+                            <span>25</span>
+                        </div>
+                        <div class="element" style="--clr: #4dd1ff">
+                            <span class="material-symbols-outlined">
+                                visibility
+                            </span>
+                            <span>901</span>
                         </div>
                         <div class="element" style="--clr: #3392e0">
                             <span class="material-symbols-outlined">
@@ -361,12 +410,17 @@
             </main>
         </div>
         <div class="right">
-            <div class="events">
+            <div class="events glass">
+                <div class="header">
+                    Brak Wydarzeń
+                </div>
+                <div class="list">
 
+                </div>
             </div>
             <div class="rules">
-                <div class="policy active">
-                    <div class="icon" style="--clr: #000">
+                <div class="policy glass active">
+                    <div class="icon" style="--clr: #000 --clrd: var(--clr)">
                         <span class="material-symbols-outlined">
                             book
                         </span>
@@ -381,6 +435,8 @@
             </div>
         </div>
     </div>
+    <div class="switch"></div>
+    <script src="index.js"></script>
 </body>
 
 </html>
