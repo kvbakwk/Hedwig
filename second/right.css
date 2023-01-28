@@ -171,6 +171,8 @@
         grid-template: 1fr / 60px;
 
         width: 60px;
+
+        cursor: pointer;
     }
 
     .right .rules .policy .name {

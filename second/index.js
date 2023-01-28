@@ -27,3 +27,34 @@ checkbox.onchange = () => {
         avatar.className = 'avatar-image'
     }
 }
+
+
+const textfield = document.querySelector('.text-field')
+const textarea = document.querySelector('.text-field textarea')
+const counter = document.querySelector('.text-field .count')
+
+
+setInterval(() => {
+    if (textarea.value.length <= 512)
+        counter.textContent = `${textarea.value.length}`
+
+    if (textarea.value.length > 0)
+        counter.style.opacity = 1
+    else
+        counter.style.opacity = 0
+
+    if (textarea.value.length >= 512) {
+        textarea.value = textarea.value.slice(0, 512)
+        counter.style.color = 'red'
+    } else
+        counter.style.color = 'inherit'
+
+    if (textarea.value.length <= 200)
+        textfield.style.height = '200px'
+    if (200 < textarea.value.length && textarea.value.length <= 350)
+        textfield.style.height = '290px'
+    if (350 < textarea.value.length)
+        textfield.style.height = '370px'
+
+}, 1)
+
