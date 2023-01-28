@@ -78,6 +78,8 @@
 }
 
 .center main .new-post {
+    z-index: 1009;
+
     display: grid;
     grid-template: auto 25% / 100px 1fr;
 
@@ -302,6 +304,8 @@
 }
 
 .center main .post {
+    z-index: 1008;
+
     display: grid;
     grid-template: 40px 1fr 60px / 100px 1fr;
 
@@ -611,4 +615,23 @@
         width: 30px;
         height: 30px;
     }
+}
+
+
+
+
+
+
+
+
+/*-------------------------------- MEDIA --------------------------------*/
+
+.hidden {
+    opacity: 0;
+
+    transition: opacity .4s ease-in-out;
+}
+
+.show {
+    opacity: 1;
 }

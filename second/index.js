@@ -58,3 +58,17 @@ setInterval(() => {
 
 }, 1)
 
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show')
+        }
+    })
+})
+
+
+const posts = document.querySelectorAll('.post')
+const loader = document.querySelector('.loading')
+posts.forEach((e) => observer.observe(e))
+observer.observe(loader)
