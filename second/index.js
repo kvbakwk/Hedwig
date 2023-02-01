@@ -72,3 +72,17 @@ const posts = document.querySelectorAll('.post')
 const loader = document.querySelector('.loading')
 posts.forEach((e) => observer.observe(e))
 observer.observe(loader)
+
+
+
+const navbar = document.querySelector('.navbar')
+const icon = document.querySelector('#icon')
+const navHandle = (e) => {
+    if (navbar.classList.length == 1) {
+        navbar.classList.add('showNav')
+        icon.textContent = 'expand_more'
+    } else {
+        navbar.classList.remove('showNav')
+        icon.textContent = 'expand_less'
+    }
+}

@@ -1,0 +1,113 @@
+.bar {
+    z-index: 10000;
+    position: absolute;
+    bottom: 0;
+
+    display: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    width: 100vw;
+    height: 56px;
+    padding: 0 20px;
+
+    background-color: #fff;
+}
+
+.dark .bar {
+    background-color: #000;
+}
+
+.navbar {
+    z-index: 9999;
+    position: absolute;
+    bottom: 0;
+
+    display: none;
+    grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+
+    width: 100vw;
+    height: 57px;
+    padding: 0 20px 56px;
+
+    background-color: #fff;
+    border-top: 1px solid #b9b9b9;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    transition: all .4s ease-in-out;
+}
+
+.dark .navbar {
+    background-color: #000;
+    border-top: 1px solid #2f3336;
+}
+
+
+.showNav {
+    height: 250px;
+
+    box-shadow: 0 -2px 5px #ccc;
+}
+
+.dark .showNav {
+    box-shadow: 0 -2px 5px #444;
+}
+
+.navbar .element {
+    display: none;
+}
+
+.navbar .element .icon span {
+    color: var(--clr);
+    font-size: 2.2rem;
+}
+
+.dark .navbar .element .icon span {
+    color: var(--clrd);
+}
+
+.navbar .element .name {
+    font-size: .8rem;
+}
+
+.navbar .element .avatar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.navbar .element .avatar .avatar-image {
+    width: 40px;
+    height: 40px;
+
+    background-image: url('./img/profile.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+.showNav .element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1050px) {
+    .bar {
+        display: flex;
+    }
+
+    .navbar {
+        display: grid;
+    }
+}
