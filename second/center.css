@@ -67,7 +67,7 @@
 .center main {
     overflow-x: hidden;
     overflow-y: auto;
-    scrollbar-width: 0px;
+    scrollbar-width: none;
 
     width: 100%;
     height: 100vh;
@@ -207,6 +207,11 @@
     outline: none;
 
     cursor: pointer;
+}
+
+
+.center main .new-post .options button::-moz-focus-inner {
+    border: 0;
 }
 
 .dark .center main .new-post .options button {
