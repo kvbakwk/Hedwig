@@ -80,6 +80,7 @@
 
 .left nav .element:hover {
     background-color: #fafafa;
+    cursor: pointer;
 }
 
 .dark .left nav .element:hover {
@@ -277,6 +278,8 @@
 
         width: 60px;
         height: 60px;
+
+        cursor: pointer;
     }
 
     .left .profile .avatar {

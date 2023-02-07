@@ -505,6 +505,7 @@
         height: 60px;
         margin: 0 0;
 
+        background-color: #fff9;
         box-shadow: 0 0 0 #000;
         border-right: 0 solid rgb(56, 56, 56);
         border-left: 0 solid rgb(56, 56, 56);
@@ -515,6 +516,7 @@
     .dark .center header {
         color: #fff;
 
+        background-color: #0009;
         box-shadow: 0 0 0 #000;
         border-right: 0 solid rgb(56, 56, 56);
         border-left: 0 solid rgb(56, 56, 56);
@@ -571,7 +573,7 @@
 
         font-size: .8rem;
 
-        width: 100%;
+        width: 90%;
         padding-left: 0;
     }
 
@@ -633,11 +635,13 @@
 /*-------------------------------- MEDIA --------------------------------*/
 
 .hidden {
-    opacity: 0;
+    opacity: .5;
+    transform: translateY(25%);
 
-    transition: opacity .4s ease-in-out;
+    transition: opacity .1s ease-in-out, transform .5s ease-in-out;
 }
 
 .show {
     opacity: 1;
+    transform: translateY(0);
 }
