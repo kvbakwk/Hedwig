@@ -451,8 +451,16 @@
     padding: 0 10px;
 }
 
-.center main .post .footer .element {
-    transition: .2s ease-in-out;
+.center main .post .footer .element span {
+    transition: .3s ease-in-out;
+}
+
+.center main .post .footer .element span:nth-child(2) {
+    color: #000 !important;
+}
+
+.dark .center main .post .footer .element span:nth-child(2) {
+    color: #fff !important;
 }
 
 .center main .post .footer .element:hover {
