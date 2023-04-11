@@ -87,8 +87,6 @@ img {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(209, 209, 209, 1);
     border-radius: 16px;
-    backdrop-filter: blur(7.6px);
-    -webkit-backdrop-filter: blur(7.6px);
 }
 
 .dark .glass {
@@ -96,8 +94,6 @@ img {
     box-shadow: 0 4px 30px rgba(209, 209, 209, 0.1);
     border: 1px solid rgb(131, 131, 131);
     border-radius: 16px;
-    backdrop-filter: blur(10.7px);
-    -webkit-backdrop-filter: blur(10.7px);
 }
 
 .glass-hover {
@@ -114,8 +110,6 @@ img {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(209, 209, 209, 1);
     border-radius: 16px;
-    backdrop-filter: blur(7.6px);
-    -webkit-backdrop-filter: blur(7.6px);
 
     transition: all .2s ease-in-out;
 }
