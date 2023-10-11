@@ -1,2 +1,2 @@
 # Hedwig
-Twitter for the school.
+Mix of twitter/x and spotted for the schools.
