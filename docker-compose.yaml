@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:3000"
     volumes:
-      - ./app:/www/app
-      - ./components:/www/components
+      - ./src/app:/www/app
+      - ./src/components:/www/components
     networks:
       - internal
     restart: unless-stopped
