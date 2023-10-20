@@ -17,8 +17,8 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_USER: root
       POSTGRES_DB: hedwig
-    # volumes:
-    #   - ./:/docker-entrypoint-initdb.d
+    volumes:
+      - ./docker/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - internal
     restart: unless-stopped
