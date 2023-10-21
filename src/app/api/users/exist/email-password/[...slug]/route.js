@@ -2,6 +2,7 @@ import conn from "@app/utils/conn";
 
 export async function POST(request, { params }) {
   const data = params.slug;
+  console.log('ss');
   console.log(data);
   const client = conn();
   const res = await client.query(
