@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import login from "../utils/login";
 import { validateEmail, validatePassword } from "@app/utils/validator";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
@@ -13,10 +15,9 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formElements = e.target.children;
-
-    let email = false;
-    let password = false;
-    let account = false;
+    let email,
+      password,
+      account = false;
 
     formElements[0].value !== ""
       ? (email = !validateEmail(formElements[0].value))
@@ -26,9 +27,14 @@ export default function LoginPage() {
       : (password = true);
 
     if (!email && !password) {
-      if (await login(formElements[0].value, formElements[1].value, formElements[3].value)) {
+      if (
+        await fetch(
+          `http://localhost/api/login/${formElements[0].value}/${formElements[1].value}/${formElements[2].value}`,
+          { status: 200, headers: {}, method: "post" }
+        ).then((res) => res.json())
+      ) {
         account = false;
-        // do something
+        router.push("/");
       } else account = true;
     }
 
@@ -41,7 +47,7 @@ export default function LoginPage() {
     <div>
       <form onSubmit={handleSubmit} method="post">
         <input
-          className={emailErr? "text-red-400" : ""}
+          className={emailErr ? "text-red-400" : ""}
           type="text"
           name="email"
           placeholder="e-mail"
