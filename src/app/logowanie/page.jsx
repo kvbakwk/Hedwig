@@ -14,33 +14,23 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formElements = e.target.children;
-    let email,
-      password,
-      account = false;
+    let email = e.target.children[0].value,
+      password = e.target.children[1].value,
+      remember = e.target.children[2].value;
 
-    formElements[0].value !== ""
-      ? (email = !validateEmail(formElements[0].value))
-      : (email = true);
-    formElements[1].value !== ""
-      ? (password = !validatePassword(formElements[1].value))
-      : (password = true);
+    const isValid = validateEmail(email) && validatePassword(password);
+    
+    if (isValid) {
+      const isLogged = await login(email, password, remember);
 
-    if (!email && !password) {
-      if (
-        await fetch(
-          `http://localhost/api/login/${formElements[0].value}/${formElements[1].value}/${formElements[2].value}`,
-          { status: 200, headers: {}, method: "post" }
-        ).then((res) => res.json())
-      ) {
-        account = false;
+      if (isLogged)
         router.push("/");
-      } else account = true;
+      else
+        setAccountErr(true);
+    } else {
+      setEmailErr(!validateEmail(email));
+      setPasswordErr(!validatePassword(password));
     }
-
-    setEmailErr(email);
-    setPasswordErr(password);
-    setAccountErr(account);
   };
 
   return (
