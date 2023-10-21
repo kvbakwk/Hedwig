@@ -8,8 +8,6 @@ const pool = new Pool({
 });
 
 export default function conn() {
-  pool.connect((err) => {
-    if (err) throw err;
-  });
+  pool.connect(err => {if(err) throw err;});
   return pool;
 }
