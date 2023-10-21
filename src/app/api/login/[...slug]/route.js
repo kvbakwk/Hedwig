@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 import conn from "@app/utils/conn";
 
 export async function POST(request, { params }) {
@@ -8,5 +10,9 @@ export async function POST(request, { params }) {
     [data[0], data[1]]
   );
 
-  return new Response(res.rowCount > 0, { status: 200 });
+  if (res.rowCount > 0) {
+    return new NextResponse(true, { status: 200 });
+  }
+
+  return new NextResponse(false, { status: 401 });
 }
