@@ -10,3 +10,8 @@ INSERT INTO public.users VALUES
 (default, 'j.kawka@zsp9.elodz.edu.pl', 'Jakub', 'Kawka', 'zaq1@WSX'),
 (default, 'a.kowalski@zsp9.elodz.edu.pl', 'Adam', 'Kowalski', 'zaq1@WSX'),
 (default, 'n.kwiatkowska@zsp9.elodz.edu.pl', 'Natalia', 'Kwiatkowska', 'zaq1@WSX');
+
+CREATE TABLE IF NOT EXISTS public.users_devices (
+    user_id int,
+    device_id VARCHAR(100) PRIMARY KEY
+);
