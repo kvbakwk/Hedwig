@@ -1,15 +1,13 @@
-import './globals.css'
+import "./globals.css";
 
 export const metadata = {
-  title: 'Hedwig',
-}
+  title: "Schcool",
+};
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="pl">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  )
+  );
 }
