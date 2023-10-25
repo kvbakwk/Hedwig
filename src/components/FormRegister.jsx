@@ -1,9 +1,14 @@
 "use client";
 
+import register from "@app/utils/register";
+
 export default function FormRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { email, fullname, password, passwordValid } = e.target.elements;
+
+    console.log(await register(email.value, fullname.value, password.value, passwordValid.value));
   };
 
   return (

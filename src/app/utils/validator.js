@@ -4,5 +4,15 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-  return password.length >= 8;
+  const pattern = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9@$!%*#?&]{8,}$/;
+  return pattern.test(password);
+};
+
+export const validatePasswords = (password1, password2) => {
+  return password1 == password2;
+};
+
+export const validateFullname = (fullname) => {
+  const pattern = /[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+/;
+  return pattern.test(fullname);
 };
