@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import login from "@app/utils/login";
-import { validateEmail, validatePassword } from "@app/utils/validator";
 
 export default function FormLogin() {
   const router = useRouter();
@@ -16,25 +15,12 @@ export default function FormLogin() {
     e.preventDefault();
     const { email, password, remember } = e.target.elements;
 
-    const isValid =
-      validateEmail(email.value) && validatePassword(password.value);
+    const res = await login(email.value, password.value, remember.checked);
 
-    if (isValid) {
-      const isLogged = await login(
-        email.value,
-        password.value,
-        remember.checked
-      );
-
-      if (isLogged) router.push("/");
-      else setAccountErr(true);
-      setEmailErr(false);
-      setPasswordErr(false);
-    } else {
-      setEmailErr(!validateEmail(email.value));
-      setPasswordErr(!validatePassword(password.value));
-      setAccountErr(false);
-    }
+    setEmailErr(res.emailErr);
+    setPasswordErr(res.passwordErr);
+    setAccountErr(res.accountErr);
+    if(res.login) router.push('/')
   };
 
   return (

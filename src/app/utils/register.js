@@ -12,7 +12,7 @@ export default async function register(email, fullname, password, passwordValid)
   const client = conn();
 
   const validateAccount = async (email) => {
-    const res = await client.query('SELECT id FROM users WHERE email = $1;', [email])
+    const res = await client.query('SELECT id FROM public.users WHERE email = $1;', [email])
     return res.rowCount === 0;
   }
 
