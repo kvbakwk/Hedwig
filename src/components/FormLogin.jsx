@@ -20,7 +20,7 @@ export default function FormLogin() {
     setEmailErr(res.emailErr);
     setPasswordErr(res.passwordErr);
     setAccountErr(res.accountErr);
-    if(res.login) router.push('/')
+    if (res.login) router.push("/");
   };
 
   return (
@@ -50,6 +50,9 @@ export default function FormLogin() {
         <span className="text-red-400">
           podane e-mail lub hasło jest nieprawidłowe
         </span>
+      )}
+      {!login && (
+        <span className="text-red-400">coś poszło nie tak, spróbuj ponownie później</span>
       )}
       <input type="submit" value="zaloguj się" />
     </form>

@@ -24,7 +24,7 @@ export default async function register(email, fullname, password, passwordValid)
     await validateAccount(email);
 
   return {
-    registered: isValid,
+    register: isValid,
     emailErr: !validateEmail(email),
     fullnameErr: !validateFullname(fullname),
     passwordErr: !validatePassword(password),
