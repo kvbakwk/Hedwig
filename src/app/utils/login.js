@@ -24,33 +24,23 @@ export default async function login(email, password, remember) {
     (await validateAccount(email, password));
 
   if (isValid) {
-    const newUuid = uuid();
+    if (!cookies().has("device_id"))
+      cookies().set("device_id", uuid(), { secure: true, path: "/" });
+
     const res = await client.query(
       "SELECT id FROM public.users WHERE email = $1 AND password = $2;",
       [email, password]
     );
 
-    if (cookies().has("device_id")) {
-      await client.query(
-        "DELETE FROM public.users_devices WHERE device_id = $1;",
-        [cookies().get("device_id").value]
-      );
-    }
+    const expireDate = new Date();
+    remember
+      ? expireDate.setMonth(expireDate.getMonth() + 3)
+      : expireDate.setHours(expireDate.getHours() + 6);
 
-    await client.query("INSERT INTO public.users_devices VALUES ($1, $2);", [
-      res.rows[0].id,
-      newUuid,
-    ]);
-
-    if (remember) {
-      cookies().set("device_id", newUuid, { secure: true, path: "/" });
-    } else {
-      cookies().set("device_id", newUuid, {
-        secure: true,
-        path: "/",
-        expires: Date.now() + 28800000,
-      });
-    }
+    await client.query(
+      "INSERT INTO public.users_devices VALUES ($1, $2, $3);",
+      [res.rows[0].id, cookies().get("device_id").value, expireDate]
+    );
   }
 
   return {
@@ -58,7 +48,8 @@ export default async function login(email, password, remember) {
     emailErr: !validateEmail(email),
     passwordErr: !validatePassword(password),
     accountErr:
-      (validateEmail(email) && validatePassword(password)) &&
+      validateEmail(email) &&
+      validatePassword(password) &&
       !(await validateAccount(email, password)),
   };
 }
@@ -68,10 +59,18 @@ export async function loginCheck(inLogin) {
 
   if (cookies().has("device_id")) {
     const res = await client.query(
-      "SELECT user_id FROM public.users_devices WHERE device_id = $1;",
+      "SELECT user_id, expire_date FROM public.users_devices WHERE device_id = $1;",
       [cookies().get("device_id").value]
     );
-    if (res.rowCount > 0) if (inLogin) redirect("/");
-  } else if (!inLogin) redirect("/logowanie");
+    if (res.rowCount > 0) {
+      if (new Date(res.rows[0].expire_date) < new Date()) {
+        await client.query(
+          "DELETE FROM public.users_devices WHERE device_id = $1;",
+          [cookies().get("device_id").value]
+        );
+        if (!inLogin) redirect("/logowanie");
+      } else if (inLogin) redirect("/");
+    } else if (!inLogin) redirect("/logowanie");
+  }
   return false;
 }

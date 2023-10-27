@@ -12,6 +12,7 @@ INSERT INTO public.users VALUES
 (default, 'n.kwiatkowska@zsp9.elodz.edu.pl', 'Natalia', 'Kwiatkowska', 'zaq1@WSX');
 
 CREATE TABLE IF NOT EXISTS public.users_devices (
-    user_id int,
-    device_id VARCHAR(100) PRIMARY KEY
+    user_id INT,
+    device_id VARCHAR(100) PRIMARY KEY,
+    expire_date TIMESTAMP
 );
