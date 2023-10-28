@@ -75,5 +75,4 @@ export async function loginCheck(inLogin) {
       } else if (inLogin) redirect("/");
     } else if (!inLogin) redirect("/logowanie");
   } else if (!inLogin) redirect("/logowanie");
-  return false;
 }
