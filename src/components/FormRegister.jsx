@@ -81,11 +81,6 @@ export default function FormRegister() {
       {passwordsErr && (
         <span className="text-red-400">podane hasła nie są identyczne</span>
       )}
-      {!register && (
-        <span className="text-red-400">
-          coś poszło nie tak, spróbuj ponownie później
-        </span>
-      )}
       <input type="submit" value="zarejestruj się" />
     </form>
   );

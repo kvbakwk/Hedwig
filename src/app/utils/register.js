@@ -1,12 +1,13 @@
 "use server";
 
+import { Pool } from "pg";
+
 import {
   validateEmail,
   validateFullname,
   validatePassword,
   validatePasswords,
 } from "./validator";
-import conn from "./conn";
 
 export default async function register(
   email,
@@ -14,13 +15,13 @@ export default async function register(
   password,
   passwordValid
 ) {
-  const client = conn();
-
   const validateAccount = async (email) => {
+    const client = new Pool();
     const res = await client.query(
       "SELECT id FROM public.users WHERE email = $1;",
       [email]
     );
+    await client.end();
     return res.rowCount === 0;
   };
 
@@ -32,11 +33,13 @@ export default async function register(
     (await validateAccount(email));
 
   if (isValid) {
+    const client = new Pool();
     const name = fullname.split(" ");
     await client.query(
       "INSERT INTO public.users VALUES (DEFAULT, $1, $2, $3, $4);",
       [email, name[0], name[1], password]
     );
+    await client.end();
   }
 
   return {

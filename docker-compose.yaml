@@ -8,6 +8,12 @@ services:
     volumes:
       - ./src/app:/www/app
       - ./src/components:/www/components
+    environment:
+      - PGHOST=postgresql
+      - PGDATABASE=hedwig
+      - PGUSER=root
+      - PGPASSWORD=root
+      - PGPORT=5432
     networks:
       - internal
     restart: unless-stopped

@@ -1,20 +1,21 @@
 "use server";
 
+import { Pool } from "pg";
+
 import { uuid } from "uuidv4";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { validateEmail, validatePassword } from "@app/utils/validator";
-import conn from "@app/utils/conn";
 
 export default async function login(email, password, remember) {
-  const client = conn();
-
   const validateAccount = async (email, password) => {
+    const client = new Pool();
     const res = await client.query(
       "SELECT id FROM public.users WHERE email = $1 AND password = $2;",
       [email, password]
     );
+    await client.end();
     return res.rowCount === 1;
   };
 
@@ -24,6 +25,7 @@ export default async function login(email, password, remember) {
     (await validateAccount(email, password));
 
   if (isValid) {
+    const client = new Pool();
     if (!cookies().has("device_id"))
       cookies().set("device_id", uuid(), { secure: true, path: "/" });
 
@@ -41,6 +43,7 @@ export default async function login(email, password, remember) {
       "INSERT INTO public.users_devices VALUES ($1, $2, $3);",
       [res.rows[0].id, cookies().get("device_id").value, expireDate]
     );
+    await client.end();
   }
 
   return {
@@ -55,8 +58,7 @@ export default async function login(email, password, remember) {
 }
 
 export async function loginCheck(inLogin) {
-  const client = conn();
-
+  const client = new Pool();
   if (cookies().has("device_id")) {
     const res = await client.query(
       "SELECT user_id, expire_date FROM public.users_devices WHERE device_id = $1;",
@@ -68,9 +70,10 @@ export async function loginCheck(inLogin) {
           "DELETE FROM public.users_devices WHERE device_id = $1;",
           [cookies().get("device_id").value]
         );
+        await client.end();
         if (!inLogin) redirect("/logowanie");
       } else if (inLogin) redirect("/");
     } else if (!inLogin) redirect("/logowanie");
-  }
+  } else if (!inLogin) redirect("/logowanie");
   return false;
 }
