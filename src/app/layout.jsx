@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Schcool",
+  title: "schcool",
 };
 
 export default async function RootLayout({ children }) {
