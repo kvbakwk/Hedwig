@@ -7,12 +7,24 @@ CREATE TABLE IF NOT EXISTS public.users (
 );
 
 INSERT INTO public.users VALUES 
-(default, 'j.kawka@zsp9.elodz.edu.pl', 'Jakub', 'Kawka', 'zaq1@WSX'),
-(default, 'a.kowalski@zsp9.elodz.edu.pl', 'Adam', 'Kowalski', 'zaq1@WSX'),
-(default, 'n.kwiatkowska@zsp9.elodz.edu.pl', 'Natalia', 'Kwiatkowska', 'zaq1@WSX');
+(DEFAULT, 'j.kawka@zsp9.elodz.edu.pl', 'Jakub', 'Kawka', 'zaq1@WSX'),
+(DEFAULT, 'a.kowalski@zsp9.elodz.edu.pl', 'Adam', 'Kowalski', 'zaq1@WSX'),
+(DEFAULT, 'n.kwiatkowska@zsp9.elodz.edu.pl', 'Natalia', 'Kwiatkowska', 'zaq1@WSX');
 
 CREATE TABLE IF NOT EXISTS public.users_devices (
-    user_id INT,
-    device_id VARCHAR(100) PRIMARY KEY,
-    expire_date TIMESTAMP
+    user_id INT REFERENCES public.users(id) NOT NULL,
+    device_id VARCHAR(100) NOT NULL,
+    expire_date TIMESTAMP NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS public.posts (
+    id SERIAL PRIMARY KEY NOT NULL,
+    user_id INT REFERENCES public.users(id) NOT NULL,
+    content VARCHAR(255) NOT NULL,
+    create_date TIMESTAMP NOT NULL
+);
+
+INSERT INTO public.posts VALUES
+(DEFAULT, 1, 'Siemano widzowie', '2023-10-10 12:00:00'),
+(DEFAULT, 2, 'xdddd', '2023-10-10 12:01:00'),
+(DEFAULT, 1, 'aha', '2023-10-12 12:00:00');
