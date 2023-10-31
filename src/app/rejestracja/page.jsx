@@ -1,4 +1,4 @@
-import { loginCheck } from "@app/utils/login";
+import { loginCheck } from "@app/api/login";
 
 import FormRegister from "@components/FormRegister";
 

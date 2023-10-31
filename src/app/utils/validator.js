@@ -16,3 +16,7 @@ export const validateFullname = (fullname) => {
   const pattern = /[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+/;
   return pattern.test(fullname);
 };
+
+export const validatePostContent = (content) => {
+  return content.length > 0 && content.length < 256;
+};
