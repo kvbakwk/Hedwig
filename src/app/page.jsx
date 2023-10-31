@@ -1,23 +1,23 @@
 import { Pool } from "pg";
 
-import { loginCheck } from "./utils/login";
+import { loginCheck } from "./api/login";
+import getUser from "./api/users/get";
+import getAllPosts from "./api/posts/getAll";
 import timeAgo from "./utils/time";
 
 import FormNewPost from "@components/FormNewPost";
 
+
 export default async function HomePage() {
   await loginCheck(false);
 
-  const client = new Pool();
-  const posts = await client.query(
-    "SELECT posts.id, users.email, users.firstname, users.lastname, posts.content, posts.create_date FROM posts JOIN users ON posts.user_id = users.id;"
-  );
-  await client.end();
+  const user = await getUser();
+  const posts = await getAllPosts();
 
   return (
     <div>
-      <FormNewPost />
-      {posts.rows.map((post) => (
+      <FormNewPost user={user}/>
+      {posts.map((post) => (
         <div key={post.id}>
           <p>
             <b>
