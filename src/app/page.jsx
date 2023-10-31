@@ -3,6 +3,8 @@ import { Pool } from "pg";
 import { loginCheck } from "./utils/login";
 import timeAgo from "./utils/time";
 
+import FormNewPost from "@components/FormNewPost";
+
 export default async function HomePage() {
   await loginCheck(false);
 
@@ -14,10 +16,14 @@ export default async function HomePage() {
 
   return (
     <div>
+      <FormNewPost />
       {posts.rows.map((post) => (
         <div key={post.id}>
           <p>
-            <b>{post.firstname.toLowerCase()} {post.lastname.toLowerCase()}</b> {post.email.split('@')[0]} · {timeAgo(post.create_date.getTime())}
+            <b>
+              {post.firstname.toLowerCase()} {post.lastname.toLowerCase()}
+            </b>{" "}
+            {post.email.split("@")[0]} · {timeAgo(post.create_date.getTime())}
           </p>
           <p>{post.content}</p>
           <br />
