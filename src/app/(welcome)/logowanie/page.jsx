@@ -11,7 +11,7 @@ export default async function LoginPage() {
   await loginCheck(true);
 
   return (
-    <div>
+    <div className="flex justify-center items-center w-full h-full">
       <FormLogin />
     </div>
   );

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +16,23 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+  font-family: roboto;
+
   color: var(--foreground);
   background: var(--background);
+}
+
+.fill {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.glass,
+.glass-hover:hover {
+  @apply border-[1px] border-gray-300 border-solid bg-white transition-shadow rounded-2xl;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
 }
