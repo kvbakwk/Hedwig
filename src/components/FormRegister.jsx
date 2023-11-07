@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import register from "@app/utils/register";
+import register from "@app/api/register";
 
 export default function FormRegister() {
   const router = useRouter();

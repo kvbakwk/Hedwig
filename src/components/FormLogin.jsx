@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import TextField from "@components/TextField";
+import FormError from "@components/FormError";
+import Button from "@components/Button";
+import Checkbox from "@components/Checkbox";
+
 import login from "@app/api/login";
 
 export default function FormLogin() {
@@ -24,37 +29,34 @@ export default function FormLogin() {
   };
 
   return (
-    <form onSubmit={handleSubmit} method="post">
-      <input
-        className={emailErr ? "text-red-400" : ""}
-        type="text"
-        name="email"
-        placeholder="e-mail"
-      />
-      {emailErr && (
-        <span className="text-red-400">wprowadź poprawnego e-maila</span>
-      )}
-      <input
-        className={passwordErr ? "text-red-400" : ""}
-        type="password"
-        name="password"
-        placeholder="hasło"
-      />
-      {passwordErr && (
-        <span className="text-red-400">
-          hasło musi mieć przynajmniej 8 znaków
-        </span>
-      )}
-      <input type="checkbox" name="remember" id="remember" />
-      {accountErr && (
-        <span className="text-red-400">
-          podane e-mail lub hasło jest nieprawidłowe
-        </span>
-      )}
-      {!login && (
-        <span className="text-red-400">coś poszło nie tak, spróbuj ponownie później</span>
-      )}
-      <input type="submit" value="zaloguj się" />
+    <form
+      className="flex flex-col justify-center items-center gap-[30px] w-[500px] py-[75px] glass"
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex flex-col justify-center items-center gap-[10px] w-[300px]">
+        <TextField
+          type="text"
+          name="email"
+          placeholder="twój e-mail"
+          error={emailErr}
+          errorMessage="wprowadź poprawnego e-maila"
+        />
+        <TextField
+          type="password"
+          name="password"
+          placeholder="twoje hasło"
+          error={passwordErr}
+          errorMessage="hasło musi mieć przynajmniej 8 znaków"
+        />
+      </div>
+      <FormError show={accountErr}>
+        podane e-mail lub hasło jest nieprawidłowe
+      </FormError>
+      <div className="flex justify-between w-[350px]">
+        <Checkbox name="remember" label="zapamiętaj" />
+        <Button value="zaloguj się"/>
+      </div>
     </form>
   );
 }
