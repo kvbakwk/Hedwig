@@ -1,14 +1,10 @@
-import { loginCheck } from "@app/api/login";
-
-import FormLogin from "@components/FormLogin";
+import FormLogin from "@components/forms/FormLogin";
 
 export const metadata = {
   title: "schcool | logowanie",
 };
 
-export default async function LoginPage() {
-
-  await loginCheck(true);
+export default function LoginPage() {
 
   return (
     <div className="flex justify-center items-center w-full h-full">

@@ -1,6 +1,10 @@
+import { loginCheck } from "@app/api/login";
+
 import NavItem from "@components/NavItem";
 
-export default function WelcomeLayout({ children }) {
+export default async function WelcomeLayout({ children }) {
+  await loginCheck(true);
+
   return (
     <div className="grid grid-cols-[345px_750px_345px] w-[1440px] h-screen mx-auto">
       <div className="flex flex-col justify-center items-center gap-28 w-full h-full">
