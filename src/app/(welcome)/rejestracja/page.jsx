@@ -1,17 +1,12 @@
-import { loginCheck } from "@app/api/login";
-
-import FormRegister from "@components/FormRegister";
+import FormRegister from "@components/forms/FormRegister";
 
 export const metadata = {
   title: "schcool | rejestracja",
 };
 
-export default async function RegisterPage() {
-
-  await loginCheck(true);
-
+export default function RegisterPage() {
   return (
-    <div>
+    <div className="flex justify-center items-center w-full h-full">
       <FormRegister />
     </div>
   );

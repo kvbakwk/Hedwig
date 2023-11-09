@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 export default function NavItem({ value, icon, fillIcon, page, href }) {
   const pathname = usePathname();
   const [active, setActive] = useState(false);
-  useEffect(() => {
-    console.log(page);
-    setActive(pathname == page || page === undefined);
-  }, [pathname]);
+  useEffect(
+    () => setActive(pathname == page || page === undefined),
+    [pathname]
+  );
   return (
     <Link
       href={href}
@@ -18,7 +18,11 @@ export default function NavItem({ value, icon, fillIcon, page, href }) {
         active ? "glass" : "border-[1px] border-transparent glass-hover"
       }`}
     >
-      <span className={`${active && fillIcon ? "fill " : ""}material-symbols-outlined`}>
+      <span
+        className={`${
+          active && fillIcon ? "fill " : ""
+        }material-symbols-outlined`}
+      >
         {icon}
       </span>
       {value}

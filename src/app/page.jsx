@@ -4,7 +4,7 @@ import { loginCheck } from "./api/login";
 import getUser from "./api/users/get";
 import getAllPosts from "./api/posts/getAll";
 
-import FormNewPost from "@components/FormNewPost";
+import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/Posts";
 
 export const metadata = {
