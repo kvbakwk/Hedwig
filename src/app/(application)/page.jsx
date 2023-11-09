@@ -1,8 +1,6 @@
-import { Pool } from "pg";
-
-import { loginCheck } from "./api/login";
-import getUser from "./api/users/get";
-import getAllPosts from "./api/posts/getAll";
+import { loginCheck } from "@app/api/login";
+import getUser from "@app/api/users/get";
+import getAllPosts from "@app/api/posts/getAll";
 
 import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/Posts";
