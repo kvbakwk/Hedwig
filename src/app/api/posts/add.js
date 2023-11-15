@@ -10,7 +10,7 @@ export default async function add(user_id, content) {
 
     if(isValid){
         const client = new Pool();
-        await client.query("INSERT INTO posts VALUES (DEFAULT, $1, $2, $3);", [user_id, content, new Date()])
+        await client.query("INSERT INTO posts VALUES (DEFAULT, $1, $2, $3, false);", [user_id, content, new Date()])
     }
 
     return {
