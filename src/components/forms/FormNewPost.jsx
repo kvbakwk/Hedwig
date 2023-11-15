@@ -14,9 +14,9 @@ export default function FormNewPost({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { content } = e.target.elements;
+    const { content, anonymous } = e.target.elements;
 
-    const res = await addPost(user.id, content.value);
+    const res = await addPost(user.id, content.value, anonymous.checked);
 
     if (res.add) {
       textareaElement.current.value = "";
