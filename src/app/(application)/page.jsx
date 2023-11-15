@@ -16,7 +16,7 @@ export default async function HomePage() {
   return (
     <div>
       <FormNewPost user={user}/>
-      <Posts posts={posts} />
+      <Posts user={user} posts={posts} />
     </div>
   );
 }
