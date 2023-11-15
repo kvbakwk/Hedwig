@@ -39,6 +39,7 @@ export default function FormNewPost({ user }) {
           zawartość posta powinna mieć conajmniej 1 znak i maksymalnie 255
         </span>
       )}
+      <input type="checkbox" name="anonymous" />
       <input type="submit" value="wstaw" />
     </form>
   );
