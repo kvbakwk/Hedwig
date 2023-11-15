@@ -1,20 +1,10 @@
-import timeAgo from "@app/utils/time";
+import PostUser from "@components/PostUser";
+import PostAnon from "@components/PostAnon";
 
-export default function Posts({ posts }) {
+export default function Posts({ user, posts }) {
   return (
     <div>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <p>
-            <b>
-              {post.firstname.toLowerCase()} {post.lastname.toLowerCase()}
-            </b>{" "}
-            {post.email.split("@")[0]} · {timeAgo(post.create_date.getTime())}
-          </p>
-          <p>{post.content}</p>
-          <br />
-        </div>
-      ))}
+      {posts.map((post) => !post.anonymous ? <PostUser key={post.id} post={post} /> : <PostAnon key={post.id} user={user} post={post} />)}
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function FormLogin({login}) {
       method="post"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col justify-center items-center gap-[10px] w-[300px]">
+      <div className="flex flex-col justify-center items-center gap-[10px] w-[350px]">
         <TextField
           type="text"
           name="email"
