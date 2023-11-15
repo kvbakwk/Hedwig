@@ -1,14 +1,17 @@
 import { loginCheck } from "@app/api/login";
+import getUser from "@app/api/users/get";
 
-import Button from "@components/Button";
+import ProfileItem from "@components/ProfileItem";
 
 export default async function ApplicationLayout({ children }) {
   await loginCheck(false);
 
+  const user = await getUser()
+
   return (
     <div className="">
       <div className="">
-        <Button value="wyloguj się"/>
+        <ProfileItem user={user}/>
       </div>
       {children}
     </div>

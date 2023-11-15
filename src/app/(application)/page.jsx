@@ -10,8 +10,6 @@ export const metadata = {
 };
 
 export default async function HomePage() {
-  await loginCheck(false);
-
   const user = await getUser();
   const posts = await getAllPosts();
 

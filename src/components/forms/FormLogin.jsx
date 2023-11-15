@@ -8,9 +8,7 @@ import FormError from "@components/FormError";
 import Button from "@components/Button";
 import Checkbox from "@components/Checkbox";
 
-import login from "@app/api/login";
-
-export default function FormLogin() {
+export default function FormLogin({login}) {
   const router = useRouter();
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
@@ -25,7 +23,7 @@ export default function FormLogin() {
     setEmailErr(res.emailErr);
     setPasswordErr(res.passwordErr);
     setAccountErr(res.accountErr);
-    if (res.login) router.push("/");
+    if (res.login) router.refresh();
   };
 
   return (

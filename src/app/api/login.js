@@ -76,3 +76,13 @@ export async function loginCheck(inLogin) {
     } else if (!inLogin) redirect("/logowanie");
   } else if (!inLogin) redirect("/logowanie");
 }
+
+export async function logout() {
+  const client = new Pool();
+  if (cookies().has("device_id")) {
+    await client.query(
+      "DELETE FROM users_devices WHERE device_id = $1;",
+      [cookies().get("device_id").value]
+    );
+  }
+}
