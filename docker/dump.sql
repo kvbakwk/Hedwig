@@ -21,10 +21,11 @@ CREATE TABLE IF NOT EXISTS public.posts (
     id SERIAL PRIMARY KEY NOT NULL,
     user_id INT REFERENCES public.users(id) NOT NULL,
     content VARCHAR(255) NOT NULL,
-    create_date TIMESTAMP NOT NULL
+    create_date TIMESTAMP NOT NULL,
+    anonymous BOOLEAN NOT NULL
 );
 
 INSERT INTO public.posts VALUES
-(DEFAULT, 1, 'Siemano widzowie', '2023-10-10 12:00:00'),
-(DEFAULT, 2, 'xdddd', '2023-10-10 12:01:00'),
-(DEFAULT, 1, 'aha', '2023-10-12 12:00:00');
+(DEFAULT, 1, 'Siemano widzowie', '2023-10-10 12:00:00', false),
+(DEFAULT, 2, 'xdddd', '2023-10-10 12:01:00', false),
+(DEFAULT, 1, 'aha', '2023-10-12 12:00:00', false);
