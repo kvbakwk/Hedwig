@@ -37,11 +37,11 @@ export default function FormRegister() {
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-[30px] w-[500px] py-[75px] glass"
+      className="flex flex-col justify-center items-center gap-[25px] w-full h-full pb-24"
       method="post"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col justify-center items-center gap-[10px] w-[350px]">
+      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12">
         <TextField
           type="text"
           name="email"
@@ -73,7 +73,7 @@ export default function FormRegister() {
       <FormError show={accountErr}>
         konto z podanym e-mailem już istnieje
       </FormError>
-      <div className="flex justify-end w-[350px]">
+      <div className="flex justify-around items-center w-11/12">
         <Button value="zarejestruj się" />
       </div>
     </form>

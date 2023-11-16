@@ -48,6 +48,6 @@ export default async function register(
     fullnameErr: !validateFullname(fullname),
     passwordErr: !validatePassword(password),
     passwordsErr: !validatePasswords(password, passwordValid),
-    accountErr: validateEmail(email) && !isValid,
+    accountErr: validateEmail(email) && !isValid && !(await validateAccount(email)),
   };
 }

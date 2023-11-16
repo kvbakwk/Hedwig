@@ -14,17 +14,22 @@ export default function NavItem({ value, icon, fillIcon, page, href }) {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-[18px] w-[250px] h-[70px] pl-[18px] text-[22px] font-extralight rounded-2xl cursor-pointer ${
-        active ? "glass" : "border-[1px] border-transparent glass-hover"
-      }`}
+      className="relative flex flex-col items-center gap-1 text-xs font-medium"
     >
-      <span
-        className={`${
-          active && fillIcon ? "fill " : ""
-        }material-symbols-outlined`}
-      >
-        {icon}
-      </span>
+      <div
+        className={`absolute z-0 w-16 h-8 bg-[color:rgb(var(--shadow)/1)] rounded-full ${
+          active ? "block" : "hidden"
+        }`}
+      ></div>
+      <div className="relative z-10 flex justify-center items-center w-16 h-8">
+        <span
+          className={`${
+            active && fillIcon ? "fill " : ""
+          }material-symbols-outlined`}
+        >
+          {icon}
+        </span>
+      </div>
       {value}
     </Link>
   );

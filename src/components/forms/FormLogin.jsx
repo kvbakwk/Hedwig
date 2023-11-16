@@ -28,11 +28,11 @@ export default function FormLogin({login}) {
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-[30px] w-[500px] py-[75px] glass"
+      className="flex flex-col justify-center items-center gap-[25px] w-full h-full pb-40"
       method="post"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col justify-center items-center gap-[10px] w-[350px]">
+      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12">
         <TextField
           type="text"
           name="email"
@@ -51,7 +51,7 @@ export default function FormLogin({login}) {
       <FormError show={accountErr}>
         podane e-mail lub hasło jest nieprawidłowe
       </FormError>
-      <div className="flex justify-between w-[350px]">
+      <div className="flex justify-around items-center w-11/12">
         <Checkbox name="remember" label="zapamiętaj" />
         <Button value="zaloguj się"/>
       </div>
