@@ -8,6 +8,7 @@ services:
     volumes:
       - ./src/app:/www/app
       - ./src/components:/www/components
+      - ./src/tailwind.config.js:/www/tailwind.config.js
     environment:
       - PGHOST=postgresql
       - PGDATABASE=hedwig

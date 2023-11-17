@@ -6,8 +6,8 @@ export default function TextField(
     <div className="flex flex-col justify-center items-center w-full h-[55px]">
       <div className={`w-full h-[35px] rounded-lg ${className}`}>
         <input
-          className={`text-[20px] font-light text-center w-full h-full p-1 focus-visible:outline-none rounded-lg ${
-            error ? "bg-red-100" : "bg-gray-100"
+          className={`text-xl font-light text-center w-full h-full p-1 focus-visible:outline-none rounded-lg ${
+            error ? "bg-red-100 dark:bg-[#222]" : "bg-[#eee] dark:bg-[#222]"
           } `}
           type={type}
           name={name}
