@@ -8,7 +8,7 @@ import FormError from "@components/FormError";
 import Button from "@components/Button";
 import Checkbox from "@components/Checkbox";
 
-export default function FormLogin({login}) {
+export default function FormLogin({ login }) {
   const router = useRouter();
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
@@ -28,11 +28,10 @@ export default function FormLogin({login}) {
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-[25px] w-full h-full pb-40"
+      className="flex flex-col justify-center items-center gap-[25px] w-full md:w-[500px] h-full md:h-auto pb-40 md:py-16 md:glass"
       method="post"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12">
+      onSubmit={handleSubmit}>
+      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12 sm:w-1/2 md:w-[300px]">
         <TextField
           type="text"
           name="email"
@@ -51,9 +50,9 @@ export default function FormLogin({login}) {
       <FormError show={accountErr}>
         podane e-mail lub hasło jest nieprawidłowe
       </FormError>
-      <div className="flex justify-around items-center w-11/12">
+      <div className="flex justify-around md:justify-between items-center w-11/12 sm:w-1/2 md:w-[300px]">
         <Checkbox name="remember" label="zapamiętaj" />
-        <Button value="zaloguj się"/>
+        <Button value="zaloguj się" />
       </div>
     </form>
   );
