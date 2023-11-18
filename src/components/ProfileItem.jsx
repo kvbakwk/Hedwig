@@ -18,7 +18,7 @@ export default function ProfileItem({ user }) {
     <div>
       {user.firstname.toLowerCase()}
       <br />
-      <Link href="#">twoje posty</Link>
+      <Link href="/twoje-posty">twoje posty</Link>
       <br />
       <Button value="wyloguj się" onClick={handleLogout} />
       <br />
