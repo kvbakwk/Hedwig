@@ -6,7 +6,7 @@ export default function Post({ user, post }) {
     <div>
       <PostHeader user={user} post={post} />
       <p>{post.content}</p>
-      <PostFooter post={post} />
+      <PostFooter user_id={user.id} post_id={post.id} likes={post.likes} />
       <br />
     </div>
   );

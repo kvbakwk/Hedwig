@@ -1,5 +1,5 @@
 import getUser from "@app/api/users/get";
-import getAllPosts from "@app/api/posts/getAll";
+import getPosts from "@app/api/posts/get";
 
 import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/posts/Posts";
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function HomePage() {
   const user = await getUser();
-  const posts = await getAllPosts();
+  const posts = await getPosts();
 
   return (
     <div>
