@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { logout } from "@app/api/login";
 
+import Link from "next/link";
 import Button from "@components/Button";
 
 export default function ProfileItem({ user }) {
@@ -16,7 +17,12 @@ export default function ProfileItem({ user }) {
   return (
     <div>
       {user.firstname.toLowerCase()}
+      <br />
+      <Link href="#">twoje posty</Link>
+      <br />
       <Button value="wyloguj się" onClick={handleLogout} />
+      <br />
+      <br />
     </div>
   );
 }
