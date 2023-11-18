@@ -30,8 +30,15 @@ CREATE TABLE IF NOT EXISTS public.likes (
 
 INSERT INTO public.users VALUES 
 (DEFAULT, 'j.kawka@zsp9.elodz.edu.pl', 'Jakub', 'Kawka', 'zaq1@WSX'),
-(DEFAULT, 'a.kowalski@zsp9.elodz.edu.pl', 'Adam', 'Kowalski', 'zaq1@WSX'),
-(DEFAULT, 'n.kwiatkowska@zsp9.elodz.edu.pl', 'Natalia', 'Kwiatkowska', 'zaq1@WSX');
+(DEFAULT, 'o.konieczny@zsp9.elodz.edu.pl', 'Olaf', 'Konieczny', 'zaq1@WSX'),
+(DEFAULT, 'a.grabarz@zsp9.elodz.edu.pl', 'Antoni', 'Grabarz', 'zaq1@WSX'),
+(DEFAULT, 't.krol@zsp9.elodz.edu.pl', 'Tomasz', 'Krol', 'zaq1@WSX'),
+(DEFAULT, 'k.kobalczyk@zsp9.elodz.edu.pl', 'Kacper', 'Kobalczyk', 'zaq1@WSX'),
+(DEFAULT, 'j.kozlowski@zsp9.elodz.edu.pl', 'Jakub', 'Kozłowski', 'zaq1@WSX'),
+(DEFAULT, 'm.garnys@zsp9.elodz.edu.pl', 'Michał', 'Garnys', 'zaq1@WSX'),
+(DEFAULT, 'j.klepacz@zsp9.elodz.edu.pl', 'Jakub', 'Klepacz', 'zaq1@WSX'),
+(DEFAULT, 'a.debczyk@zsp9.elodz.edu.pl', 'Aleksander', 'Dębczyk', 'zaq1@WSX'),
+(DEFAULT, 'k.konopka@zsp9.elodz.edu.pl', 'Konrad', 'Konopka', 'zaq1@WSX');
 
 INSERT INTO public.posts VALUES
 (DEFAULT, 1, 'Siemano widzowie', '2023-10-10 12:00:00', false),

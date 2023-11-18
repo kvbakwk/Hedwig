@@ -80,9 +80,8 @@ export async function loginCheck(inLogin) {
 export async function logout() {
   const client = new Pool();
   if (cookies().has("device_id")) {
-    await client.query(
-      "DELETE FROM users_devices WHERE device_id = $1;",
-      [cookies().get("device_id").value]
-    );
+    await client.query("DELETE FROM users_devices WHERE device_id = $1;", [
+      cookies().get("device_id").value,
+    ]);
   }
 }

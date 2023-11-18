@@ -13,7 +13,8 @@ export const validatePasswords = (password1, password2) => {
 };
 
 export const validateFullname = (fullname) => {
-  const pattern = /[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+/;
+  const pattern =
+    /[A-ZŻŹĆĄŚĘŁÓŃ][A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+\s[A-ZŻŹĆĄŚĘŁÓŃ][A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+/;
   return pattern.test(fullname);
 };
 
