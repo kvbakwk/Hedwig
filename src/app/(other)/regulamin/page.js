@@ -8,6 +8,8 @@ export default async function PostsPage() {
   return (
     <div>
       <Link href="#">powrót</Link>
+      <br />
+      regulamin
     </div>
   );
 }
