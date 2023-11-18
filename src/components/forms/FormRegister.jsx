@@ -32,7 +32,7 @@ export default function FormRegister() {
     setPasswordErr(res.passwordErr);
     setPasswordsErr(res.passwordsErr);
     setAccountErr(res.accountErr);
-    if (res.register) router.refresh();
+    if (res.register) router.push("/logowanie");
   };
 
   return (

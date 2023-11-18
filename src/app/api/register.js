@@ -25,6 +25,8 @@ export default async function register(
     return res.rowCount === 0;
   };
 
+  console.log(validateFullname(fullname));
+
   const isValid =
     validateEmail(email) &&
     validateFullname(fullname) &&
@@ -48,6 +50,7 @@ export default async function register(
     fullnameErr: !validateFullname(fullname),
     passwordErr: !validatePassword(password),
     passwordsErr: !validatePasswords(password, passwordValid),
-    accountErr: validateEmail(email) && !isValid && !(await validateAccount(email)),
+    accountErr:
+      validateEmail(email) && !isValid && !(await validateAccount(email)),
   };
 }
