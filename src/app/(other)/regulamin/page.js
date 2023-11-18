@@ -1,7 +1,13 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "schcool | regulamin",
 };
 
 export default async function PostsPage() {
-  return <div></div>;
+  return (
+    <div>
+      <Link href="#">powrót</Link>
+    </div>
+  );
 }
