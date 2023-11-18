@@ -1,13 +1,13 @@
-import Link from "next/link";
+import LinkBack from "@components/LinkBack";
 
 export const metadata = {
   title: "schcool | regulamin",
 };
 
-export default async function PostsPage() {
+export default function RulesPage() {
   return (
     <div>
-      <Link href="#">powrót</Link>
+      <LinkBack>powrót</LinkBack>
       <br />
       regulamin
     </div>
