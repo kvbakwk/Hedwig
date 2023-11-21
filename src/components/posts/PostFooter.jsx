@@ -39,6 +39,9 @@ export default function PostFooter({ user_id, post_id, likes, saves }) {
         </span>
         {likesCount}
       </div>
+      <div className="cursor-pointer" onClick={() => {}}>
+        <span className={`material-symbols-outlined`}>thumb_down</span>0
+      </div>
       <div className="cursor-pointer" onClick={handleSave}>
         {saved ? "zapisany" : "zapisz"}
       </div>
