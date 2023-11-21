@@ -21,7 +21,7 @@ export default function PostFooter({ user_id, post_id, likes }) {
   };
 
   return (
-    <div>
+    <div className="flex gap-2">
       <div className="cursor-pointer" onClick={handleLike}>
         <span
           className={`material-symbols-outlined text-red-600 ${
@@ -30,6 +30,9 @@ export default function PostFooter({ user_id, post_id, likes }) {
           favorite
         </span>
         {likesCount}
+      </div>
+      <div className="cursor-pointer" onClick={() => {}}>
+        zapisz
       </div>
     </div>
   );
