@@ -18,7 +18,7 @@ export default async function register(
   const validateAccount = async (email) => {
     const client = new Pool();
     const res = await client.query(
-      "SELECT id FROM public.users WHERE email = $1;",
+      "SELECT id FROM public.user WHERE email = $1;",
       [email]
     );
     await client.end();
@@ -38,7 +38,7 @@ export default async function register(
     const client = new Pool();
     const name = fullname.split(" ");
     await client.query(
-      "INSERT INTO public.users VALUES (DEFAULT, $1, $2, $3, $4);",
+      "INSERT INTO public.user VALUES (DEFAULT, $1, $2, $3, $4);",
       [email, name[0], name[1], password]
     );
     await client.end();

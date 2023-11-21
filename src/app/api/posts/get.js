@@ -4,8 +4,9 @@ import { Pool } from "pg";
 
 export default async function get() {
   const queryPosts =
-    "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM posts AS p JOIN users AS u ON p.user_id = u.id ORDER BY p.create_date DESC;";
-  const queryLikes = "SELECT user_id FROM likes WHERE likes.post_id = $1;";
+    "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id ORDER BY p.create_date DESC;";
+  const queryLikes =
+    "SELECT user_id FROM public.like_user_post WHERE post_id = $1;";
 
   const client = new Pool();
   const posts = (await client.query(queryPosts)).rows;
