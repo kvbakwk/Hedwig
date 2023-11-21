@@ -27,6 +27,13 @@ CREATE TABLE IF NOT EXISTS public.like_user_post (
     date TIMESTAMP NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.dislike_user_post (
+    id SERIAL PRIMARY KEY NOT NULL,
+    user_id INT REFERENCES public.user(id) NOT NULL,
+    post_id INT REFERENCES public.post(id) NOT NULL,
+    date TIMESTAMP NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS public.save_user_post (
     id SERIAL PRIMARY KEY NOT NULL,
     user_id INT REFERENCES public.user(id) NOT NULL,
@@ -57,3 +64,9 @@ INSERT INTO public.like_user_post VALUES
 (DEFAULT, 2, 1, '2023-10-10 12:01:00'),
 (DEFAULT, 1, 2, '2023-10-12 12:00:00'),
 (DEFAULT, 3, 2, '2023-10-12 12:00:00');
+
+INSERT INTO public.dislike_user_post VALUES
+(DEFAULT, 1, 1, '2023-10-10 12:00:00'),
+(DEFAULT, 3, 1, '2023-10-10 12:00:00'),
+(DEFAULT, 5, 1, '2023-10-10 12:00:00'),
+(DEFAULT, 6, 1, '2023-10-10 12:00:00');
