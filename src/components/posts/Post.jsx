@@ -10,6 +10,7 @@ export default function Post({ user, post }) {
         user_id={user.id}
         post_id={post.id}
         likes={post.likes}
+        dislikes={post.dislikes}
         saves={post.saves}
       />
       <br />
