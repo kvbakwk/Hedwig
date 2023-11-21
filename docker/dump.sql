@@ -27,6 +27,13 @@ CREATE TABLE IF NOT EXISTS public.likes (
     date TIMESTAMP NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.save_user_post (
+    id SERIAL PRIMARY KEY NOT NULL,
+    user_id INT REFERENCES public.users(id) NOT NULL,
+    post_id INT REFERENCES public.posts(id) NOT NULL,
+    date TIMESTAMP NOT NULL
+)
+
 
 INSERT INTO public.users VALUES 
 (DEFAULT, 'j.kawka@zsp9.elodz.edu.pl', 'Jakub', 'Kawka', 'zaq1@WSX'),
