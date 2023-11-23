@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS public.post (
     anonymous BOOLEAN NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.post_parent (
+    post_id INT PRIMARY KEY REFERENCES public.post(id) NOT NULL,
+    parent_id INT REFERENCES public.post(id) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS public.like_user_post (
     id SERIAL PRIMARY KEY NOT NULL,
     user_id INT REFERENCES public.user(id) NOT NULL,
