@@ -1,40 +1,31 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import addPost from "@app/api/posts/add";
 
-export default function FormNewPost({ user }) {
+export default function FormNewReply({ user, parent_id }) {
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [contentErr, setContentErr] = useState(false);
 
   const textareaElement = useRef();
-
-  const createQueryString = useCallback(
-    (name) => {
-      const params = new URLSearchParams(searchParams);
-      params.delete(name);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { content, anonymous } = e.target.elements;
 
-    const res = await addPost(user.id, content.value, anonymous.checked);
+    const res = await addPost(
+      user.id,
+      content.value,
+      anonymous.checked,
+      parent_id
+    );
 
     if (res.add) {
-      router.push(pathname + "?" + createQueryString("reply"), {
-        scroll: false,
-      });
       textareaElement.current.value = "";
+      router.refresh();
     }
     setContentErr(res.contentErr);
   };

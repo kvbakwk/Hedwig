@@ -25,8 +25,6 @@ export default async function register(
     return res.rowCount === 0;
   };
 
-  console.log(validateFullname(fullname));
-
   const isValid =
     validateEmail(email) &&
     validateFullname(fullname) &&
