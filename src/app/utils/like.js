@@ -8,5 +8,6 @@ export async function getLikes(post_id) {
       [post_id]
     )
   ).rows;
+  await client.end();
   return likes;
 }

@@ -8,5 +8,6 @@ export async function getSaves(post_id) {
       [post_id]
     )
   ).rows;
+  await client.end();
   return saves;
 }
