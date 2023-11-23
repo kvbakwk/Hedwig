@@ -1,8 +1,8 @@
 import { Pool } from "pg";
 
-import { getLikes } from "@app/utils/like";
-import { getDislikes } from "@app/utils/dislike";
-import { getSaves } from "@app/utils/save";
+import { getLikes } from "@app/utils/db-actions/like";
+import { getDislikes } from "@app/utils/db-actions/dislike";
+import { getSaves } from "@app/utils/db-actions/save";
 
 export async function getPosts(user_id) {
   const client = new Pool();
@@ -64,4 +64,13 @@ export async function getPosts(user_id) {
           saves: post.saves,
         }
   );
+}
+
+export async function addPost(user_id, content, anonymous) {
+  const client = new Pool();
+  await client.query(
+    "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4);",
+    [user_id, content, new Date(), anonymous]
+  );
+  await client.end();
 }

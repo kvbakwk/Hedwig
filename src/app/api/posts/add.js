@@ -1,20 +1,12 @@
 "use server";
 
-import { Pool } from "pg";
-
 import { validatePostContent } from "@app/utils/validator";
+import { addPost } from "@app/utils/db-actions/post";
 
 export default async function add(user_id, content, anonymous) {
   const isValid = validatePostContent(content);
 
-  if (isValid) {
-    const client = new Pool();
-    await client.query(
-      "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4);",
-      [user_id, content, new Date(), anonymous]
-    );
-    await client.end();
-  }
+  if (isValid) await addPost(user_id, content, anonymous);
 
   return {
     add: isValid,
