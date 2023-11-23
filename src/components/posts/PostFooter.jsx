@@ -50,10 +50,7 @@ export default function PostFooter({
   return (
     <div className="flex gap-2">
       <div className="cursor-pointer" onClick={handleLike}>
-        <span
-          className={`material-symbols-outlined ${
-            liked ? "fill" : ""
-          } text-red-600`}>
+        <span className={`material-symbols-outlined ${liked ? "fill" : ""}`}>
           favorite
         </span>
         {likesCount}
@@ -63,6 +60,9 @@ export default function PostFooter({
           thumb_down
         </span>
         {dislikesCount}
+      </div>
+      <div className="cursor-pointer" onClick={() => {}}>
+        <span className={`material-symbols-outlined`}>reply</span>0
       </div>
       <div className="cursor-pointer" onClick={handleSave}>
         {saved ? "zapisany" : "zapisz"}
