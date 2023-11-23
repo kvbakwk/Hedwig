@@ -15,7 +15,7 @@ export default function Posts({ user, posts }) {
         <Post key={post.id} user={user} post={post} setReply={setReply} />
       ))}
       <Popup show={reply !== 0} setShow={setReply}>
-        <FormNewReply user={user} />
+        <FormNewReply user={user} parent_id={reply} />
       </Popup>
     </div>
   );
