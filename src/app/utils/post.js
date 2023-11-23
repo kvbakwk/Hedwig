@@ -4,7 +4,7 @@ import { getLikes } from "@app/utils/like";
 import { getDislikes } from "@app/utils/dislike";
 import { getSaves } from "@app/utils/save";
 
-export async function getPosts() {
+export async function getPosts(user_id) {
   const client = new Pool();
   const posts = (
     await client.query(
@@ -25,5 +25,43 @@ export async function getPosts() {
   );
   await client.end();
 
-  return posts;
+  return posts.map((post) =>
+    user_id === post.user_id
+      ? {
+          id: post.id,
+          user_id: post.user_id,
+          email: post.email,
+          firstname: post.firstname,
+          lastname: post.lastname,
+          content: post.content,
+          date: post.create_date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+        }
+      : post.anonymous
+      ? {
+          id: post.id,
+          content: post.content,
+          date: post.create_date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+        }
+      : {
+          id: post.id,
+          user_id: post.user_id,
+          email: post.email,
+          firstname: post.firstname,
+          lastname: post.lastname,
+          content: post.content,
+          date: post.create_date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+        }
+  );
 }

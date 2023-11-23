@@ -7,14 +7,14 @@ export default function PostHeader({ user, post }) {
         <b>
           {post.firstname.toLowerCase()} {post.lastname.toLowerCase()}
         </b>{" "}
-        {post.email.split("@")[0]} · {timeAgo(post.create_date.getTime())}
+        {post.email.split("@")[0]} · {timeAgo(post.date.getTime())}
       </div>
     );
   else
     return (
       <div>
         <b>anonimowy {user.id === post.user_id ? "(ty)" : ""}</b> ·{" "}
-        {timeAgo(post.create_date.getTime())}
+        {timeAgo(post.date.getTime())}
       </div>
     );
 }

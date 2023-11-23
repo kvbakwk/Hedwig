@@ -1,18 +1,12 @@
 import PostHeader from "./PostHeader";
 import PostFooter from "./PostFooter";
 
-export default function Post({ user, post }) {
+export default function Post({ user, post, setReply }) {
   return (
     <div>
       <PostHeader user={user} post={post} />
       <p>{post.content}</p>
-      <PostFooter
-        user_id={user.id}
-        post_id={post.id}
-        likes={post.likes}
-        dislikes={post.dislikes}
-        saves={post.saves}
-      />
+      <PostFooter post={post} setReply={setReply} />
       <br />
     </div>
   );

@@ -1,47 +1,31 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import like from "@app/api/users/like";
 import dislike from "@app/api/users/dislike";
 import save from "@app/api/users/save";
 
-export default function PostFooter({
-  user_id,
-  post_id,
-  likes,
-  dislikes,
-  saves,
-}) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [liked, setLiked] = useState(likes.find((id) => id === user_id));
-  const [disliked, setDisliked] = useState(
-    dislikes.find((id) => id === user_id)
+export default function PostFooter({ post, setReply }) {
+  const [liked, setLiked] = useState(
+    post.likes.find((id) => id === post.user_id)
   );
-  const [saved, setSaved] = useState(saves.find((id) => id === user_id));
-  const [likesCount, setLikesCount] = useState(likes.length);
-  const [dislikesCount, setDislikesCount] = useState(dislikes.length);
+  const [disliked, setDisliked] = useState(
+    post.dislikes.find((id) => id === post.user_id)
+  );
+  const [saved, setSaved] = useState(
+    post.saves.find((id) => id === post.user_id)
+  );
+  const [likesCount, setLikesCount] = useState(post.likes.length);
+  const [dislikesCount, setDislikesCount] = useState(post.dislikes.length);
 
   useEffect(() => {
-    setLiked(likes.find((id) => id === user_id));
-    setDisliked(dislikes.find((id) => id === user_id));
-    setSaved(saves.find((id) => id === user_id));
-    setLikesCount(likes.length);
-    setDislikesCount(dislikes.length);
-  }, [likes]);
-
-  const createQueryString = useCallback(
-    (name, value) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+    setLiked(post.likes.find((id) => id === post.user_id));
+    setDisliked(post.dislikes.find((id) => id === post.user_id));
+    setSaved(post.saves.find((id) => id === post.user_id));
+    setLikesCount(post.likes.length);
+    setDislikesCount(post.dislikes.length);
+  }, [post]);
 
   const handleLike = async () => {
     (await like(user_id, post_id))
@@ -75,13 +59,7 @@ export default function PostFooter({
         </span>
         {dislikesCount}
       </div>
-      <div
-        className="cursor-pointer"
-        onClick={() =>
-          router.push(pathname + "?" + createQueryString("reply", post_id), {
-            scroll: false,
-          })
-        }>
+      <div className="cursor-pointer" onClick={() => setReply(post.id)}>
         <span className={`material-symbols-outlined`}>reply</span>0
       </div>
       <div className="cursor-pointer" onClick={handleSave}>

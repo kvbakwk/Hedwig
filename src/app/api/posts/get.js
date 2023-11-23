@@ -2,6 +2,6 @@
 
 import { getPosts } from "@app/utils/post";
 
-export default async function get() {
-  return await getPosts();
+export default async function get(user_id) {
+  return await getPosts(user_id);
 }
