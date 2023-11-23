@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 import like from "@app/api/users/like";
 import dislike from "@app/api/users/dislike";
@@ -13,6 +14,9 @@ export default function PostFooter({
   dislikes,
   saves,
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [liked, setLiked] = useState(likes.find((id) => id === user_id));
   const [disliked, setDisliked] = useState(
     dislikes.find((id) => id === user_id)
@@ -28,6 +32,16 @@ export default function PostFooter({
     setLikesCount(likes.length);
     setDislikesCount(dislikes.length);
   }, [likes]);
+
+  const createQueryString = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   const handleLike = async () => {
     (await like(user_id, post_id))
@@ -61,7 +75,13 @@ export default function PostFooter({
         </span>
         {dislikesCount}
       </div>
-      <div className="cursor-pointer" onClick={() => {}}>
+      <div
+        className="cursor-pointer"
+        onClick={() =>
+          router.push(pathname + "?" + createQueryString("reply", post_id), {
+            scroll: false,
+          })
+        }>
         <span className={`material-symbols-outlined`}>reply</span>0
       </div>
       <div className="cursor-pointer" onClick={handleSave}>
