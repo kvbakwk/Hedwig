@@ -6,12 +6,12 @@ import ProfileItem from "@components/ProfileItem";
 export default async function ApplicationLayout({ children }) {
   await loginCheck(false);
 
-  const user = await getUser()
+  const user = await getUser();
 
   return (
-    <div className="">
+    <div className="flex gap-16">
       <div className="">
-        <ProfileItem user={user}/>
+        <ProfileItem user={user} />
       </div>
       {children}
     </div>
