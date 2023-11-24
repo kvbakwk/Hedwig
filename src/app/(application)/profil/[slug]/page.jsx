@@ -5,6 +5,10 @@ import ProfileOwn from "@components/ProfileOwn";
 
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "schcool | profil",
+};
+
 export default async function ProfilePage({ params: { slug } }) {
   const user = await getUser();
 
