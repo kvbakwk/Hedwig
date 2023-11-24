@@ -90,10 +90,11 @@ export async function addReplyPost(user_id, content, anonymous, parent_id) {
       [user_id, content, new Date(), anonymous]
     )
   ).rows[0].id;
-  await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
-    post_id,
-    parent_id,
-  ]);
+  if (parent_id !== undefined)
+    await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
+      post_id,
+      parent_id,
+    ]);
   await client.end();
 }
 
