@@ -21,5 +21,5 @@ export async function getUser(user_id) {
     )
   ).rows[0];
   await client.end();
-  return user;
+  return user ? user : false;
 }
