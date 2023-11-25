@@ -1,12 +1,15 @@
 import getUser from "@app/api/users/get";
 import getUserById from "@app/api/users/id/get";
+import getUserPosts from "@app/api/posts/user/get";
 
-import Profile from "@components/profiles/Profile";
-import ProfileOwn from "@components/profiles/ProfileOwn";
+import ProfilePosts from "@components/profiles/ProfilePosts";
+import ProfilePostsOwn from "@components/profiles/ProfilePostsOwn";
 
-export default async function ProfilePage({ params: { slug } }) {
+export default async function ProfilePage({ params: { user_id } }) {
   const user = await getUser();
 
-  if (slug == user.id) return <ProfileOwn user={user} option={"posty"} />;
-  else return <Profile user={await getUserById(slug)} option={"posty"} />;
+  const posts = await getUserPosts(user.id, true, false, user_id == user.id);
+
+  if (user_id == user.id) return <ProfilePostsOwn user={user} posts={posts} />;
+  else return <ProfilePosts user={await getUserById(user_id)} posts={posts} />;
 }
