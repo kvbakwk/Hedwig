@@ -12,11 +12,20 @@ export default async function Profile({ user, option }) {
         <Link className="cursor-pointer" href={`/profil/${user.id}/posty`}>
           posty
         </Link>
+        <Link className="cursor-pointer" href={`/profil/${user.id}/odpowiedzi`}>
+          odpowiedzi
+        </Link>
       </div>
       {(option === "posty" || option === undefined) && (
         <Posts
           user={user}
           posts={await getPosts(user.id, true, false, false)}
+        />
+      )}
+      {option === "odpowiedzi" && (
+        <Posts
+          user={user}
+          posts={await getPosts(user.id, false, true, false)}
         />
       )}
     </div>
