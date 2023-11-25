@@ -16,9 +16,9 @@ export default function ProfileItem({ user }) {
 
   return (
     <div>
-      {user.firstname.toLowerCase()}
-      <br />
-      <Link href="/twoje-posty">twoje posty</Link>
+      <Link className="cursor-pointer" href={`/profil/${user.id}`}>
+        {user.firstname.toLowerCase()}
+      </Link>
       <br />
       <Button value="wyloguj się" onClick={handleLogout} />
       <br />

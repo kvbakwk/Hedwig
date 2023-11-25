@@ -12,14 +12,14 @@ export const metadata = {
 export default async function ProfilePage({ params: { slug } }) {
   const user = await getUser();
 
-  const user_id = isNaN(slug)
+  const user_id = isNaN(slug[0])
     ? 0
-    : !(await getUserById(slug))
+    : !(await getUserById(slug[0]))
     ? 0
-    : Number(slug);
+    : Number(slug[0]);
 
   if (user_id === 0) redirect("/");
 
-  if (user_id === user.id) return <ProfileOwn user={user} />;
-  else return <Profile user={await getUserById(user_id)} />;
+  if (user_id === user.id) return <ProfileOwn user={user} option={slug[1]} />;
+  else return <Profile user={await getUserById(user_id)} option={slug[1]} />;
 }
