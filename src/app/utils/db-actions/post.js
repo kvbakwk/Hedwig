@@ -4,7 +4,7 @@ import { getLikes } from "@app/utils/db-actions/like";
 import { getDislikes } from "@app/utils/db-actions/dislike";
 import { getSaves } from "@app/utils/db-actions/save";
 
-export async function getPosts(user_id) {
+export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
   const client = new Pool();
   let posts = (
     await client.query(
@@ -28,7 +28,9 @@ export async function getPosts(user_id) {
   await client.end();
 
   return posts
-    .filter((post) => !post.reply)
+    .filter((post) => post.reply || (!post.reply && withPosts))
+    .filter((post) => !post.reply || (post.reply && withReplies))
+    .filter((post) => !post.anonymous || (post.anonymous && withAnonymous))
     .map((post) =>
       user_id === post.user_id
         ? {

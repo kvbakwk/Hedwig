@@ -20,7 +20,12 @@ export default function ProfileItem({ user }) {
         {user.firstname.toLowerCase()}
       </Link>
       <br />
-      <Button value="wyloguj się" onClick={handleLogout} />
+      <input
+        className="cursor-pointer"
+        type="button"
+        value="wyloguj się"
+        onClick={handleLogout}
+      />
       <br />
       <br />
     </div>

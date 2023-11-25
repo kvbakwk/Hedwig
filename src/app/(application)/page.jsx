@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function HomePage() {
   const user = await getUser();
-  const posts = await getPosts(user.id);
+  const posts = await getPosts(user.id, true, false, true);
 
   return (
     <div>
