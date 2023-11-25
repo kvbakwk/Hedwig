@@ -12,7 +12,7 @@ export default async function ApplicationLayout({ children }) {
   return (
     <div className="flex gap-16">
       <div className="flex flex-col gap-2">
-        <Link href="/">glowna</Link>
+        <Link href="/">główna</Link>
         <ProfileItem user={user} />
       </div>
       {children}

@@ -1,9 +1,46 @@
-import Link from "next/link";
-import Posts from "./posts/Posts";
+import { redirect } from "next/navigation";
 import getPosts from "@app/api/posts/get";
 import getUserPosts from "@app/api/posts/user/get";
 
+import Link from "next/link";
+import Posts from "./posts/Posts";
+
 export default async function Profile({ user, option }) {
+  const pathsSites = [
+    {
+      path: ["posty", undefined],
+      site: (
+        <Posts
+          user={user}
+          posts={await getUserPosts(user.id, true, false, false)}
+        />
+      ),
+    },
+    {
+      path: ["odpowiedzi"],
+      site: (
+        <Posts
+          user={user}
+          posts={await getUserPosts(user.id, false, true, false)}
+        />
+      ),
+    },
+    {
+      path: ["polubione"],
+      site: (
+        <Posts
+          user={user}
+          posts={(await getPosts(user.id)).filter((post) =>
+            post.likes.find((id) => id === user.id)
+          )}
+        />
+      ),
+    },
+  ];
+
+  if (!pathsSites.find((pathSite) => pathSite.path.includes(option)))
+    redirect("/");
+
   return (
     <div>
       profil <br />
@@ -20,26 +57,7 @@ export default async function Profile({ user, option }) {
           polubione
         </Link>
       </div>
-      {(option === "posty" || option === undefined) && (
-        <Posts
-          user={user}
-          posts={await getUserPosts(user.id, true, false, false)}
-        />
-      )}
-      {option === "odpowiedzi" && (
-        <Posts
-          user={user}
-          posts={await getUserPosts(user.id, false, true, false)}
-        />
-      )}
-      {option === "polubione" && (
-        <Posts
-          user={user}
-          posts={(await getPosts(user.id)).filter((post) =>
-            post.likes.find((id) => id === user.id)
-          )}
-        />
-      )}
+      {pathsSites.find((pathSite) => pathSite.path.includes(option)).site}
     </div>
   );
 }
