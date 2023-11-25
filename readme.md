@@ -1,3 +1,1 @@
-### hedwig
-
 _soon_
