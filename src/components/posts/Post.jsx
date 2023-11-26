@@ -5,11 +5,12 @@ import PostFooter from "./PostFooter";
 
 export default function Post({ user, post, setReply }) {
   return (
-    <div>
+    <div className="grid grid-rows-[40px_auto_40px]">
       <PostHeader user={user} post={post} />
-      <p>{post.content}</p>
+      <div className="text-[20px] font-light my-[15px] pl-[10px] ml-[40px] mr-[50px]">
+        {post.content}
+      </div>
       <PostFooter user={user} post={post} setReply={setReply} />
-      <br />
     </div>
   );
 }

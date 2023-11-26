@@ -14,9 +14,7 @@ export default function NavItem({ value, icon, fillIcon, page, href }) {
   return (
     <Link
       href={href}
-      className={`relative flex flex-col lg:flex-row md:justify-center lg:justify-start items-center gap-1 lg:gap-0 md:w-[70px] lg:w-[180px] xl:w-[250px] md:h-[70px] text-xs lg:text-xl xl:text-[22px] font-medium lg:font-extralight ${
-        active ? "md:glass" : "md:glass-hover"
-      }`}>
+      className={`relative flex flex-col lg:flex-row md:justify-center lg:justify-start items-center gap-1 lg:gap-0 md:w-[70px] lg:w-[180px] xl:w-[250px] md:h-[70px] text-xs lg:text-xl xl:text-[22px] font-medium lg:font-light glass`}>
       <div
         className={`absolute z-0 w-16 h-8 bg-[color:rgb(var(--shadow)/1)] rounded-full ${
           active ? "block md:hidden" : "hidden"
