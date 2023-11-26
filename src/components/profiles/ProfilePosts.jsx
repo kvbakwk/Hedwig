@@ -39,9 +39,9 @@ export default function ProfilePosts({ user, posts }) {
       <div className="cursor-pointer" onClick={() => setDirection(!direction)}>
         sortuj według
         {direction ? (
-          <span class="material-symbols-outlined">arrow_upward_alt</span>
+          <span className="material-symbols-outlined">arrow_upward_alt</span>
         ) : (
-          <span class="material-symbols-outlined">arrow_downward_alt</span>
+          <span className="material-symbols-outlined">arrow_downward_alt</span>
         )}
       </div>
       <select onChange={(e) => setSort(e.target.value)} defaultValue="date">

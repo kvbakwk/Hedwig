@@ -40,6 +40,10 @@ body {
     box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
   }
 
+  .glass-shadow {
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+
   .glass-hover {
     @apply border-[1px] border-transparent;
   }

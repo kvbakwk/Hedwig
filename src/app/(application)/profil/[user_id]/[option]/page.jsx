@@ -1,5 +1,4 @@
 import getUser from "@app/api/users/get";
-import getUserById from "@app/api/users/id/get";
 import getPosts from "@app/api/posts/get";
 import getUserPosts from "@app/api/posts/user/get";
 
@@ -29,5 +28,5 @@ export default async function ProfilePage({ params: { user_id, option } }) {
       : [];
 
   if (user_id == user.id) return <ProfilePostsOwn user={user} posts={posts} />;
-  else return <ProfilePosts user={await getUserById(user_id)} posts={posts} />;
+  else return <ProfilePosts user={user} posts={posts} />;
 }
