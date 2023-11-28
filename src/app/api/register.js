@@ -7,7 +7,7 @@ import {
   validateFullname,
   validatePassword,
   validatePasswords,
-} from "../utils/validator";
+} from "@app/utils/validator";
 
 export default async function register(
   email,

@@ -7,10 +7,12 @@ export default function Popup({ children, show, setShow }) {
 
   return (
     <div
-      className={`fixed bottom-1 w-[600px] h-[400px] mx-[calc(50vw-300px)] border-[1px] border-solid border-black ${
+      className={`fixed bottom-[50px] w-[710px] bg-[rgb(var(--background)/1)] glass-shadow glass-border rounded-2xl ${
         show ? "block" : "hidden"
       }`}>
-      <div className="cursor-pointer" onClick={handleClose}>
+      <div
+        className="absolute top-2 right-2 flex justify-center items-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] rounded-full cursor-pointer"
+        onClick={handleClose}>
         <span className="material-symbols-outlined">close</span>
       </div>
       {children}

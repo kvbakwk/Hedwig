@@ -1,8 +1,6 @@
 import getUser from "@app/api/users/get";
-import getPosts from "@app/api/posts/get";
-
-import FormNewPost from "@components/forms/FormNewPost";
-import Posts from "@components/posts/Posts";
+import Glowna from "@components/Glowna";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "schcool | główna",
@@ -10,7 +8,6 @@ export const metadata = {
 
 export default async function HomePage() {
   const user = await getUser();
-  const posts = await getPosts(user.id, true, false, true);
 
   return (
     <div className="relative w-[full] h-auto px-[15px]">
@@ -18,8 +15,7 @@ export default async function HomePage() {
         główna
       </div>
       <div className="flex flex-col gap-[20px] w-full py-[90px] px-[5px]">
-        <FormNewPost user={user} />
-        <Posts user={user} posts={posts} />
+        <Glowna user={user} />
       </div>
     </div>
   );

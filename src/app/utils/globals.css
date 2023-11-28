@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 @tailwind base;
 @tailwind components;
@@ -23,10 +24,17 @@
 }
 
 body {
+  overflow-y: auto;
   font-family: roboto;
 
   color: rgb(var(--foreground));
   background: rgb(var(--background));
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .fill {
@@ -42,6 +50,9 @@ body {
 
   .glass-shadow {
     box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+  }
+  .glass-border {
+    @apply border-[1px] border-gray-300 border-solid;
   }
 
   .glass-hover {

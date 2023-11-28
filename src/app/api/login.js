@@ -58,7 +58,7 @@ export default async function login(email, password, remember) {
   };
 }
 
-export async function loginCheck(inLogin) {
+export async function loginCheck() {
   const client = new Pool();
   if (cookies().has("device_id")) {
     const res = await client.query(
@@ -72,10 +72,13 @@ export async function loginCheck(inLogin) {
           [cookies().get("device_id").value]
         );
         await client.end();
-        if (!inLogin) redirect("/logowanie");
-      } else if (inLogin) redirect("/");
-    } else if (!inLogin) redirect("/logowanie");
-  } else if (!inLogin) redirect("/logowanie");
+        return false;
+      } else await client.end();
+      return true;
+    }
+    return false;
+  }
+  return false;
 }
 
 export async function logout() {

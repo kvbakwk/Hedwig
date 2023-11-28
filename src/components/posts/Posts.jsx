@@ -6,7 +6,7 @@ import Post from "@components/posts/Post";
 import FormNewReply from "@components/forms/FormNewReply";
 import Popup from "@components/Popup";
 
-export default async function Posts({ user, posts }) {
+export default function Posts({ user, posts }) {
   const [reply, setReply] = useState(0);
 
   return (

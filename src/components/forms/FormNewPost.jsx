@@ -1,28 +1,27 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
-
 import addPost from "@app/api/posts/add";
+import getPosts from "@app/api/posts/get";
 
-export default function FormNewPost({ user }) {
-  const router = useRouter();
+export default function FormNewPost({ user, setPosts }) {
   const [contentErr, setContentErr] = useState(false);
 
   const textareaElement = useRef();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const { content, anonymous } = e.target.elements;
 
-    const res = await addPost(user.id, content.value, anonymous.checked);
+    addPost(user.id, content.value, anonymous.checked).then((res) => {
+      if (res.add) {
+        textareaElement.current.value = "";
 
-    if (res.add) {
-      textareaElement.current.value = "";
-      router.refresh();
-    }
-    setContentErr(res.contentErr);
+        getPosts(user.id, true, false, true).then((res) => setPosts(res));
+      }
+      setContentErr(res.contentErr);
+    });
   };
 
   return (

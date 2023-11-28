@@ -1,8 +1,8 @@
 import { Pool } from "pg";
 
-import { getLikes } from "@app/utils/db-actions/like";
-import { getDislikes } from "@app/utils/db-actions/dislike";
-import { getSaves } from "@app/utils/db-actions/save";
+import { getLikes } from "./like";
+import { getDislikes } from "./dislike";
+import { getSaves } from "./save";
 
 export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
   const client = new Pool();

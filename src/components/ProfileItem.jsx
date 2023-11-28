@@ -12,7 +12,7 @@ export default function ProfileItem({ user }) {
   const pathname = usePathname();
   const moreEl = useRef("moreEl");
   const [active, setActive] = useState(false);
-  const [page, setPage] = useState(`/profil/${user.id}`);
+  const [page, setPage] = useState(`/uzytkownik/${user.id}`);
 
   useEffect(
     () => setActive(pathname == page || page === undefined),

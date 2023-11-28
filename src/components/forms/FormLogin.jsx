@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import TextField from "@components/TextField";
@@ -13,6 +13,10 @@ export default function FormLogin({ login }) {
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
+
+  useEffect(() => {
+    router.prefetch("/rejestracja");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

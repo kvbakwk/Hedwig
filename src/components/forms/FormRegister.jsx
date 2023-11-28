@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import register from "@app/api/register";
@@ -15,6 +15,10 @@ export default function FormRegister() {
   const [passwordErr, setPasswordErr] = useState(false);
   const [passwordsErr, setPasswordsErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
+
+  useEffect(() => {
+    router.prefetch("/logowanie");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
