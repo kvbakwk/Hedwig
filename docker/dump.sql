@@ -62,7 +62,8 @@ INSERT INTO public.user VALUES
 INSERT INTO public.post VALUES
 (DEFAULT, 1, 'Siemano widzowie', '2023-10-10 12:00:00', false),
 (DEFAULT, 2, 'xdddd', '2023-10-10 12:01:00', false),
-(DEFAULT, 1, 'aha', '2023-10-12 12:00:00', false);
+(DEFAULT, 3, 'aha', '2023-10-12 12:00:00', false),
+(DEFAULT, 1, 'lets go', '2023-10-12 12:01:00', true);
 
 INSERT INTO public.like_user_post VALUES
 (DEFAULT, 3, 1, '2023-10-12 12:00:00'),

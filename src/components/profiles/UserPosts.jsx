@@ -59,7 +59,7 @@ export default function UserPosts({ user }) {
   };
 
   return (
-    <div>
+    <>
       <div className="grid grid-rows-2 gap-[10px] my-[10px] select-none">
         <div className="flex justify-center items-center gap-[10px]">
           <span>sortuj według</span>
@@ -108,6 +108,6 @@ export default function UserPosts({ user }) {
         </div>
       </div>
       <Posts user={user} posts={sortPosts(posts)} />
-    </div>
+    </>
   );
 }
