@@ -19,7 +19,8 @@ export default function PostHeader({ user, post }) {
   else
     return (
       <div className="flex gap-[6px] items-center text-[14px] mt-[10px] pl-[10px] ml-[40px] mr-[100px] border-b-[1px] border-[rgb(var(--shadow)/1)]">
-        <b>anonimowy {user.id === post.user_id ? "(ty)" : ""}</b>
+        <b>anonimowy</b>
+        {user.id === post.user_id ? "(ty)" : ""}
         <span>·</span>
         <span>{timeAgo(post.date.getTime())}</span>
       </div>

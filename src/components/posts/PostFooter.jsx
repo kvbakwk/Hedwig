@@ -8,6 +8,7 @@ import save from "@app/api/users/save";
 import PostFooterOption from "./PostFooterOption";
 
 export default function PostFooter({ user, post, setReply }) {
+  const [inProgress, setInProgress] = useState(false);
   const [liked, setLiked] = useState(post.likes.find((id) => id === user.id));
   const [disliked, setDisliked] = useState(
     post.dislikes.find((id) => id === user.id)
@@ -26,42 +27,52 @@ export default function PostFooter({ user, post, setReply }) {
     setRepliesCount(post.replies.length);
   }, [post]);
 
-  const handleLike = async () => {
-    (await like(user.id, post.id))
-      ? setLikesCount(likesCount + 1)
-      : setLikesCount(likesCount - 1);
-    setLiked(!liked);
+  const handleLike = () => {
+    setInProgress(true);
+    like(user.id, post.id)
+      .then((res) => {
+        res ? setLikesCount(likesCount + 1) : setLikesCount(likesCount - 1);
+        setLiked(!liked);
+      })
+      .finally(() => setInProgress(false));
   };
-  const handleDislike = async () => {
-    (await dislike(user.id, post.id))
-      ? setDislikesCount(dislikesCount + 1)
-      : setDislikesCount(dislikesCount - 1);
-    setDisliked(!disliked);
+  const handleDislike = () => {
+    setInProgress(true);
+    dislike(user.id, post.id)
+      .then((res) => {
+        res
+          ? setDislikesCount(dislikesCount + 1)
+          : setDislikesCount(dislikesCount - 1);
+        setDisliked(!disliked);
+      })
+      .finally(() => setInProgress(false));
   };
 
-  const handleSave = async () => {
-    await save(user.id, post.id);
-    setSaved(!saved);
+  const handleSave = () => {
+    setInProgress(true);
+    save(user.id, post.id)
+      .then(() => setSaved(!saved))
+      .finally(() => setInProgress(false));
   };
 
   return (
     <div className="justify-self-end self-center flex justify-center items-center gap-1 mr-[50px] select-none">
       <PostFooterOption
-        handleClick={handleLike}
+        handleClick={() => (inProgress ? "" : handleLike())}
         icon="favorite"
         iconFilled={liked}
         iconColor="text-[#FF0000]"
         count={likesCount}
       />
       <PostFooterOption
-        handleClick={handleDislike}
+        handleClick={() => (inProgress ? "" : handleDislike())}
         icon="thumb_down"
         iconFilled={disliked}
         iconColor="text-[#0047D0]"
         count={dislikesCount}
       />
       <PostFooterOption
-        handleClick={() => setReply(post.id)}
+        handleClick={() => (inProgress ? "" : setReply(post.id))}
         icon="reply"
         iconFilled={false}
         iconColor=""
@@ -70,7 +81,9 @@ export default function PostFooter({ user, post, setReply }) {
       <div className="flex justify-center items-center cursor-pointer">
         <span className={`material-symbols-outlined`}>more_vert</span>
       </div>
-      <div className="hidden cursor-pointer" onClick={handleSave}>
+      <div
+        className="hidden cursor-pointer"
+        onClick={() => (inProgress ? "" : handleSave())}>
         {saved ? "zapisany" : "zapisz"}
       </div>
     </div>
