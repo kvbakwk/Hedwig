@@ -4,7 +4,7 @@ import getUserById from "@app/api/users/id/get";
 
 import Link from "next/link";
 import Image from "next/image";
-import Avatar from "./user.jpg";
+import Avatar from "../../user.jpg";
 
 export const metadata = {
   title: "schcool | profil",

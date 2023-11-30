@@ -25,8 +25,8 @@ export default function ProfileItem({ user }) {
   };
 
   return (
-    <div className="relative grid grid-cols-[1fr_40px] grid-rows-1 w-[250px] h-[70px] px-[10px] select-none">
-      <Link className="self-center text-[22px] cursor-pointer" href={page}>
+    <div className="relative hidden lg:grid grid-cols-[1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] px-[10px] select-none">
+      <Link className="self-center text-[22px] pl-4 cursor-pointer" href={page}>
         {user.firstname.toLowerCase()}
       </Link>
       <div

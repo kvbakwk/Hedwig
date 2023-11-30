@@ -56,7 +56,7 @@ export default function PostFooter({ user, post, setReply }) {
   };
 
   return (
-    <div className="justify-self-end self-center flex justify-center items-center gap-1 mr-[50px] select-none">
+    <div className="justify-self-end self-center flex justify-center items-center gap-[20px] md:gap-1 mr-[22px] md:mr-[50px] select-none">
       <PostFooterOption
         handleClick={() => (inProgress ? "" : handleLike())}
         icon="favorite"

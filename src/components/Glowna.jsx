@@ -14,7 +14,9 @@ export default function Glowna({ user }) {
 
   return (
     <>
-      <FormNewPost user={user} setPosts={setPosts} />
+      <div className="hidden md:block">
+        <FormNewPost user={user} setPosts={setPosts} />
+      </div>
       <Posts user={user} posts={posts} />
     </>
   );
