@@ -8,6 +8,8 @@ services:
     volumes:
       - ./src/app:/www/app
       - ./src/components:/www/components
+      - ./src/public:/www/public
+      - ./src/next.config.js:/www/next.config.js
       - ./src/tailwind.config.js:/www/tailwind.config.js
     environment:
       - PGHOST=postgresql

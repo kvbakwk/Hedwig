@@ -1,23 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 import { logout } from "@app/api/login";
 
 import Link from "next/link";
+import Avatar from "./Avatar";
 
 export default function ProfileItem({ user }) {
   const router = useRouter();
-  const pathname = usePathname();
   const moreEl = useRef("moreEl");
-  const [active, setActive] = useState(false);
   const [page, setPage] = useState(`/uzytkownik/${user.id}`);
-
-  useEffect(
-    () => setActive(pathname == page || page === undefined),
-    [pathname]
-  );
 
   const handleLogout = async () => {
     await logout();
@@ -25,9 +18,16 @@ export default function ProfileItem({ user }) {
   };
 
   return (
-    <div className="relative hidden lg:grid grid-cols-[1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] px-[10px] select-none">
-      <Link className="self-center text-[22px] pl-4 cursor-pointer" href={page}>
-        {user.firstname.toLowerCase()}
+    <div className="relative hidden lg:grid grid-cols-[40px_1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] px-[25px] select-none">
+      <Link className="contents" href={page}>
+        <Avatar
+          className="justify-self-center self-center w-[40px] h-[40px] rounded-full"
+          user_id={user.id}
+          anonymous={false}
+        />
+        <span className="self-center text-[22px] pl-4 cursor-pointer">
+          {user.firstname.toLowerCase()}
+        </span>
       </Link>
       <div
         className="flex justify-center items-center justify-self-center self-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"

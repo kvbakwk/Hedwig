@@ -8,8 +8,7 @@ import { Suspense } from "react";
 import ProfileItem from "@components/ProfileItem";
 import NavItem from "@components/NavItem";
 import Link from "next/link";
-import Image from "next/image";
-import awatarImage from "./user.jpg";
+import Avatar from "@components/Avatar";
 
 export const metadata = {
   title: "schcool",
@@ -42,9 +41,10 @@ export default async function RootDashboardLayout({ children }) {
               <Link
                 className="text-xs font-medium flex lg:hidden flex-col justify-center items-center gap-1"
                 href={`/uzytkownik/${user.id}`}>
-                <Image
+                <Avatar
                   className="w-[32px] md:w-[50px] h-[32px] md:h-[50px] rounded-full"
-                  src={awatarImage}
+                  user_id={user.id}
+                  anonymous={false}
                 />
                 <span className="md:hidden">
                   {user.firstname.toLowerCase()}

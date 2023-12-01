@@ -3,8 +3,7 @@ import getUser from "@app/api/users/get";
 import getUserById from "@app/api/users/id/get";
 
 import Link from "next/link";
-import Image from "next/image";
-import Avatar from "../../user.jpg";
+import Avatar from "@components/Avatar";
 
 export const metadata = {
   title: "schcool | profil",
@@ -18,18 +17,18 @@ export default async function ProfileLayout({ params: { user_id }, children }) {
   const profileUser = await getUserById(user_id);
 
   return (
-    <div className="relative w-[full] h-auto px-[15px]">
-      <div className="z-10 fixed hidden md:flex items-center text-[22px] w-[720px] h-[70px] pl-[50px] border-[1px] border-t-0 border-gray-300 border-solid transition-shadow rounded-b-2xl backdrop-blur-xl glass-shadow">
+    <div className="relative w-[full] h-auto md:px-[15px]">
+      <div className="z-50 fixed hidden md:flex items-center text-[22px] w-[720px] h-[70px] pl-[50px] border-[1px] border-t-0 border-gray-300 border-solid transition-shadow rounded-b-2xl backdrop-blur-xl glass-shadow">
         {user.id == user_id ? "twój profil użytkownika" : "profil użytkownika"}{" "}
         <br />
       </div>
-      <div className="z-0 relative flex flex-col gap-[20px] w-full py-[90px] px-[5px]">
+      <div className="z-0 relative flex flex-col gap-[20px] w-full py-[90px] md:px-[5px]">
         <div className="relative flex flex-col justify-center md:justify-start items-center md:items-start gap-[5px] md:pl-[40px] pt-[20px] md:pt-[100px] pb-[20px] md:pb-[40px] md:mt-[60px] md:glass">
-          <Image
-            className="static md:absolute top-[-50px] left-[60px] mb-[20px] md:mb-0 bg-[rgb(var(--background)/1)] border-[1px] border-gray-300 border-solid rounded-full"
-            src={Avatar}
-            width={100}
-            height={100}></Image>
+          <Avatar
+            className="static md:absolute top-[-50px] left-[60px] w-[100px] h-[100px] mb-[20px] md:mb-0 bg-[rgb(var(--background)/1)] md:border-[1px] md:border-gray-300 rounded-full"
+            user_id={user_id}
+            anonymous={false}
+          />
           <span className="text-[20px]">
             {profileUser.firstname.toLowerCase()}{" "}
             {profileUser.lastname.toLowerCase()}

@@ -26,11 +26,17 @@ export default function UserPosts({ user }) {
       : params.option === "polubione"
       ? getPosts(user.id, true, true, true).then((res) =>
           setPosts(
-            res.filter((post) => post.likes.find((id) => id === params.user_id))
+            res.filter((post) =>
+              post.likes.find((id) => id === parseInt(params.user_id))
+            )
           )
         )
       : setPosts([]);
   }, [params]);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
 
   const sortPosts = (posts) => {
     let tempPosts = posts;

@@ -3,8 +3,10 @@
 import { useState, useRef } from "react";
 import addPost from "@app/api/posts/add";
 import getPosts from "@app/api/posts/get";
+import Avatar from "@components/Avatar";
 
 export default function FormNewPost({ user, setPosts }) {
+  const [anonymous, setAnonymous] = useState(false);
   const [contentErr, setContentErr] = useState(false);
 
   const textareaElement = useRef();
@@ -26,11 +28,16 @@ export default function FormNewPost({ user, setPosts }) {
 
   return (
     <form
-      className="grid grid-rows-[1fr_15px_60px] glass"
+      className="grid grid-cols-[100px_1fr] grid-rows-[1fr_15px_60px] glass"
       onSubmit={handleSubmit}
       method="post">
+      <Avatar
+        className="row-span-3 justify-self-center w-[60px] h-[60px] mt-[20px] rounded-full"
+        user_id={user.id}
+        anonymous={anonymous}
+      />
       <textarea
-        className="text-[22px] leading-10 h-[170px] mt-[20px] mx-[40px] border-b-[1px] border-[rgb(var(--shadow)/1)] outline-none resize-none"
+        className="text-[22px] leading-10 h-[170px] mt-[20px] mr-[40px] border-b-[1px] border-[rgb(var(--shadow)/1)] outline-none resize-none"
         name="content"
         placeholder="co u ciebie?"
         ref={textareaElement}></textarea>
@@ -45,7 +52,13 @@ export default function FormNewPost({ user, setPosts }) {
         <label
           htmlFor="anonymous"
           className="flex justify-center items-center gap-2">
-          <input type="checkbox" name="anonymous" id="anonymous" /> anonimowy
+          <input
+            type="checkbox"
+            name="anonymous"
+            id="anonymous"
+            onChange={() => setAnonymous(!anonymous)}
+          />{" "}
+          anonimowy
         </label>
         <input
           className="text-lg text-[rgb(var(--background)/1)] p-[5px_18px] bg-[rgb(var(--foreground)/1)] rounded-full cursor-pointer"

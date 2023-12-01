@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import like from "@app/api/users/like";
 import dislike from "@app/api/users/dislike";
@@ -17,6 +17,8 @@ export default function PostFooter({ user, post, setReply }) {
   const [likesCount, setLikesCount] = useState(post.likes.length);
   const [dislikesCount, setDislikesCount] = useState(post.dislikes.length);
   const [repliesCount, setRepliesCount] = useState(post.replies.length);
+
+  const moreEl = useRef("moreEl");
 
   useEffect(() => {
     setLiked(post.likes.find((id) => id === user.id));
@@ -56,7 +58,7 @@ export default function PostFooter({ user, post, setReply }) {
   };
 
   return (
-    <div className="justify-self-end self-center flex justify-center items-center gap-[20px] md:gap-1 mr-[22px] md:mr-[50px] select-none">
+    <div className="relative z-10 justify-self-end self-center flex justify-center items-center gap-[20px] md:gap-1 mr-[22px] md:mr-[50px] select-none">
       <PostFooterOption
         handleClick={() => (inProgress ? "" : handleLike())}
         icon="favorite"
@@ -78,13 +80,33 @@ export default function PostFooter({ user, post, setReply }) {
         iconColor=""
         count={repliesCount}
       />
-      <div className="flex justify-center items-center cursor-pointer">
+      <div
+        className="flex justify-center items-center justify-self-center self-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
+        onClick={() => {
+          moreEl.current.classList.toggle("hidden");
+          moreEl.current.classList.toggle("flex");
+        }}>
         <span className={`material-symbols-outlined`}>more_vert</span>
       </div>
       <div
-        className="hidden cursor-pointer"
-        onClick={() => (inProgress ? "" : handleSave())}>
-        {saved ? "zapisany" : "zapisz"}
+        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col w-[150px] py-[10px] bg-[color:rgb(var(--background)/1)] glass-border glass-shadow rounded-2xl"
+        ref={moreEl}>
+        <div
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors"
+          onClick={() => (inProgress ? "" : handleSave())}>
+          <span className={`material-symbols-outlined ${saved ? "fill" : ""}`}>
+            bookmark
+          </span>
+          {saved ? "zapisany" : "zapisz"}
+        </div>
+        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors">
+          <span className="material-symbols-outlined">upload</span>
+          udostępnij
+        </div>
+        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors">
+          <span className="material-symbols-outlined">flag</span>
+          zgłoś
+        </div>
       </div>
     </div>
   );
