@@ -2,9 +2,8 @@
 
 import { Pool } from "pg";
 
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { validateEmail, validatePassword } from "@app/utils/validator";
 
