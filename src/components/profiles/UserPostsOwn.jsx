@@ -79,7 +79,7 @@ export default function UserPostsOwn({ user }) {
   return (
     <>
       <div className="grid grid-cols-2 my-[10px] select-none">
-        <div className="grid grid-rows-2 gap-[10px]">
+        <div className="grid grid-rows-[50px_1fr] gap-[10px]">
           <div className="flex justify-center items-center gap-[10px]">
             <span>sortuj według</span>
             <div
@@ -96,7 +96,7 @@ export default function UserPostsOwn({ user }) {
               )}
             </div>
           </div>
-          <div className="flex justify-center items-center gap-[10px]">
+          <div className="flex flex-col md:flex-row md:justify-center items-center gap-[10px]">
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 sort === "replies"
@@ -126,9 +126,9 @@ export default function UserPostsOwn({ user }) {
             </div>
           </div>
         </div>
-        <div className="grid grid-rows-2 gap-[10px]">
+        <div className="grid grid-rows-[50px_1fr] gap-[10px]">
           <div className="flex justify-center items-center">filtruj</div>
-          <div className="flex justify-center items-center gap-[10px]">
+          <div className="flex flex-col md:flex-row md:justify-center items-center gap-[10px]">
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 filter.includes("common")
