@@ -2,6 +2,8 @@
 
 import { Pool } from "pg";
 
+import fs from "fs";
+
 import {
   validateEmail,
   validateFullname,
@@ -9,12 +11,13 @@ import {
   validatePasswords,
 } from "@app/utils/validator";
 
-export default async function register(
-  email,
-  fullname,
-  password,
-  passwordValid
-) {
+export default async function register(formData) {
+  const email = formData.get("email"),
+    fullname = formData.get("fullname"),
+    password = formData.get("password"),
+    passwordValid = formData.get("passwordValid"),
+    avatar = formData.get("avatar");
+
   const validateAccount = async (email) => {
     const client = new Pool();
     const res = await client.query(
@@ -35,10 +38,18 @@ export default async function register(
   if (isValid) {
     const client = new Pool();
     const name = fullname.split(" ");
-    await client.query(
-      "INSERT INTO public.user VALUES (DEFAULT, $1, $2, $3, $4);",
+    const res = await client.query(
+      "INSERT INTO public.user VALUES (DEFAULT, $1, $2, $3, $4, NULL) RETURNING id;",
       [email, name[0], name[1], password]
     );
+    if (avatar.size)
+      fs.writeFile(
+        `./public/avatars/${res.rows[0].id}.png`,
+        Buffer.from(await avatar.arrayBuffer()),
+        (err) => {
+          if (err) console.error(err);
+        }
+      );
     await client.end();
   }
 

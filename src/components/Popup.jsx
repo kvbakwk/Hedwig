@@ -7,7 +7,7 @@ export default function Popup({ children, show, setShow }) {
 
   return (
     <div
-      className={`fixed bottom-[50px] w-[710px] bg-[rgb(var(--background)/1)] glass-shadow glass-border rounded-2xl ${
+      className={`fixed z-50 bottom-[50px] w-[710px] bg-[rgb(var(--background)/1)] glass-shadow glass-border rounded-2xl ${
         show ? "block" : "hidden"
       }`}>
       <div

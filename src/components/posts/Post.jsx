@@ -6,7 +6,7 @@ import Avatar from "@components/Avatar";
 
 export default function Post({ user, post, setReply }) {
   return (
-    <div className="grid grid-cols-[60px_1fr] sm:grid-cols-[100px_1fr] grid-rows-[35px_auto_40px] sm:grid-rows-[40px_auto_40px]">
+    <div className="grid grid-cols-[60px_1fr] sm:grid-cols-[100px_1fr] grid-rows-[35px_auto_40px] sm:grid-rows-[40px_auto_40px] md:pb-[10px] md:glass-hover cursor-pointer">
       <Avatar
         className="row-span-3 justify-self-center w-[40px] sm:w-[60px] h-[40px] sm:h-[60px] mt-[10px] sm:mt-[20px] rounded-full"
         user_id={post.user_id}

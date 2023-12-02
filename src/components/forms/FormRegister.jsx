@@ -15,21 +15,14 @@ export default function FormRegister() {
   const [passwordErr, setPasswordErr] = useState(false);
   const [passwordsErr, setPasswordsErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
+  const [avatar, setAvatar] = useState([]);
 
   useEffect(() => {
     router.prefetch("/logowanie");
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, fullname, password, passwordValid } = e.target.elements;
-
-    const res = await register(
-      email.value,
-      fullname.value,
-      password.value,
-      passwordValid.value
-    );
+  const handleSubmit = async (formData) => {
+    const res = await register(formData);
 
     setEmailErr(res.emailErr);
     setFullnameErr(res.fullnameErr);
@@ -43,21 +36,44 @@ export default function FormRegister() {
     <form
       className="flex flex-col justify-center items-center gap-[25px] w-full md:w-[500px] h-full md:h-auto pb-40 md:py-16 md:glass"
       method="post"
-      onSubmit={handleSubmit}>
+      action={handleSubmit}>
       <div className="flex flex-col justify-center items-center gap-[10px] w-11/12 sm:w-1/2 md:w-[300px]">
-        <TextField
-          type="text"
-          name="email"
-          placeholder="e-mail"
-          error={emailErr}
-          errorMessage="wprowadź poprawnego e-maila"
-        />
+        <label
+          className="flex justify-center items-center w-[100px] h-[100px] mb-[10px] bg-[rgb(var(--background)/1)] glass-shadow glass-border rounded-full cursor-pointer"
+          htmlFor="avatar">
+          {avatar.length === 0 && (
+            <span className="material-symbols-outlined">
+              add_photo_alternate
+            </span>
+          )}
+          {avatar.length === 1 && (
+            <img
+              className="w-full h-full rounded-full"
+              src={URL.createObjectURL(avatar[0])}
+            />
+          )}
+          <input
+            className="hidden"
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+            onChange={(e) => setAvatar(e.target.files)}
+          />
+        </label>
         <TextField
           type="text"
           name="fullname"
           placeholder="imię i nazwisko"
           error={fullnameErr}
           errorMessage="wprowadź swoje poprawne dane"
+        />
+        <TextField
+          type="text"
+          name="email"
+          placeholder="e-mail"
+          error={emailErr}
+          errorMessage="wprowadź poprawnego e-maila"
         />
         <TextField
           type="password"

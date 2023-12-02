@@ -18,7 +18,7 @@ export default function ProfileItem({ user }) {
   };
 
   return (
-    <div className="relative hidden lg:grid grid-cols-[40px_1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] px-[25px] select-none">
+    <div className="relative hidden lg:grid grid-cols-[40px_1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] xl:px-[25px] select-none">
       <Link className="contents" href={page}>
         <Avatar
           className="justify-self-center self-center w-[40px] h-[40px] rounded-full"
