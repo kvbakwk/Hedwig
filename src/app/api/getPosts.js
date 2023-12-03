@@ -2,7 +2,7 @@
 
 import { getPosts } from "@app/utils/db-actions/post";
 
-export default async function get(
+export default async function getPostsAPI(
   user_id,
   withPosts,
   withReplies,

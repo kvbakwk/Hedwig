@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 
 import { validateEmail, validatePassword } from "@app/utils/validator";
 
-export default async function login(email, password, remember) {
+export default async function loginAPI(email, password, remember) {
   const validateAccount = async (email, password) => {
     const client = new Pool();
     const res = await client.query(

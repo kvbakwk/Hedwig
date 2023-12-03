@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import PostHeader from "./PostHeader";
 import PostFooter from "./PostFooter";
 import Avatar from "@components/Avatar";

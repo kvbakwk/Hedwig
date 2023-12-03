@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import timeAgo from "@app/utils/time";
-import getPostsById from "@app/api/posts/getById";
+import getPostsById from "@app/api/getPostsById";
 
 import Link from "next/link";
 import Avatar from "@components/Avatar";

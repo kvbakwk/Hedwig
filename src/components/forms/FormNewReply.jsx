@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import addPost from "@app/api/posts/add";
+import addPost from "@app/api/addPost";
 
 export default function FormNewReply({ user, parent_id }) {
   const router = useRouter();

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import addPost from "@app/api/posts/add";
-import getPosts from "@app/api/posts/getAll";
+import addPost from "@app/api/addPost";
+import getPosts from "@app/api/getPosts";
 import Avatar from "@components/Avatar";
 
 export default function FormNewPost({ user, setPosts }) {

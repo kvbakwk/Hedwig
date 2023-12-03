@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import getUser from "@app/api/users/get";
-import getUserById from "@app/api/users/id/get";
+import getUser from "@app/api/getUser";
+import getUserById from "@app/api/getUserById";
 
 import Link from "next/link";
 import Avatar from "@components/Avatar";

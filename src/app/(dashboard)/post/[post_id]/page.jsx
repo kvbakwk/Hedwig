@@ -1,5 +1,5 @@
-import getPost from "@app/api/posts/get";
-import getUser from "@app/api/users/get";
+import getPost from "@app/api/getPostById";
+import getUser from "@app/api/getUser";
 import Post from "@components/Post";
 
 export default async function PostPage({ params: { post_id } }) {

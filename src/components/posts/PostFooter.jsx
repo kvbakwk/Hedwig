@@ -3,9 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import like from "@app/api/users/like";
-import dislike from "@app/api/users/dislike";
-import save from "@app/api/users/save";
+import like from "@app/api/likePost";
+import dislike from "@app/api/dislikePost";
+import save from "@app/api/savePost";
 import PostFooterOption from "./PostFooterOption";
 
 export default function PostFooter({ className, user, post, setReply }) {

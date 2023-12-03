@@ -2,7 +2,7 @@
 
 import { Pool } from "pg";
 
-export default async function save(user_id, post_id) {
+export default async function savePostAPI(user_id, post_id) {
   const client = new Pool();
   let res;
 

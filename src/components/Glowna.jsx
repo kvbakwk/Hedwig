@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import getPosts from "@app/api/posts/getAll";
+import getPosts from "@app/api/getPosts";
 
 import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/posts/Posts";

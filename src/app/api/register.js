@@ -11,7 +11,7 @@ import {
   validatePasswords,
 } from "@app/utils/validator";
 
-export default async function register(formData) {
+export default async function registerAPI(formData) {
   const email = formData.get("email"),
     fullname = formData.get("fullname"),
     password = formData.get("password"),

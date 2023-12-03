@@ -1,8 +1,94 @@
 import { Pool } from "pg";
 
-import { getLikes } from "./like";
-import { getDislikes } from "./dislike";
-import { getSaves } from "./save";
+export async function addPost(user_id, content, anonymous) {
+  const client = new Pool();
+  await client.query(
+    "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4);",
+    [user_id, content, new Date(), anonymous]
+  );
+  await client.end();
+}
+
+export async function addPostReply(user_id, content, anonymous, parent_id) {
+  const client = new Pool();
+  let post_id = (
+    await client.query(
+      "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4) RETURNING id;",
+      [user_id, content, new Date(), anonymous]
+    )
+  ).rows[0].id;
+  if (parent_id !== undefined)
+    await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
+      post_id,
+      parent_id,
+    ]);
+  await client.end();
+}
+
+export async function getPostById(user_id, post_id) {
+  const client = new Pool();
+  let post = (
+    await client.query(
+      "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id WHERE p.id = $1 ORDER BY p.create_date DESC;",
+      [post_id]
+    )
+  ).rows[0];
+  await client.end();
+
+  await Promise.all([
+    (post = {
+      ...post,
+      likes: (await getPostLikes(post.id)).map((like) => like.user_id),
+      dislikes: (
+        await getPostDislikes(post.id)
+      ).map((dislike) => dislike.user_id),
+      saves: (await getPostSaves(post.id)).map((save) => save.user_id),
+      replies: (await getPostReplies(post.id)).map((reply) => reply.post_id),
+      reply: await isReply(post),
+    }),
+  ]);
+
+  return user_id === post.user_id
+    ? {
+        id: post.id,
+        user_id: post.user_id,
+        email: post.email,
+        firstname: post.firstname,
+        lastname: post.lastname,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      }
+    : post.anonymous
+    ? {
+        id: post.id,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      }
+    : {
+        id: post.id,
+        user_id: post.user_id,
+        email: post.email,
+        firstname: post.firstname,
+        lastname: post.lastname,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      };
+}
 
 export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
   const client = new Pool();
@@ -11,21 +97,22 @@ export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
       "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id ORDER BY p.create_date DESC;"
     )
   ).rows;
+  await client.end();
+
   await Promise.all(
     posts.map(async (post, index) => {
       posts[index] = {
         ...post,
-        likes: (await getLikes(post.id)).map((like) => like.user_id),
-        dislikes: (await getDislikes(post.id)).map(
+        likes: (await getPostLikes(post.id)).map((like) => like.user_id),
+        dislikes: (await getPostDislikes(post.id)).map(
           (dislike) => dislike.user_id
         ),
-        saves: (await getSaves(post.id)).map((save) => save.user_id),
-        replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
-        reply: await isReplyPost(post),
+        saves: (await getPostSaves(post.id)).map((save) => save.user_id),
+        replies: (await getPostReplies(post.id)).map((reply) => reply.post_id),
+        reply: await isReply(post),
       };
     })
   );
-  await client.end();
 
   return posts
     .filter((post) => post.reply || (!post.reply && withPosts))
@@ -76,8 +163,6 @@ export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
 }
 
 export async function getPostsById(user_id, post_ids) {
-  const client = new Pool();
-
   let posts = post_ids;
 
   await Promise.all(
@@ -86,23 +171,20 @@ export async function getPostsById(user_id, post_ids) {
     })
   );
 
-  // posts.sort((a, b) => b.date - a.date);
-
   await Promise.all(
     posts.map(async (post, index) => {
       posts[index] = {
         ...post,
-        likes: (await getLikes(post.id)).map((like) => like.user_id),
-        dislikes: (await getDislikes(post.id)).map(
+        likes: (await getPostLikes(post.id)).map((like) => like.user_id),
+        dislikes: (await getPostDislikes(post.id)).map(
           (dislike) => dislike.user_id
         ),
-        saves: (await getSaves(post.id)).map((save) => save.user_id),
-        replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
-        reply: await isReplyPost(post),
+        saves: (await getPostSaves(post.id)).map((save) => save.user_id),
+        replies: (await getPostReplies(post.id)).map((reply) => reply.post_id),
+        reply: await isReply(post),
       };
     })
   );
-  await client.end();
 
   return posts.map((post) =>
     user_id === post.user_id
@@ -148,7 +230,7 @@ export async function getPostsById(user_id, post_ids) {
   );
 }
 
-export async function getUserPosts(
+export async function getPostsByUser(
   user_id,
   withPosts,
   withReplies,
@@ -161,21 +243,22 @@ export async function getUserPosts(
       [user_id]
     )
   ).rows;
+  await client.end();
+
   await Promise.all(
     posts.map(async (post, index) => {
       posts[index] = {
         ...post,
-        likes: (await getLikes(post.id)).map((like) => like.user_id),
-        dislikes: (await getDislikes(post.id)).map(
+        likes: (await getPostLikes(post.id)).map((like) => like.user_id),
+        dislikes: (await getPostDislikes(post.id)).map(
           (dislike) => dislike.user_id
         ),
-        saves: (await getSaves(post.id)).map((save) => save.user_id),
-        replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
-        reply: await isReplyPost(post),
+        saves: (await getPostSaves(post.id)).map((save) => save.user_id),
+        replies: (await getPostReplies(post.id)).map((reply) => reply.post_id),
+        reply: await isReply(post),
       };
     })
   );
-  await client.end();
 
   return posts
     .filter((post) => post.reply || (!post.reply && withPosts))
@@ -225,104 +308,7 @@ export async function getUserPosts(
     );
 }
 
-export async function getPost(user_id, post_id) {
-  const client = new Pool();
-  let post = (
-    await client.query(
-      "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id WHERE p.id = $1 ORDER BY p.create_date DESC;",
-      [post_id]
-    )
-  ).rows[0];
-  await Promise.all([
-    (post = {
-      ...post,
-      likes: (await getLikes(post.id)).map((like) => like.user_id),
-      dislikes: (await getDislikes(post.id)).map((dislike) => dislike.user_id),
-      saves: (await getSaves(post.id)).map((save) => save.user_id),
-      replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
-      reply: await isReplyPost(post),
-    }),
-  ]);
-  await client.end();
-
-  return user_id === post.user_id
-    ? {
-        id: post.id,
-        user_id: post.user_id,
-        email: post.email,
-        firstname: post.firstname,
-        lastname: post.lastname,
-        content: post.content,
-        date: post.create_date,
-        anonymous: post.anonymous,
-        likes: post.likes,
-        dislikes: post.dislikes,
-        saves: post.saves,
-        replies: post.replies,
-      }
-    : post.anonymous
-    ? {
-        id: post.id,
-        content: post.content,
-        date: post.create_date,
-        anonymous: post.anonymous,
-        likes: post.likes,
-        dislikes: post.dislikes,
-        saves: post.saves,
-        replies: post.replies,
-      }
-    : {
-        id: post.id,
-        user_id: post.user_id,
-        email: post.email,
-        firstname: post.firstname,
-        lastname: post.lastname,
-        content: post.content,
-        date: post.create_date,
-        anonymous: post.anonymous,
-        likes: post.likes,
-        dislikes: post.dislikes,
-        saves: post.saves,
-        replies: post.replies,
-      };
-}
-
-export async function addPost(user_id, content, anonymous) {
-  const client = new Pool();
-  await client.query(
-    "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4);",
-    [user_id, content, new Date(), anonymous]
-  );
-  await client.end();
-}
-
-export async function addReplyPost(user_id, content, anonymous, parent_id) {
-  const client = new Pool();
-  let post_id = (
-    await client.query(
-      "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4) RETURNING id;",
-      [user_id, content, new Date(), anonymous]
-    )
-  ).rows[0].id;
-  if (parent_id !== undefined)
-    await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
-      post_id,
-      parent_id,
-    ]);
-  await client.end();
-}
-
-export async function isReplyPost(post) {
-  const client = new Pool();
-  const res = await client.query(
-    "SELECT parent_id FROM public.post_parent WHERE post_id = $1;",
-    [post.id]
-  );
-  await client.end();
-  return res.rowCount === 1;
-}
-
-export async function getReplyIds(post_id) {
+export async function getPostReplies(post_id) {
   const client = new Pool();
   const replies = (
     await client.query(
@@ -332,4 +318,50 @@ export async function getReplyIds(post_id) {
   ).rows;
   await client.end();
   return replies;
+}
+
+export async function getPostLikes(post_id) {
+  const client = new Pool();
+  const likes = (
+    await client.query(
+      "SELECT user_id FROM public.like_user_post WHERE post_id = $1;",
+      [post_id]
+    )
+  ).rows;
+  await client.end();
+  return likes;
+}
+
+export async function getPostDislikes(post_id) {
+  const client = new Pool();
+  const dislikes = (
+    await client.query(
+      "SELECT user_id FROM public.dislike_user_post WHERE post_id = $1;",
+      [post_id]
+    )
+  ).rows;
+  await client.end();
+  return dislikes;
+}
+
+export async function getPostSaves(post_id) {
+  const client = new Pool();
+  const saves = (
+    await client.query(
+      "SELECT user_id FROM public.save_user_post WHERE post_id = $1;",
+      [post_id]
+    )
+  ).rows;
+  await client.end();
+  return saves;
+}
+
+export async function isReply(post) {
+  const client = new Pool();
+  const res = await client.query(
+    "SELECT parent_id FROM public.post_parent WHERE post_id = $1;",
+    [post.id]
+  );
+  await client.end();
+  return res.rowCount === 1;
 }

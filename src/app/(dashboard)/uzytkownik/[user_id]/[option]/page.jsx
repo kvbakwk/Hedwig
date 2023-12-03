@@ -1,4 +1,4 @@
-import getUser from "@app/api/users/get";
+import getUser from "@app/api/getUser";
 
 import UserPosts from "@components/profiles/UserPosts";
 import UserPostsOwn from "@components/profiles/UserPostsOwn";
