@@ -36,9 +36,9 @@ export default function FormNewReply({ user, parent_id }) {
       onSubmit={handleSubmit}
       method="post">
       <textarea
-        className="text-[22px] leading-10 h-[170px] mt-[20px] mx-[40px] border-b-[1px] border-[rgb(var(--shadow)/1)] outline-none resize-none"
+        className="text-[22px] leading-10 h-[80px] mt-[20px] mx-[40px] border-b-[1px] border-[rgb(var(--shadow)/1)] outline-none resize-none"
         name="content"
-        placeholder="co u ciebie?"
+        placeholder="odpowiedz..."
         ref={textareaElement}></textarea>
       <div className="flex justify-center items-center justify-self-end mr-[40px]">
         {contentErr && (

@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import addPost from "@app/api/posts/add";
-import getPosts from "@app/api/posts/get";
+import getPosts from "@app/api/posts/getAll";
 import Avatar from "@components/Avatar";
 
 export default function FormNewPost({ user, setPosts }) {
