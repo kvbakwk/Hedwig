@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import like from "@app/api/users/like";
 import dislike from "@app/api/users/dislike";
 import save from "@app/api/users/save";
 import PostFooterOption from "./PostFooterOption";
 
-export default function PostFooter({ user, post, setReply }) {
+export default function PostFooter({ className, user, post, setReply }) {
+  const router = useRouter();
   const [inProgress, setInProgress] = useState(false);
   const [liked, setLiked] = useState(post.likes.find((id) => id === user.id));
   const [disliked, setDisliked] = useState(
@@ -58,7 +60,7 @@ export default function PostFooter({ user, post, setReply }) {
   };
 
   return (
-    <div className="relative z-10 justify-self-end self-center flex justify-center items-center gap-[20px] md:gap-1 mr-[22px] md:mr-[50px] select-none">
+    <div className={className}>
       <PostFooterOption
         handleClick={() => (inProgress ? "" : handleLike())}
         icon="favorite"
@@ -80,6 +82,11 @@ export default function PostFooter({ user, post, setReply }) {
         iconColor=""
         count={repliesCount}
       />
+      <div
+        className="flex justify-center items-center justify-self-center self-center w-[35px] h-[35px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
+        onClick={() => router.push(`/post/${post.id}`)}>
+        <span className={`material-symbols-outlined`}>open_in_new</span>
+      </div>
       <div
         className="flex justify-center items-center justify-self-center self-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
         onClick={() => {

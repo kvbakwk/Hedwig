@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import Posts from "../posts/Posts";
 
 import getUserPosts from "@app/api/posts/user/get";
-import getPosts from "@app/api/posts/get";
+import getPosts from "@app/api/posts/getAll";
 
 export default function UserPosts({ user }) {
   const params = useParams();

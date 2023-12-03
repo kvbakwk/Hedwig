@@ -75,6 +75,79 @@ export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
     );
 }
 
+export async function getPostsById(user_id, post_ids) {
+  const client = new Pool();
+
+  let posts = post_ids;
+
+  await Promise.all(
+    post_ids.map(async (id, index) => {
+      posts[index] = await getPost(user_id, id);
+    })
+  );
+
+  // posts.sort((a, b) => b.date - a.date);
+
+  await Promise.all(
+    posts.map(async (post, index) => {
+      posts[index] = {
+        ...post,
+        likes: (await getLikes(post.id)).map((like) => like.user_id),
+        dislikes: (await getDislikes(post.id)).map(
+          (dislike) => dislike.user_id
+        ),
+        saves: (await getSaves(post.id)).map((save) => save.user_id),
+        replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
+        reply: await isReplyPost(post),
+      };
+    })
+  );
+  await client.end();
+
+  return posts.map((post) =>
+    user_id === post.user_id
+      ? {
+          id: post.id,
+          user_id: post.user_id,
+          email: post.email,
+          firstname: post.firstname,
+          lastname: post.lastname,
+          content: post.content,
+          date: post.date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+          replies: post.replies,
+        }
+      : post.anonymous
+      ? {
+          id: post.id,
+          content: post.content,
+          date: post.date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+          replies: post.replies,
+        }
+      : {
+          id: post.id,
+          user_id: post.user_id,
+          email: post.email,
+          firstname: post.firstname,
+          lastname: post.lastname,
+          content: post.content,
+          date: post.date,
+          anonymous: post.anonymous,
+          likes: post.likes,
+          dislikes: post.dislikes,
+          saves: post.saves,
+          replies: post.replies,
+        }
+  );
+}
+
 export async function getUserPosts(
   user_id,
   withPosts,
@@ -150,6 +223,68 @@ export async function getUserPosts(
             replies: post.replies,
           }
     );
+}
+
+export async function getPost(user_id, post_id) {
+  const client = new Pool();
+  let post = (
+    await client.query(
+      "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id WHERE p.id = $1 ORDER BY p.create_date DESC;",
+      [post_id]
+    )
+  ).rows[0];
+  await Promise.all([
+    (post = {
+      ...post,
+      likes: (await getLikes(post.id)).map((like) => like.user_id),
+      dislikes: (await getDislikes(post.id)).map((dislike) => dislike.user_id),
+      saves: (await getSaves(post.id)).map((save) => save.user_id),
+      replies: (await getReplyIds(post.id)).map((reply) => reply.post_id),
+      reply: await isReplyPost(post),
+    }),
+  ]);
+  await client.end();
+
+  return user_id === post.user_id
+    ? {
+        id: post.id,
+        user_id: post.user_id,
+        email: post.email,
+        firstname: post.firstname,
+        lastname: post.lastname,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      }
+    : post.anonymous
+    ? {
+        id: post.id,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      }
+    : {
+        id: post.id,
+        user_id: post.user_id,
+        email: post.email,
+        firstname: post.firstname,
+        lastname: post.lastname,
+        content: post.content,
+        date: post.create_date,
+        anonymous: post.anonymous,
+        likes: post.likes,
+        dislikes: post.dislikes,
+        saves: post.saves,
+        replies: post.replies,
+      };
 }
 
 export async function addPost(user_id, content, anonymous) {
