@@ -2,8 +2,15 @@ import { redirect } from "next/navigation";
 import getUser from "@app/api/getUser";
 import getUserById from "@app/api/getUserById";
 
-import Link from "next/link";
-import Avatar from "@components/Avatar";
+import Container from "@components/dashboard/user/LayoutContainer";
+import Header from "@components/dashboard/user/LayoutContainerHeader";
+import Main from "@components/dashboard/user/LayoutContainerMain";
+import Profile from "@components/dashboard/user/LayoutContainerMainProfile";
+import Nav from "@components/dashboard/user/LayoutContainerMainNav";
+import Item from "@components/dashboard/user/LayoutContainerMainNavItem";
+import Fullname from "@components/dashboard/user/LayoutContainerMainProfileFullname";
+import Email from "@components/dashboard/user/LayoutContainerMainProfileEmail";
+import Avatar from "@components/dashboard/user/LayoutContainerMainProfileAvatar";
 
 export const metadata = {
   title: "schcool | profil",
@@ -17,57 +24,32 @@ export default async function ProfileLayout({ params: { user_id }, children }) {
   const profileUser = await getUserById(user_id);
 
   return (
-    <div className="relative w-[full] h-auto md:px-[15px]">
-      <div className="z-50 fixed hidden md:flex items-center text-[22px] w-[720px] h-[70px] pl-[50px] border-[1px] border-t-0 border-gray-300 border-solid transition-shadow rounded-b-2xl backdrop-blur-xl glass-shadow">
-        {user.id == user_id ? "twój profil użytkownika" : "profil użytkownika"}{" "}
-        <br />
-      </div>
-      <div className="z-0 relative flex flex-col gap-[20px] w-full py-[90px] md:px-[5px]">
-        <div className="relative flex flex-col justify-center md:justify-start items-center md:items-start gap-[5px] md:pl-[40px] pt-[20px] md:pt-[100px] pb-[20px] md:pb-[40px] md:mt-[60px] md:glass">
-          <Avatar
-            className="static md:absolute top-[-50px] left-[60px] w-[100px] h-[100px] mb-[20px] md:mb-0 bg-[rgb(var(--background)/1)] md:border-[1px] md:border-gray-300 rounded-full"
-            user_id={user_id}
-            anonymous={false}
-          />
-          <span className="text-[20px]">
+    <Container>
+      <Header>
+        {user.id == user_id ? "twój profil użytkownika" : "profil użytkownika"}
+      </Header>
+      <Main>
+        <Profile>
+          <Avatar user_id={user_id} />
+          <Fullname>
             {profileUser.firstname.toLowerCase()}{" "}
             {profileUser.lastname.toLowerCase()}
-          </span>
-          <span className="text-[16px] text-gray-500">{profileUser.email}</span>
-        </div>
-        <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-[10px] md:gap-[30px]">
-          <Link
-            className="flex justify-center items-center px-[20px] h-[40px] glass"
-            href={`/uzytkownik/${user_id}/posty`}>
-            posty
-          </Link>
-          <Link
-            className="flex justify-center items-center px-[20px] h-[40px] glass"
-            href={`/uzytkownik/${user_id}/odpowiedzi`}>
-            odpowiedzi
-          </Link>
-          <Link
-            className="flex justify-center items-center px-[20px] h-[40px] glass"
-            href={`/uzytkownik/${user_id}/polubione`}>
-            polubione
-          </Link>
+          </Fullname>
+          <Email>{profileUser.email}</Email>
+        </Profile>
+        <Nav>
+          <Item href={`/uzytkownik/${user_id}/posty`}>posty</Item>
+          <Item href={`/uzytkownik/${user_id}/odpowiedzi`}>odpowiedzi</Item>
+          <Item href={`/uzytkownik/${user_id}/polubione`}>polubione</Item>
           {user.id == user_id && (
             <>
-              <Link
-                className="flex justify-center items-center px-[20px] h-[40px] glass"
-                href={`/uzytkownik/${user_id}/negatywne`}>
-                negatywne
-              </Link>
-              <Link
-                className="flex justify-center items-center px-[20px] h-[40px] glass"
-                href={`/uzytkownik/${user_id}/zapisane`}>
-                zapisane
-              </Link>
+              <Item href={`/uzytkownik/${user_id}/negatywne`}>negatywne</Item>
+              <Item href={`/uzytkownik/${user_id}/zapisane`}>zapisane</Item>
             </>
           )}
-        </div>
+        </Nav>
         {children}
-      </div>
-    </div>
+      </Main>
+    </Container>
   );
 }

@@ -167,7 +167,7 @@ export async function getPostsById(user_id, post_ids) {
 
   await Promise.all(
     post_ids.map(async (id, index) => {
-      posts[index] = await getPost(user_id, id);
+      posts[index] = await getPostById(user_id, id);
     })
   );
 

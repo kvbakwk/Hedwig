@@ -9,13 +9,13 @@ import NavItem from "@components/NavItem";
 import EventsItem from "@components/EventsItem";
 import ProfileItemLg from "@components/ProfileItemLg";
 import ProfileItem from "@components/ProfileItem";
-import Container from "@components/DashboardRootLayoutContainer";
-import LeftBar from "@components/DashboardRootLayoutLeftBar";
-import LeftBarTitle from "@components/DashboardRootLayoutLeftBarTitle";
-import Nav from "@components/DashboardRootLayoutLeftBarNav";
-import RightBar from "@components/DashboardRootLayoutRightBar";
-import Children from "@components/DashboardRootLayoutChildren";
-import RightBarTitle from "@components/DashboardRootLayoutRightBarTitle";
+import Container from "@components/dashboard/LayoutContainer";
+import LeftBar from "@components/dashboard/LayoutContainerLeftBar";
+import LeftBarTitle from "@components/dashboard/LayoutContainerLeftBarTitle";
+import Nav from "@components/dashboard/LayoutContainerLeftBarNav";
+import RightBar from "@components/dashboard/LayoutContainerRightBar";
+import Children from "@components/dashboard/LayoutChildren";
+import RightBarTitle from "@components/dashboard/LayoutContainerRightBarTitle";
 
 export const metadata = {
   title: "schcool",

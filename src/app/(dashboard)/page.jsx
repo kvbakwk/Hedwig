@@ -1,8 +1,8 @@
 import getUser from "@app/api/getUser";
 import Glowna from "@components/Glowna";
-import Container from "@components/DashboardRootPageContainer";
-import Header from "@components/DashboardRootPageContainerHeader";
-import Main from "@components/DashboardRootPageContainerMain";
+import Container from "@components/dashboard/PageContainer";
+import Header from "@components/dashboard/PageContainerHeader";
+import Main from "@components/dashboard/PageContainerMain";
 
 export const metadata = {
   title: "schcool | główna",
