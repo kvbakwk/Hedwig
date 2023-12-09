@@ -1,16 +1,15 @@
 import { redirect } from "next/navigation";
 import getUser from "@app/api/getUser";
 import getUserById from "@app/api/getUserById";
-
-import Container from "@components/dashboard/user/LayoutContainer";
-import Header from "@components/dashboard/user/LayoutContainerHeader";
-import Main from "@components/dashboard/user/LayoutContainerMain";
-import Profile from "@components/dashboard/user/LayoutContainerMainProfile";
-import Nav from "@components/dashboard/user/LayoutContainerMainNav";
-import Item from "@components/dashboard/user/LayoutContainerMainNavItem";
-import Fullname from "@components/dashboard/user/LayoutContainerMainProfileFullname";
-import Email from "@components/dashboard/user/LayoutContainerMainProfileEmail";
-import Avatar from "@components/dashboard/user/LayoutContainerMainProfileAvatar";
+import Container from "@components/ui/dashboard/user/Container";
+import Header from "@components/ui/dashboard/user/Header";
+import Main from "@components/ui/dashboard/user/Main";
+import Profile from "@components/ui/dashboard/user/Profile";
+import ProfileAvatar from "@components/ui/dashboard/user/ProfileAvatar";
+import ProfileFullname from "@components/ui/dashboard/user/ProfileFullname";
+import ProfileEmail from "@components/ui/dashboard/user/ProfileEmail";
+import Nav from "@components/ui/dashboard/user/Nav";
+import NavItem from "@components/ui/dashboard/user/NavItem";
 
 export const metadata = {
   title: "schcool | profil",
@@ -30,21 +29,27 @@ export default async function ProfileLayout({ params: { user_id }, children }) {
       </Header>
       <Main>
         <Profile>
-          <Avatar user_id={user_id} />
-          <Fullname>
+          <ProfileAvatar user_id={user_id} />
+          <ProfileFullname>
             {profileUser.firstname.toLowerCase()}{" "}
             {profileUser.lastname.toLowerCase()}
-          </Fullname>
-          <Email>{profileUser.email}</Email>
+          </ProfileFullname>
+          <ProfileEmail>{profileUser.email}</ProfileEmail>
         </Profile>
         <Nav>
-          <Item href={`/uzytkownik/${user_id}/posty`}>posty</Item>
-          <Item href={`/uzytkownik/${user_id}/odpowiedzi`}>odpowiedzi</Item>
-          <Item href={`/uzytkownik/${user_id}/polubione`}>polubione</Item>
+          <NavItem href={`/uzytkownik/${user_id}/posty`}>posty</NavItem>
+          <NavItem href={`/uzytkownik/${user_id}/odpowiedzi`}>
+            odpowiedzi
+          </NavItem>
+          <NavItem href={`/uzytkownik/${user_id}/polubione`}>polubione</NavItem>
           {user.id == user_id && (
             <>
-              <Item href={`/uzytkownik/${user_id}/negatywne`}>negatywne</Item>
-              <Item href={`/uzytkownik/${user_id}/zapisane`}>zapisane</Item>
+              <NavItem href={`/uzytkownik/${user_id}/negatywne`}>
+                negatywne
+              </NavItem>
+              <NavItem href={`/uzytkownik/${user_id}/zapisane`}>
+                zapisane
+              </NavItem>
             </>
           )}
         </Nav>

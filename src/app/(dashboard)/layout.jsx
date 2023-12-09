@@ -9,13 +9,14 @@ import NavItem from "@components/NavItem";
 import EventsItem from "@components/EventsItem";
 import ProfileItemLg from "@components/ProfileItemLg";
 import ProfileItem from "@components/ProfileItem";
-import Container from "@components/dashboard/LayoutContainer";
-import LeftBar from "@components/dashboard/LayoutContainerLeftBar";
-import LeftBarTitle from "@components/dashboard/LayoutContainerLeftBarTitle";
-import Nav from "@components/dashboard/LayoutContainerLeftBarNav";
-import RightBar from "@components/dashboard/LayoutContainerRightBar";
-import Children from "@components/dashboard/LayoutChildren";
-import RightBarTitle from "@components/dashboard/LayoutContainerRightBarTitle";
+import Layout from "@components/ui/dashboard/Layout";
+import Container from "@components/ui/dashboard/Container";
+import CenterBar from "@components/ui/dashboard/CenterBar";
+import LeftBar from "@components/ui/dashboard/LeftBar";
+import LeftBarTitle from "@components/ui/dashboard/LeftBarTitle";
+import Nav from "@components/pages/Nav";
+import RightBar from "@components/ui/dashboard/RightBar";
+import RightBarTitle from "@components/ui/dashboard/RightBarTitle";
 
 export const metadata = {
   title: "schcool",
@@ -32,27 +33,29 @@ export default async function RootDashboardLayout({ children }) {
       <body>
         <Suspense fallback={<></>}>
           <Container>
-            <LeftBar>
-              <LeftBarTitle>schcool</LeftBarTitle>
-              <Nav>
-                <NavItem
-                  value="główna"
-                  icon={"home"}
-                  fillIcon={true}
-                  page="/"
-                  href="/"
-                />
-              </Nav>
-              <ProfileItem user={user} />
-              <ProfileItemLg user={user} />
-            </LeftBar>
-            <div></div>
-            <RightBar>
-              <RightBarTitle>główna</RightBarTitle>
-              <EventsItem />
-            </RightBar>
+            <Layout>
+              <LeftBar>
+                <LeftBarTitle>schcool</LeftBarTitle>
+                <Nav>
+                  <NavItem
+                    value="główna"
+                    icon={"home"}
+                    fillIcon={true}
+                    page="/"
+                    href="/"
+                  />
+                </Nav>
+                <ProfileItem user={user} />
+                <ProfileItemLg user={user} />
+              </LeftBar>
+              <div></div>
+              <RightBar>
+                <RightBarTitle>główna</RightBarTitle>
+                <EventsItem />
+              </RightBar>
+            </Layout>
+            <CenterBar>{children}</CenterBar>
           </Container>
-          <Children>{children}</Children>
         </Suspense>
       </body>
     </html>

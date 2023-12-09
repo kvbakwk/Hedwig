@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="flex justify-center items-center w-full lg:w-[750px] h-full">
+    <>
       <FormLogin login={login} />
-    </div>
+    </>
   );
 }

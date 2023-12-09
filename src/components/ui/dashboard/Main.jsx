@@ -6,7 +6,7 @@ import getPosts from "@app/api/getPosts";
 import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/posts/Posts";
 
-export default function Glowna({ user }) {
+export default function Main({ user }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
