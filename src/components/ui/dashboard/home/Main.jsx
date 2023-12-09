@@ -5,6 +5,7 @@ import getPosts from "@app/api/getPosts";
 
 import FormNewPost from "@components/forms/FormNewPost";
 import Posts from "@components/posts/Posts";
+import Container from "@components/ui/dashboard/home/MainContainer";
 
 export default function Main({ user }) {
   const [posts, setPosts] = useState([]);
@@ -14,11 +15,9 @@ export default function Main({ user }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-[20px] w-full pt-[70px] sm:pt-[80px] md:pt-[90px] pb-[100px] md:pb-[50px] md:px-[5px]">
-      <div className="hidden md:block">
-        <FormNewPost user={user} setPosts={setPosts} />
-      </div>
+    <Container>
+      <FormNewPost user={user} setPosts={setPosts} />
       <Posts user={user} posts={posts} />
-    </div>
+    </Container>
   );
 }

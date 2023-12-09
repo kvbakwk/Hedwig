@@ -7,8 +7,12 @@ import register from "@app/api/register";
 import Button from "@components/Button";
 import TextField from "@components/TextField";
 import FormError from "@components/FormError";
+import Form from "@components/ui/auth/Form";
+import FormFields from "@components/ui/auth/FormFields";
+import FormOptions from "@components/ui/auth/FormOptions";
+import AvatarField from "@components/ui/auth/register/AvatarField";
 
-export default function FormRegister() {
+export default function Register() {
   const router = useRouter();
   const [emailErr, setEmailErr] = useState(false);
   const [fullnameErr, setFullnameErr] = useState(false);
@@ -21,8 +25,9 @@ export default function FormRegister() {
     router.prefetch("/logowanie");
   }, []);
 
-  const handleSubmit = async (formData) => {
-    const res = await register(formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await register(new FormData(e.target));
 
     setEmailErr(res.emailErr);
     setFullnameErr(res.fullnameErr);
@@ -33,34 +38,9 @@ export default function FormRegister() {
   };
 
   return (
-    <form
-      className="flex flex-col justify-center items-center gap-[25px] w-full md:w-[500px] h-full md:h-auto pb-40 md:py-16 md:glass"
-      method="post"
-      action={handleSubmit}>
-      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12 sm:w-1/2 md:w-[300px]">
-        <label
-          className="flex justify-center items-center w-[100px] h-[100px] mb-[10px] bg-[rgb(var(--background)/1)] glass-shadow glass-border rounded-full cursor-pointer"
-          htmlFor="avatar">
-          {avatar.length === 0 && (
-            <span className="material-symbols-outlined">
-              add_photo_alternate
-            </span>
-          )}
-          {avatar.length === 1 && (
-            <img
-              className="w-full h-full rounded-full"
-              src={URL.createObjectURL(avatar[0])}
-            />
-          )}
-          <input
-            className="hidden"
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/*"
-            onChange={(e) => setAvatar(e.target.files)}
-          />
-        </label>
+    <Form handleSubmit={handleSubmit}>
+      <FormFields>
+        <AvatarField avatar={avatar} setAvatar={setAvatar} />
         <TextField
           type="text"
           name="fullname"
@@ -89,13 +69,14 @@ export default function FormRegister() {
           error={passwordsErr}
           errorMessage="podane hasła nie są identyczne"
         />
-      </div>
+      </FormFields>
       <FormError show={accountErr}>
         konto z podanym e-mailem już istnieje
       </FormError>
-      <div className="flex justify-around md:justify-end items-center w-11/12 sm:w-1/2 md:w-[300px]">
+      <FormOptions>
+        <div></div>
         <Button value="zarejestruj się" />
-      </div>
-    </form>
+      </FormOptions>
+    </Form>
   );
 }

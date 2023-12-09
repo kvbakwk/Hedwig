@@ -7,8 +7,11 @@ import TextField from "@components/TextField";
 import FormError from "@components/FormError";
 import Button from "@components/Button";
 import Checkbox from "@components/Checkbox";
+import Form from "@components/ui/auth/Form";
+import FormFields from "@components/ui/auth/FormFields";
+import FormOptions from "@components/ui/auth/FormOptions";
 
-export default function FormLogin({ login }) {
+export default function Login({ login }) {
   const router = useRouter();
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
@@ -31,11 +34,8 @@ export default function FormLogin({ login }) {
   };
 
   return (
-    <form
-      className="flex flex-col justify-center items-center gap-[25px] w-full md:w-[500px] h-full md:h-auto pb-40 md:py-16 md:glass"
-      method="post"
-      onSubmit={handleSubmit}>
-      <div className="flex flex-col justify-center items-center gap-[10px] w-11/12 sm:w-1/2 md:w-[300px]">
+    <Form handleSubmit={handleSubmit}>
+      <FormFields>
         <TextField
           type="text"
           name="email"
@@ -50,14 +50,14 @@ export default function FormLogin({ login }) {
           error={passwordErr}
           errorMessage="hasło musi mieć przynajmniej 8 znaków"
         />
-      </div>
+      </FormFields>
       <FormError show={accountErr}>
         podane e-mail lub hasło jest nieprawidłowe
       </FormError>
-      <div className="flex justify-around md:justify-between items-center w-11/12 sm:w-1/2 md:w-[300px]">
+      <FormOptions>
         <Checkbox name="remember" label="zapamiętaj" />
         <Button value="zaloguj się" />
-      </div>
-    </form>
+      </FormOptions>
+    </Form>
   );
 }

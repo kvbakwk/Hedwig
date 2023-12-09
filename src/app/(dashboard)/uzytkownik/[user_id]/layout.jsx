@@ -10,6 +10,7 @@ import ProfileFullname from "@components/ui/dashboard/user/ProfileFullname";
 import ProfileEmail from "@components/ui/dashboard/user/ProfileEmail";
 import Nav from "@components/ui/dashboard/user/Nav";
 import NavItem from "@components/ui/dashboard/user/NavItem";
+import Back from "@components/Back";
 
 export const metadata = {
   title: "schcool | profil",
@@ -25,6 +26,7 @@ export default async function ProfileLayout({ params: { user_id }, children }) {
   return (
     <Container>
       <Header>
+        <Back />
         {user.id == user_id ? "twój profil użytkownika" : "profil użytkownika"}
       </Header>
       <Main>

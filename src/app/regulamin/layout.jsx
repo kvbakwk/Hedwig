@@ -1,3 +1,5 @@
+import "@app/utils/globals.css";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">

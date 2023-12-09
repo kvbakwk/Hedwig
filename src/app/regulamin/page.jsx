@@ -1,4 +1,4 @@
-import LinkBack from "@components/LinkBack";
+import Back from "@components/Back";
 
 export const metadata = {
   title: "schcool | regulamin",
@@ -7,7 +7,7 @@ export const metadata = {
 export default function RulesPage() {
   return (
     <div>
-      <LinkBack>powrót</LinkBack>
+      <Back>powrót</Back>
       <br />
       regulamin
     </div>

@@ -14,9 +14,9 @@ import Container from "@components/ui/dashboard/Container";
 import CenterBar from "@components/ui/dashboard/CenterBar";
 import LeftBar from "@components/ui/dashboard/LeftBar";
 import LeftBarTitle from "@components/ui/dashboard/LeftBarTitle";
-import Nav from "@components/pages/Nav";
 import RightBar from "@components/ui/dashboard/RightBar";
 import RightBarTitle from "@components/ui/dashboard/RightBarTitle";
+import Nav from "@components/ui/dashboard/Nav";
 
 export const metadata = {
   title: "schcool",

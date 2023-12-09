@@ -28,7 +28,7 @@ export default function FormNewPost({ user, setPosts }) {
 
   return (
     <form
-      className="grid grid-cols-[100px_1fr] grid-rows-[1fr_15px_60px] glass"
+      className="hidden md:grid grid-cols-[100px_1fr] grid-rows-[1fr_15px_60px] glass"
       onSubmit={handleSubmit}
       method="post">
       <Avatar
