@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Icon from "./Icon";
 
 export default function NavItem({ value, icon, fillIcon, page, href }) {
   const pathname = usePathname();
@@ -14,18 +15,14 @@ export default function NavItem({ value, icon, fillIcon, page, href }) {
   return (
     <Link
       href={href}
-      className={`relative flex flex-col lg:flex-row md:justify-center lg:justify-start items-center gap-1 lg:gap-0 md:w-[60px] lg:w-[180px] xl:w-[250px] md:h-[60px] lg:h-[70px] text-xs lg:text-xl xl:text-[22px] font-medium lg:font-light md:glass`}>
+      className="relative flex lg:flex-row flex-col lg:justify-start md:justify-center items-center lg:gap-0 gap-1 xl:text-[22px] lg:text-xl text-xs lg:font-light font-medium xl:w-[250px] lg:w-[180px] md:w-[60px] lg:h-[70px] md:h-[60px] md:glass">
       <div
-        className={`absolute z-0 w-16 h-8 bg-[color:rgb(var(--shadow)/1)] rounded-full ${
+        className={`absolute z-0 w-16 h-8 bg-shadow rounded-full ${
           active ? "block md:hidden" : "hidden"
-        }`}></div>
-      <div className="relative z-10 flex justify-center items-center w-16 h-8 md:w-auto md:h-auto lg:px-[18px]">
-        <span
-          className={`${
-            active && fillIcon ? "fill " : ""
-          }material-symbols-outlined`}>
-          {icon}
-        </span>
+        }`}
+      />
+      <div className="z-10 relative flex justify-center items-center md:w-auto w-16 md:h-auto h-8 lg:px-[18px]">
+        <Icon icon={icon} fill={active && fillIcon} />
       </div>
       <span className="md:hidden lg:contents">{value}</span>
     </Link>

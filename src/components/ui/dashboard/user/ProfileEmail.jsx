@@ -1,3 +1,3 @@
 export default function ProfileEmail({ children }) {
-  return <span className="text-[16px] text-gray-500">{children}</span>;
+  return <span className="text-gray-500 text-[16px]">{children}</span>;
 }

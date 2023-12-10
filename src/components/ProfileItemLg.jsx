@@ -6,11 +6,14 @@ import { logout } from "@app/api/login";
 
 import Link from "next/link";
 import Avatar from "./Avatar";
+import Icon from "./Icon";
 
 export default function ProfileItemLg({ user }) {
   const router = useRouter();
   const moreEl = useRef("moreEl");
   const [page, setPage] = useState(`/uzytkownik/${user.id}`);
+
+  useEffect(() => setPage(`/uzytkownik/${user.id}`), [user]);
 
   const handleLogout = async () => {
     await logout();
@@ -18,7 +21,7 @@ export default function ProfileItemLg({ user }) {
   };
 
   return (
-    <div className="relative hidden lg:grid grid-cols-[40px_1fr_40px] grid-rows-1 lg:w-[180px] xl:w-[250px] h-[70px] xl:px-[25px] select-none">
+    <div className="relative lg:grid hidden grid-cols-[40px_1fr_40px] grid-rows-1 xl:w-[250px] lg:w-[180px] h-[70px] xl:px-[25px] select-none">
       <Link className="contents" href={page}>
         <Avatar
           className="justify-self-center self-center w-[40px] h-[40px] rounded-full"
@@ -30,20 +33,20 @@ export default function ProfileItemLg({ user }) {
         </span>
       </Link>
       <div
-        className="flex justify-center items-center justify-self-center self-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
+        className="justify-self-center self-center flex justify-center items-center w-[30px] h-[30px] hover:bg-shadow cursor-pointer transition-colors rounded-full"
         onClick={() => {
           moreEl.current.classList.toggle("hidden");
           moreEl.current.classList.toggle("flex");
         }}>
-        <span className="material-symbols-outlined">more_vert</span>
+        <Icon icon="more_vert" fill={false} />
       </div>
       <div
-        className="absolute bottom-[calc(100%+5px)] right-0 hidden flex-col w-[150px] py-[10px] bg-[color:rgb(var(--background)/1)] glass"
+        className="absolute bottom-[calc(100%+5px)] right-0 hidden flex-col w-[150px] py-[10px] bg-background glass"
         ref={moreEl}>
         <div
-          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors"
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors"
           onClick={handleLogout}>
-          <span className="material-symbols-outlined">logout</span>
+          <Icon icon="logout" fill={false} />
           wyloguj się
         </div>
       </div>

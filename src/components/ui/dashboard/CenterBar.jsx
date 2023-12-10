@@ -1,6 +1,6 @@
 export default function CenterBar({ children }) {
   return (
-    <div className="z-10 relative w-screen md:w-[700px] lg:w-[750px] min-h-screen mx-auto">
+    <div className="z-10 relative lg:w-[750px] md:w-[700px] w-screen min-h-screen mx-auto">
       {children}
     </div>
   );

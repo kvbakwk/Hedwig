@@ -1,6 +1,6 @@
 export default function MainContainer({ children }) {
   return (
-    <div className="flex flex-col gap-[20px] w-full pt-[70px] sm:pt-[80px] md:pt-[90px] pb-[100px] md:pb-[50px] md:px-[5px]">
+    <div className="flex flex-col gap-[20px] w-full md:pt-[90px] sm:pt-[80px] pt-[70px] md:pb-[50px] pb-[100px] md:px-[5px]">
       {children}
     </div>
   );

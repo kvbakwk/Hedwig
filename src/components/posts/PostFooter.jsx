@@ -96,7 +96,7 @@ export default function PostFooter({ className, user, post, setReply }) {
         <span className={`material-symbols-outlined`}>more_vert</span>
       </div>
       <div
-        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col w-[150px] py-[10px] bg-[color:rgb(var(--background)/1)] glass-border glass-shadow rounded-2xl"
+        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col w-[150px] py-[10px] bg-[color:rgb(var(--background)/1)] glass-border shadow-md rounded-2xl"
         ref={moreEl}>
         <div
           className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors"

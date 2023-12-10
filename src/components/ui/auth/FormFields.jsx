@@ -1,6 +1,6 @@
 export default function FormFields({ children }) {
   return (
-    <div className="flex flex-col justify-center items-center gap-[10px] w-11/12 sm:w-1/2 md:w-[300px]">
+    <div className="flex flex-col justify-center items-center gap-[10px] md:w-[300px] sm:w-1/2 w-11/12">
       {children}
     </div>
   );

@@ -83,7 +83,7 @@ export default function UserPostsOwn({ user }) {
           <div className="flex justify-center items-center gap-[10px]">
             <span>sortuj według</span>
             <div
-              className="flex justify-center items-center w-[30px] h-[30px] rounded-lg cursor-pointer glass-shadow glass-border"
+              className="flex justify-center items-center w-[30px] h-[30px] rounded-lg cursor-pointer shadow-md glass-border"
               onClick={() => setDirection(!direction)}>
               {direction ? (
                 <span className="material-symbols-outlined">
@@ -100,8 +100,8 @@ export default function UserPostsOwn({ user }) {
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 sort === "replies"
-                  ? "glass-shadow glass-border"
-                  : "hover:glass-shadow hover:glass-border border-[1px] border-transparent"
+                  ? "shadow-md glass-border"
+                  : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
               }`}
               onClick={() => setSort("replies")}>
               odpowiedzi
@@ -109,8 +109,8 @@ export default function UserPostsOwn({ user }) {
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 sort === "date"
-                  ? "glass-shadow glass-border"
-                  : "hover:glass-shadow hover:glass-border border-[1px] border-transparent"
+                  ? "shadow-md glass-border"
+                  : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
               }`}
               onClick={() => setSort("date")}>
               daty
@@ -118,8 +118,8 @@ export default function UserPostsOwn({ user }) {
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 sort === "likes"
-                  ? "glass-shadow glass-border"
-                  : "hover:glass-shadow hover:glass-border border-[1px] border-transparent"
+                  ? "shadow-md glass-border"
+                  : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
               }`}
               onClick={() => setSort("likes")}>
               polubień
@@ -132,8 +132,8 @@ export default function UserPostsOwn({ user }) {
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 filter.includes("common")
-                  ? "glass-shadow glass-border"
-                  : "hover:glass-shadow hover:glass-border border-[1px] border-transparent"
+                  ? "shadow-md glass-border"
+                  : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
               }`}
               onClick={() =>
                 filter.includes("common")
@@ -145,8 +145,8 @@ export default function UserPostsOwn({ user }) {
             <div
               className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
                 filter.includes("anonymous")
-                  ? "glass-shadow glass-border"
-                  : "hover:glass-shadow hover:glass-border border-[1px] border-transparent"
+                  ? "shadow-md glass-border"
+                  : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
               }`}
               onClick={() =>
                 filter.includes("anonymous")

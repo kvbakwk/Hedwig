@@ -1,6 +1,6 @@
 export default function Nav({ children }) {
   return (
-    <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-[10px] md:gap-[30px]">
+    <div className="flex md:flex-nowrap flex-wrap justify-center items-center md:gap-[30px] gap-[10px]">
       {children}
     </div>
   );

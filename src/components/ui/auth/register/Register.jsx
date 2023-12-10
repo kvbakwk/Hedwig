@@ -74,7 +74,7 @@ export default function Register() {
         konto z podanym e-mailem już istnieje
       </FormError>
       <FormOptions>
-        <div></div>
+        <div />
         <Button value="zarejestruj się" />
       </FormOptions>
     </Form>

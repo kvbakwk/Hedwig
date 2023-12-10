@@ -1,6 +1,6 @@
 export default function CenterBar({ children }) {
   return (
-    <div className="flex justify-center items-center w-full lg:w-[750px] h-full">
+    <div className="flex justify-center items-center w-full h-full">
       {children}
     </div>
   );
