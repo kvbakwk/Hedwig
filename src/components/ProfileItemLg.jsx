@@ -45,6 +45,12 @@ export default function ProfileItemLg({ user }) {
         ref={moreEl}>
         <div
           className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors"
+          onClick={() => {}}>
+          <Icon icon="lock_reset" fill={false} />
+          zmień hasło
+        </div>
+        <div
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors"
           onClick={handleLogout}>
           <Icon icon="logout" fill={false} />
           wyloguj się
