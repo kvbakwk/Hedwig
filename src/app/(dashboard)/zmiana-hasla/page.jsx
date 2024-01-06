@@ -1,4 +1,5 @@
 import Back from "@components/Back";
+import FormChangePassword from "@components/forms/FormChangePassword";
 import Container from "@components/ui/dashboard/password/Container";
 import Header from "@components/ui/dashboard/password/Header";
 import MainContainer from "@components/ui/dashboard/password/MainContainer";
@@ -8,8 +9,11 @@ export default function PasswordPage() {
     <Container>
       <Header>
         <Back />
+        zmiana hasła
       </Header>
-      <MainContainer></MainContainer>
+      <MainContainer>
+        <FormChangePassword />
+      </MainContainer>
     </Container>
   );
 }
