@@ -23,3 +23,24 @@ export async function getUserIdByDeviceId(device_id) {
   await client.end();
   return id;
 }
+
+export async function validateUserPassword(user_id, password) {
+  const client = new Pool();
+  const res = (
+    await client.query(
+      "SELECT id FROM public.user WHERE id = $1 AND password = $2;",
+      [user_id, password]
+    )
+  ).rowCount;
+  await client.end();
+  return res === 1;
+}
+
+export async function changePassword(user_id, password) {
+  const client = new Pool();
+  await client.query("UPDATE public.user SET password = $1 WHERE id = $2;", [
+    password,
+    user_id,
+  ]);
+  await client.end();
+}

@@ -1,10 +1,13 @@
+import getUser from "@app/api/getUser";
 import Back from "@components/Back";
 import FormChangePassword from "@components/forms/FormChangePassword";
 import Container from "@components/ui/dashboard/password/Container";
 import Header from "@components/ui/dashboard/password/Header";
 import MainContainer from "@components/ui/dashboard/password/MainContainer";
 
-export default function PasswordPage() {
+export default async function PasswordPage() {
+  const user = await getUser();
+
   return (
     <Container>
       <Header>
@@ -12,7 +15,7 @@ export default function PasswordPage() {
         zmiana hasła
       </Header>
       <MainContainer>
-        <FormChangePassword />
+        <FormChangePassword user={user} />
       </MainContainer>
     </Container>
   );
