@@ -41,16 +41,16 @@ export default function ProfileItemLg({ user }) {
         <Icon icon="more_vert" fill={false} />
       </div>
       <div
-        className="absolute bottom-[calc(100%+5px)] right-0 hidden flex-col w-[150px] py-[10px] bg-background glass"
+        className="absolute bottom-[calc(100%+5px)] right-0 hidden flex-col gap-[1px] w-[160px] py-[8px] px-[4px] bg-background glass"
         ref={moreEl}>
         <div
-          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors"
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors rounded-lg"
           onClick={() => router.push("/zmiana-hasla")}>
-          <Icon icon="lock_reset" fill={false} />
+          <Icon icon="password" fill={false} />
           zmień hasło
         </div>
         <div
-          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors"
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors rounded-lg"
           onClick={handleLogout}>
           <Icon icon="logout" fill={false} />
           wyloguj się

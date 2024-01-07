@@ -96,21 +96,21 @@ export default function PostFooter({ className, user, post, setReply }) {
         <span className={`material-symbols-outlined`}>more_vert</span>
       </div>
       <div
-        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col w-[150px] py-[10px] bg-[color:rgb(var(--background)/1)] glass-border shadow-md rounded-2xl"
+        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col gap-[1px] w-[150px] py-[8px] px-[4px] bg-[color:rgb(var(--background)/1)] glass-border shadow-md rounded-2xl"
         ref={moreEl}>
         <div
-          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors"
+          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg"
           onClick={() => (inProgress ? "" : handleSave())}>
           <span className={`material-symbols-outlined ${saved ? "fill" : ""}`}>
             bookmark
           </span>
           {saved ? "zapisany" : "zapisz"}
         </div>
-        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors">
+        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg">
           <span className="material-symbols-outlined">upload</span>
           udostępnij
         </div>
-        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors">
+        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg">
           <span className="material-symbols-outlined">flag</span>
           zgłoś
         </div>
