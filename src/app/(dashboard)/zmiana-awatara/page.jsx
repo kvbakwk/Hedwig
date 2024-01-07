@@ -1,6 +1,7 @@
 import getUser from "@app/api/getUser";
+
 import Back from "@components/Back";
-import FormChangePassword from "@components/forms/FormChangePassword";
+import FormChangeAvatar from "@components/forms/FormChangeAvatar";
 import Container from "@components/ui/dashboard/password/Container";
 import Header from "@components/ui/dashboard/password/Header";
 import MainContainer from "@components/ui/dashboard/password/MainContainer";
@@ -14,7 +15,9 @@ export default async function PasswordPage() {
         <Back />
         zmiana awatara
       </Header>
-      <MainContainer></MainContainer>
+      <MainContainer>
+        <FormChangeAvatar user={user} />
+      </MainContainer>
     </Container>
   );
 }
