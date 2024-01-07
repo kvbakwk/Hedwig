@@ -45,7 +45,7 @@ export default function ProfileItemLg({ user }) {
         ref={moreEl}>
         <div
           className="flex justify-start items-center gap-[8px] w-full h-[30px] px-[16px] hover:bg-shadow cursor-pointer transition-colors rounded-lg"
-          onClick={() => router.push("/zmiana-hasla")}>
+          onClick={() => router.push("/zmiana-awatara")}>
           <Icon icon="account_circle" fill={false} />
           zmień awatar
         </div>
