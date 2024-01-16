@@ -4,9 +4,13 @@ RUN apk add --no-cache libc6-compat
 
 WORKDIR /www
 
-COPY /src .
-
-# RUN npm cache clean --force
-RUN npm install
+COPY ./src ./src
+COPY ./node_modules .
+COPY ./package.json .
+COPY ./tsconfig.json .
+COPY ./next.config.js .
+COPY ./postcss.config.js .
+COPY ./tailwind.config.js .
+COPY ./.eslintrc.json .
 
 CMD npm run dev

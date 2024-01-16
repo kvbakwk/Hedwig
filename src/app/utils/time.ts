@@ -1,4 +1,4 @@
-export default function timeAgo(time) {
+export default function timeAgo(time: any): string {
   switch (typeof time) {
     case "number":
       break;
@@ -49,6 +49,6 @@ export default function timeAgo(time) {
       else
         return Math.floor(seconds / format[2]) + " " + format[1] + " " + token;
     }
-    
+
   return time;
 }

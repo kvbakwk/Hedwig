@@ -2,10 +2,17 @@
 
 import fs from "fs";
 
-export default async function changeAvatarAPI(user_id, formData) {
+interface changeAvatarAPIResponse {
+  change: boolean;
+}
+
+export default async function changeAvatarAPI(
+  user_id: number,
+  formData: FormData
+): Promise<changeAvatarAPIResponse> {
   const avatar = formData.get("avatar");
 
-  if (avatar.size)
+  if (avatar instanceof File && avatar.size)
     fs.writeFile(
       `./public/avatars/${user_id}.png`,
       Buffer.from(await avatar.arrayBuffer()),

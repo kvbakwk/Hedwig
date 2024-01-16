@@ -9,8 +9,10 @@ services:
       - ./src/app:/www/app
       - ./src/components:/www/components
       - ./src/public:/www/public
-      - ./src/next.config.js:/www/next.config.js
-      - ./src/tailwind.config.js:/www/tailwind.config.js
+      - ./next.config.js:/www/next.config.js
+      - ./tailwind.config.js:/www/tailwind.config.js
+      - ./tsconfig.json:/www/tsconfig.json
+      - ./node_modules:/www/node_modules
     environment:
       - PGHOST=postgresql
       - PGDATABASE=hedwig

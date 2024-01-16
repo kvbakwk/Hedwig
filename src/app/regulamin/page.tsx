@@ -7,7 +7,7 @@ export const metadata = {
 export default function RulesPage() {
   return (
     <div>
-      <Back>powrót</Back>
+      <Back />
       <br />
       regulamin
     </div>

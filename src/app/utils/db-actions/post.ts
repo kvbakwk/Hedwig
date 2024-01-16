@@ -1,6 +1,10 @@
 import { Pool } from "pg";
 
-export async function addPost(user_id, content, anonymous) {
+export async function addPost(
+  user_id: number,
+  content: string,
+  anonymous: boolean
+): Promise<void> {
   const client = new Pool();
   await client.query(
     "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4);",
@@ -9,23 +13,27 @@ export async function addPost(user_id, content, anonymous) {
   await client.end();
 }
 
-export async function addPostReply(user_id, content, anonymous, parent_id) {
-  const client = new Pool();
-  let post_id = (
+export async function addPostReply(
+  user_id: number,
+  content: string,
+  anonymous: boolean,
+  parent_id: number
+): Promise<void> {
+  const client: Pool = new Pool();
+  let post_id: number = (
     await client.query(
       "INSERT INTO public.post VALUES (DEFAULT, $1, $2, $3, $4) RETURNING id;",
       [user_id, content, new Date(), anonymous]
     )
   ).rows[0].id;
-  if (parent_id !== undefined)
-    await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
-      post_id,
-      parent_id,
-    ]);
+  await client.query("INSERT INTO public.post_parent VALUES ($1, $2);", [
+    post_id,
+    parent_id,
+  ]);
   await client.end();
 }
 
-export async function getPostById(user_id, post_id) {
+export async function getPostById(user_id: number, post_id: number) {
   const client = new Pool();
   let post = (
     await client.query(
@@ -90,7 +98,12 @@ export async function getPostById(user_id, post_id) {
       };
 }
 
-export async function getPosts(user_id, withPosts, withReplies, withAnonymous) {
+export async function getPosts(
+  user_id: number,
+  withPosts: boolean,
+  withReplies: boolean,
+  withAnonymous: boolean
+) {
   const client = new Pool();
   let posts = (
     await client.query(
