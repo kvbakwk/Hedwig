@@ -10,7 +10,7 @@ import FormError from "@components/FormError";
 import Form from "@components/ui/auth/Form";
 import FormFields from "@components/ui/auth/FormFields";
 import FormOptions from "@components/ui/auth/FormOptions";
-import AvatarField from "@components/ui/auth/register/AvatarField";
+import AvatarField from "@components/AvatarField";
 
 export default function Register() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function Register() {
   const [passwordErr, setPasswordErr] = useState(false);
   const [passwordsErr, setPasswordsErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState<FileList>(null);
 
   useEffect(() => {
     router.prefetch("/logowanie");

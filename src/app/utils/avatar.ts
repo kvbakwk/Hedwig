@@ -1,6 +1,6 @@
 const DEFAULT_AVATAR_URL: string = "http://localhost/avatars/default.png";
 const ANONYMOUS_AVATAR_URL: string = "http://localhost/avatars/default.png";
-const USER_AVATAR_URL: (id: number) => string = (id: number) =>
+const USER_AVATAR_URL: (id: number) => string = (id: number): string =>
   `http://localhost/avatars/${id}.png`;
 export { DEFAULT_AVATAR_URL, ANONYMOUS_AVATAR_URL, USER_AVATAR_URL };
 

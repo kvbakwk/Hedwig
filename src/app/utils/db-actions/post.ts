@@ -175,7 +175,10 @@ export async function getPosts(
     );
 }
 
-export async function getPostsById(user_id, post_ids) {
+export async function getPostsById(
+  user_id: number,
+  post_ids: Array<number | any>
+) {
   let posts = post_ids;
 
   await Promise.all(
@@ -244,12 +247,12 @@ export async function getPostsById(user_id, post_ids) {
 }
 
 export async function getPostsByUser(
-  user_id,
-  withPosts,
-  withReplies,
-  withAnonymous
+  user_id: number,
+  withPosts: boolean,
+  withReplies: boolean,
+  withAnonymous: boolean
 ) {
-  const client = new Pool();
+  const client: Pool = new Pool();
   let posts = (
     await client.query(
       "SELECT p.id, p.user_id, u.email, u.firstname, u.lastname, p.content, p.create_date, p.anonymous FROM public.post AS p JOIN public.user AS u ON p.user_id = u.id WHERE p.user_id = $1 ORDER BY p.create_date DESC;",
@@ -321,7 +324,7 @@ export async function getPostsByUser(
     );
 }
 
-export async function getPostReplies(post_id) {
+export async function getPostReplies(post_id: number): Promise<any> {
   const client = new Pool();
   const replies = (
     await client.query(
@@ -333,7 +336,7 @@ export async function getPostReplies(post_id) {
   return replies;
 }
 
-export async function getPostLikes(post_id) {
+export async function getPostLikes(post_id: number): Promise<any> {
   const client = new Pool();
   const likes = (
     await client.query(
@@ -345,7 +348,7 @@ export async function getPostLikes(post_id) {
   return likes;
 }
 
-export async function getPostDislikes(post_id) {
+export async function getPostDislikes(post_id: number): Promise<any> {
   const client = new Pool();
   const dislikes = (
     await client.query(
@@ -357,7 +360,7 @@ export async function getPostDislikes(post_id) {
   return dislikes;
 }
 
-export async function getPostSaves(post_id) {
+export async function getPostSaves(post_id: number): Promise<any> {
   const client = new Pool();
   const saves = (
     await client.query(
@@ -369,7 +372,7 @@ export async function getPostSaves(post_id) {
   return saves;
 }
 
-export async function isReply(post) {
+export async function isReply(post: any): Promise<boolean> {
   const client = new Pool();
   const res = await client.query(
     "SELECT parent_id FROM public.post_parent WHERE post_id = $1;",

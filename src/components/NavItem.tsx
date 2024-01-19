@@ -5,7 +5,19 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Icon from "./Icon";
 
-export default function NavItem({ value, icon, fillIcon, page, href }) {
+export default function NavItem({
+  value,
+  icon,
+  fillIcon,
+  page,
+  href,
+}: {
+  value: string;
+  icon: string;
+  fillIcon: boolean;
+  page?: string;
+  href: string;
+}) {
   const pathname = usePathname();
   const [active, setActive] = useState(false);
   useEffect(

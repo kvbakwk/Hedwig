@@ -2,11 +2,18 @@
 
 import { Pool } from "pg";
 
-export default async function likePostAPI(user_id, post_id) {
-  const client = new Pool();
-  let res;
+interface likeIds {
+  id: number;
+}
 
-  const id = (
+export default async function likePostAPI(
+  user_id: number,
+  post_id: number
+): Promise<boolean> {
+  const client = new Pool();
+  let res: boolean;
+
+  const id: Array<likeIds> = (
     await client.query(
       "SELECT id FROM public.like_user_post WHERE post_id = $1 AND user_id = $2",
       [post_id, user_id]

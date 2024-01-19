@@ -1,9 +1,18 @@
 "use client";
 
 import Icon from "@components/Icon";
+import { Dispatch, SetStateAction } from "react";
 
-export default function Popup({ children, show, setShow }) {
-  const handleClose = () => {
+export default function Popup({
+  children,
+  show,
+  setShow,
+}: {
+  children: JSX.Element;
+  show: boolean;
+  setShow: Dispatch<SetStateAction<any>>;
+}) {
+  const handleClose = (): void => {
     setShow(0);
   };
 

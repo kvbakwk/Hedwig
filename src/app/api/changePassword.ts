@@ -20,7 +20,7 @@ export default async function changePasswordAPI(
   newPassword: string,
   newPasswordValid: string
 ): Promise<changePasswordAPIResponse> {
-  const isValid =
+  const isValid: boolean =
     (await validateUserPassword(user_id, oldPassword)) &&
     validatePassword(newPassword) &&
     validatePasswords(newPassword, newPasswordValid) &&

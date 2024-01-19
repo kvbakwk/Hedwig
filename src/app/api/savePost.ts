@@ -2,11 +2,18 @@
 
 import { Pool } from "pg";
 
-export default async function savePostAPI(user_id, post_id) {
-  const client = new Pool();
-  let res;
+interface saveIds {
+  id: number;
+}
 
-  const id = (
+export default async function savePostAPI(
+  user_id: number,
+  post_id: number
+): Promise<boolean> {
+  const client: Pool = new Pool();
+  let res: boolean;
+
+  const id: Array<saveIds> = (
     await client.query(
       "SELECT id FROM public.save_user_post WHERE post_id = $1 AND user_id = $2",
       [post_id, user_id]

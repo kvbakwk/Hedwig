@@ -3,7 +3,15 @@
 import { useEffect, useState } from "react";
 import getAvatar, { DEFAULT_AVATAR_URL } from "@app/utils/avatar";
 
-export default function Avatar({ user_id, anonymous, className }) {
+export default function Avatar({
+  user_id,
+  anonymous,
+  className,
+}: {
+  user_id: number;
+  anonymous: boolean;
+  className: string;
+}) {
   const [avatarUrl, setAvatarUrl] = useState(DEFAULT_AVATAR_URL);
 
   useEffect(() => {

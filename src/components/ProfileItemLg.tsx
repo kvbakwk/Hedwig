@@ -10,12 +10,12 @@ import Icon from "./Icon";
 
 export default function ProfileItemLg({ user }) {
   const router = useRouter();
-  const moreEl = useRef("moreEl");
+  const moreEl = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(`/uzytkownik/${user.id}`);
 
   useEffect(() => setPage(`/uzytkownik/${user.id}`), [user]);
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     await logout();
     router.refresh();
   };

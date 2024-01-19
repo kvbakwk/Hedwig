@@ -4,6 +4,12 @@ export default function TextField({
   placeholder,
   error,
   errorMessage,
+}: {
+  type: string;
+  name: string;
+  placeholder: string;
+  error: boolean;
+  errorMessage: string;
 }) {
   return (
     <div className="flex flex-col justify-center items-center w-full h-[55px]">

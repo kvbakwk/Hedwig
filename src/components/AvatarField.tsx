@@ -1,6 +1,13 @@
 import Icon from "@components/Icon";
+import { Dispatch, SetStateAction } from "react";
 
-export default function AvatarField({ avatar, setAvatar }) {
+export default function AvatarField({
+  avatar,
+  setAvatar,
+}: {
+  avatar: FileList;
+  setAvatar: Dispatch<SetStateAction<FileList>>;
+}) {
   return (
     <label
       className="flex justify-center items-center w-[100px] h-[100px] mb-[10px] bg-background shadow-md glass-border rounded-full cursor-pointer"

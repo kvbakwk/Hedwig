@@ -1,16 +1,30 @@
 "use server";
 
-import { Pool } from "pg";
+import { Pool, QueryResult } from "pg";
 
 import { v4 as uuid } from "uuid";
 import { cookies } from "next/headers";
 
 import { validateEmail, validatePassword } from "@app/utils/validator";
 
-export default async function loginAPI(email, password, remember) {
-  const validateAccount = async (email, password) => {
-    const client = new Pool();
-    const res = await client.query(
+interface loginAPIResponse {
+  login: boolean;
+  emailErr: boolean;
+  passwordErr: boolean;
+  accountErr: boolean;
+}
+
+export default async function loginAPI(
+  email: string,
+  password: string,
+  remember: boolean
+): Promise<loginAPIResponse> {
+  const validateAccount = async (
+    email: string,
+    password: string
+  ): Promise<boolean> => {
+    const client: Pool = new Pool();
+    const res: QueryResult = await client.query(
       "SELECT id FROM public.user WHERE email = $1 AND password = $2;",
       [email, password]
     );
@@ -18,22 +32,22 @@ export default async function loginAPI(email, password, remember) {
     return res.rowCount === 1;
   };
 
-  const isValid =
+  const isValid: boolean =
     validateEmail(email) &&
     validatePassword(password) &&
     (await validateAccount(email, password));
 
   if (isValid) {
-    const client = new Pool();
+    const client: Pool = new Pool();
     if (!cookies().has("device_id"))
       cookies().set("device_id", uuid(), { secure: true, path: "/" });
 
-    const res = await client.query(
+    const res: QueryResult = await client.query(
       "SELECT id FROM public.user WHERE email = $1 AND password = $2;",
       [email, password]
     );
 
-    const expireDate = new Date();
+    const expireDate: Date = new Date();
     remember
       ? expireDate.setMonth(expireDate.getMonth() + 3)
       : expireDate.setHours(expireDate.getHours() + 6);
@@ -57,10 +71,10 @@ export default async function loginAPI(email, password, remember) {
   };
 }
 
-export async function loginCheck() {
-  const client = new Pool();
+export async function loginCheck(): Promise<boolean> {
+  const client: Pool = new Pool();
   if (cookies().has("device_id")) {
-    const res = await client.query(
+    const res: QueryResult = await client.query(
       "SELECT user_id, expire_date FROM public.user_device WHERE device_id = $1;",
       [cookies().get("device_id").value]
     );
@@ -80,11 +94,12 @@ export async function loginCheck() {
   return false;
 }
 
-export async function logout() {
-  const client = new Pool();
+export async function logout(): Promise<void> {
+  const client: Pool = new Pool();
   if (cookies().has("device_id")) {
     await client.query("DELETE FROM user_device WHERE device_id = $1;", [
       cookies().get("device_id").value,
     ]);
   }
+  await client.end();
 }

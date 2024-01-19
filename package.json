@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/node": "20.11.4",
     "@types/react": "18.2.48",
+    "@types/pg": "8.10.9",
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",

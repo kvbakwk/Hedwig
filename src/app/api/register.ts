@@ -1,6 +1,6 @@
 "use server";
 
-import { Pool } from "pg";
+import { Pool, QueryResult } from "pg";
 
 import fs from "fs";
 
@@ -11,16 +11,27 @@ import {
   validatePasswords,
 } from "@app/utils/validator";
 
-export default async function registerAPI(formData) {
-  const email = formData.get("email"),
-    fullname = formData.get("fullname"),
-    password = formData.get("password"),
-    passwordValid = formData.get("passwordValid"),
-    avatar = formData.get("avatar");
+interface registerAPIResponse {
+  register: boolean;
+  emailErr: boolean;
+  fullnameErr: boolean;
+  passwordErr: boolean;
+  passwordsErr: boolean;
+  accountErr: boolean;
+}
 
-  const validateAccount = async (email) => {
-    const client = new Pool();
-    const res = await client.query(
+export default async function registerAPI(
+  formData
+): Promise<registerAPIResponse> {
+  const email: string = formData.get("email"),
+    fullname: string = formData.get("fullname"),
+    password: string = formData.get("password"),
+    passwordValid: string = formData.get("passwordValid"),
+    avatar: File = formData.get("avatar");
+
+  const validateAccount = async (email: string): Promise<boolean> => {
+    const client: Pool = new Pool();
+    const res: QueryResult = await client.query(
       "SELECT id FROM public.user WHERE email = $1;",
       [email]
     );
@@ -36,9 +47,9 @@ export default async function registerAPI(formData) {
     (await validateAccount(email));
 
   if (isValid) {
-    const client = new Pool();
+    const client: Pool = new Pool();
     const name = fullname.split(" ");
-    const res = await client.query(
+    const res: QueryResult = await client.query(
       "INSERT INTO public.user VALUES (DEFAULT, $1, $2, $3, $4, NULL) RETURNING id;",
       [email, name[0], name[1], password]
     );

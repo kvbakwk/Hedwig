@@ -16,7 +16,13 @@ export const metadata = {
   title: "schcool | profil",
 };
 
-export default async function ProfileLayout({ params: { user_id }, children }) {
+export default async function ProfileLayout({
+  params: { user_id },
+  children,
+}: {
+  params: { user_id: number };
+  children: JSX.Element;
+}) {
   const user = await getUser();
 
   if (isNaN(user_id) || !(await getUserById(user_id))) redirect("/");

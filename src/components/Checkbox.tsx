@@ -1,4 +1,10 @@
-export default function Checkbox({ name, label }) {
+export default function Checkbox({
+  name,
+  label,
+}: {
+  name: string;
+  label: string;
+}) {
   return (
     <label
       htmlFor={name}
