@@ -4,14 +4,14 @@ import { redirect } from "next/navigation";
 import { loginCheck } from "@app/api/login";
 
 import NavItem from "@components/NavItem";
-import Container from "@components/ui/auth/Container";
-import LeftBar from "@components/ui/auth/LeftBar";
-import LeftBarTitle from "@components/ui/auth/LeftBarTitle";
-import Nav from "@components/ui/auth/Nav";
-import RightBar from "@components/ui/auth/RightBar";
-import RightBarTitle from "@components/ui/auth/RightBarTitle";
-import RulesItem from "@components/ui/auth/RulesItem";
-import CenterBar from "@components/ui/auth/CenterBar";
+import Container from "@components/styled/auth/Container";
+import LeftBar from "@components/styled/auth/LeftBar";
+import LeftBarTitle from "@components/styled/auth/LeftBarTitle";
+import Nav from "@components/styled/auth/Nav";
+import RightBar from "@components/styled/auth/RightBar";
+import RightBarTitle from "@components/styled/auth/RightBarTitle";
+import RulesItem from "@components/auth/RulesItem";
+import CenterBar from "@components/styled/auth/CenterBar";
 
 export const metadata = {
   title: "schcool",

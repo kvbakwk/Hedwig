@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import Post from "@components/posts/Post";
-import FormNewReply from "@components/forms/FormNewReply";
+import Post from "@components/dashboard/Post";
+import FormNewReply from "@components/dashboard/FormNewReply";
 import Popup from "@components/Popup";
 
 export default function Posts({ user, posts }) {

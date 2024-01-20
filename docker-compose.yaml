@@ -6,9 +6,9 @@ services:
     ports:
       - "80:3000"
     volumes:
-      - ./src/app:/www/app
-      - ./src/components:/www/components
-      - ./src/public:/www/public
+      - ./src/app:/www/src/app
+      - ./src/components:/www/src/components
+      - ./public:/www/public
       - ./next.config.js:/www/next.config.js
       - ./tailwind.config.js:/www/tailwind.config.js
       - ./tsconfig.json:/www/tsconfig.json

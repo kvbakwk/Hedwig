@@ -6,17 +6,17 @@ import getUser from "@app/api/getUser";
 
 import { Suspense } from "react";
 import NavItem from "@components/NavItem";
-import EventsItem from "@components/EventsItem";
-import ProfileItemLg from "@components/ProfileItemLg";
-import ProfileItem from "@components/ProfileItem";
-import Layout from "@components/ui/dashboard/Layout";
-import Container from "@components/ui/dashboard/Container";
-import CenterBar from "@components/ui/dashboard/CenterBar";
-import LeftBar from "@components/ui/dashboard/LeftBar";
-import LeftBarTitle from "@components/ui/dashboard/LeftBarTitle";
-import RightBar from "@components/ui/dashboard/RightBar";
-import RightBarTitle from "@components/ui/dashboard/RightBarTitle";
-import Nav from "@components/ui/dashboard/Nav";
+import EventsItem from "@components/dashboard/EventsItem";
+import ProfileItemLg from "@components/dashboard/ProfileItemLg";
+import ProfileItem from "@components/dashboard/ProfileItem";
+import Layout from "@components/styled/dashboard/Layout";
+import Container from "@components/styled/dashboard/Container";
+import CenterBar from "@components/styled/dashboard/CenterBar";
+import LeftBar from "@components/styled/dashboard/LeftBar";
+import LeftBarTitle from "@components/styled/dashboard/LeftBarTitle";
+import RightBar from "@components/styled/dashboard/RightBar";
+import RightBarTitle from "@components/styled/dashboard/RightBarTitle";
+import Nav from "@components/styled/dashboard/Nav";
 
 export const metadata = {
   title: "schcool",

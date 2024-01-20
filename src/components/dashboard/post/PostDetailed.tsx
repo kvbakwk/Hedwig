@@ -6,12 +6,12 @@ import getPostsById from "@app/api/getPostsById";
 
 import Link from "next/link";
 import Avatar from "@components/Avatar";
-import Posts from "./posts/Posts";
-import Popup from "./Popup";
-import FormNewReply from "./forms/FormNewReply";
-import PostFooter from "./posts/PostFooter";
+import Posts from "../Posts";
+import Popup from "../../Popup";
+import FormNewReply from "../FormNewReply";
+import PostFooter from "../PostFooter";
 
-export default function Post({ user, post }) {
+export default function PostDetailed({ user, post }) {
   const [reply, setReply] = useState(0);
   const [replies, setReplies] = useState([]);
 

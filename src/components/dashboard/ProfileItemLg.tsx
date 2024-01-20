@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { logout } from "@app/api/login";
 
 import Link from "next/link";
-import Avatar from "./Avatar";
-import Icon from "./Icon";
+import Avatar from "../Avatar";
+import Icon from "../Icon";
 
 export default function ProfileItemLg({ user }) {
   const router = useRouter();

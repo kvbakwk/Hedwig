@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import getPosts from "@app/api/getPosts";
 
-import FormNewPost from "@components/forms/FormNewPost";
-import Posts from "@components/posts/Posts";
-import Container from "@components/ui/dashboard/home/MainContainer";
+import FormNewPost from "@components/dashboard/FormNewPost";
+import Posts from "@components/dashboard/Posts";
+import Container from "@components/styled/dashboard/home/MainContainer";
 
 export default function Main({ user }) {
   const [posts, setPosts] = useState([]);

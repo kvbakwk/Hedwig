@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-import Posts from "../posts/Posts";
+import Posts from "../Posts";
 
 import getUserPosts from "@app/api/getPostsByUser";
 import getPosts from "@app/api/getPosts";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import changeAvatar from "@app/api/changeAvatar";
 
@@ -10,12 +10,14 @@ import AvatarField from "@components/AvatarField";
 
 export default function FormChangeAvatar({ user }) {
   const router = useRouter();
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState<FileList>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    changeAvatar(user.id, new FormData(e.target)).then(() => router.push("/"));
+    changeAvatar(user.id, new FormData(e.currentTarget)).then(() =>
+      router.push("/")
+    );
   };
 
   return (

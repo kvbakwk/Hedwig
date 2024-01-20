@@ -1,7 +1,7 @@
 import getUser from "@app/api/getUser";
 
-import UserPosts from "@components/profiles/UserPosts";
-import UserPostsOwn from "@components/profiles/UserPostsOwn";
+import UserPosts from "@components/dashboard/uzytkownik/UserPosts";
+import UserPostsOwn from "@components/dashboard/uzytkownik/UserPostsOwn";
 
 export default async function ProfilePage({
   params: { user_id },

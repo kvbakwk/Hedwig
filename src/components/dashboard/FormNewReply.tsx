@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, FormEventHandler } from "react";
 import { useRouter } from "next/navigation";
 
 import addPost from "@app/api/addPost";
@@ -9,12 +9,13 @@ export default function FormNewReply({ user, parent_id }) {
   const router = useRouter();
   const [contentErr, setContentErr] = useState(false);
 
-  const textareaElement = useRef();
+  const textareaElement = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const { content, anonymous } = e.target.elements;
+    const content = e.currentTarget.elements["content"];
+    const anonymous = e.currentTarget.elements["anonymous"];
 
     const res = await addPost(
       user.id,

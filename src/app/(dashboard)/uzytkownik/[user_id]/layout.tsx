@@ -1,15 +1,15 @@
 import { redirect } from "next/navigation";
 import getUser from "@app/api/getUser";
 import getUserById from "@app/api/getUserById";
-import Container from "@components/ui/dashboard/user/Container";
-import Header from "@components/ui/dashboard/user/Header";
-import Main from "@components/ui/dashboard/user/Main";
-import Profile from "@components/ui/dashboard/user/Profile";
-import ProfileAvatar from "@components/ui/dashboard/user/ProfileAvatar";
-import ProfileFullname from "@components/ui/dashboard/user/ProfileFullname";
-import ProfileEmail from "@components/ui/dashboard/user/ProfileEmail";
-import Nav from "@components/ui/dashboard/user/Nav";
-import NavItem from "@components/ui/dashboard/user/NavItem";
+import Container from "@components/styled/dashboard/user/Container";
+import Header from "@components/styled/dashboard/user/Header";
+import Main from "@components/styled/dashboard/user/Main";
+import Profile from "@components/styled/dashboard/user/Profile";
+import ProfileAvatar from "@components/styled/dashboard/user/ProfileAvatar";
+import ProfileFullname from "@components/styled/dashboard/user/ProfileFullname";
+import ProfileEmail from "@components/styled/dashboard/user/ProfileEmail";
+import Nav from "@components/styled/dashboard/user/Nav";
+import NavItem from "@components/styled/dashboard/user/NavItem";
 import Back from "@components/Back";
 
 export const metadata = {

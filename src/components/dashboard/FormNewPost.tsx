@@ -9,14 +9,14 @@ export default function FormNewPost({ user, setPosts }) {
   const [anonymous, setAnonymous] = useState(false);
   const [contentErr, setContentErr] = useState(false);
 
-  const textareaElement = useRef();
+  const textareaElement = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { content, anonymous } = e.target.elements;
 
-    addPost(user.id, content.value, anonymous.checked).then((res) => {
+    addPost(user.id, content.value, anonymous.checked, 0).then((res) => {
       if (res.add) {
         textareaElement.current.value = "";
 

@@ -1,4 +1,4 @@
-import Register from "@components/ui/auth/register/Register";
+import Register from "@components/auth/register/Register";
 
 export const metadata = {
   title: "schcool | rejestracja",

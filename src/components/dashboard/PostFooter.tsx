@@ -20,7 +20,7 @@ export default function PostFooter({ className, user, post, setReply }) {
   const [dislikesCount, setDislikesCount] = useState(post.dislikes.length);
   const [repliesCount, setRepliesCount] = useState(post.replies.length);
 
-  const moreEl = useRef("moreEl");
+  const moreEl = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLiked(post.likes.find((id) => id === user.id));
