@@ -1,66 +1,72 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import TextField from "@components/TextField";
-import FormError from "@components/auth/FormError";
-import Button from "@components/Button";
-import Checkbox from "@components/auth/login/Checkbox";
-import Form from "@components/auth/Form";
-import FormContainer from "@components/styled/auth/FormContainer";
-import FormFields from "@components/styled/auth/FormFields";
-import FormOptions from "@components/styled/auth/FormOptions";
+import loginAPI from "@app/api/login";
 
-export default function Login({ login }) {
+import { FilledButton } from "@components/Button";
+import { TextFieldOutlined } from "@components/TextField";
+import { Checkbox } from "../../Checkbox";
+
+export default function Login() {
   const router = useRouter();
+
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
   const [accountErr, setAccountErr] = useState(false);
 
-  useEffect(() => {
-    router.prefetch("/rejestracja");
-  }, []);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    const { email, password, remember } = e.target.elements;
+    const formData = new FormData(e.currentTarget);
 
-    const res = await login(email.value, password.value, remember.checked);
+    const res = await loginAPI(
+      formData.get("email").toString(),
+      formData.get("password").toString(),
+      formData.get("remember") ? true : false
+    );
 
+    if (res.login) router.push("/");
     setEmailErr(res.emailErr);
     setPasswordErr(res.passwordErr);
     setAccountErr(res.accountErr);
-    if (res.login) router.refresh();
   };
 
   return (
-    <FormContainer>
-      <Form handleSubmit={handleSubmit}>
-        <FormFields>
-          <TextField
-            type="text"
-            name="email"
-            placeholder="twój e-mail"
-            error={emailErr}
-            errorMessage="wprowadź poprawnego e-maila"
-          />
-          <TextField
-            type="password"
-            name="password"
-            placeholder="twoje hasło"
-            error={passwordErr}
-            errorMessage="hasło musi mieć przynajmniej 8 znaków"
-          />
-        </FormFields>
-        <FormError show={accountErr}>
-          podane e-mail lub hasło jest nieprawidłowe
-        </FormError>
-        <FormOptions>
-          <Checkbox name="remember" label="zapamiętaj" />
-          <Button value="zaloguj się" />
-        </FormOptions>
-      </Form>
-    </FormContainer>
+    <form
+      className="flex flex-col justify-center items-center gap-[16px] w-[500px] h-fit py-[60px] bg-surface rounded-2xl shadow-md"
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex flex-col justify-center items-center gap-[25px] w-[320px] px-[10px] py-[20px]">
+        <TextFieldOutlined
+          className="w-full"
+          label="twój e-mail"
+          name="email"
+          error={emailErr}
+          errorText="wpisany adres e-mail jest niepoprawny"
+        />
+        <TextFieldOutlined
+          className="w-full"
+          label="twoje hasło"
+          name="password"
+          type="password"
+          error={passwordErr || accountErr}
+          errorText="wpisane hasło jest niepoprawne"
+        />
+      </div>
+      <div className="flex justify-center items-center gap-[70px] pr-[10px]">
+        <label
+          className="flex justify-center items-center text-[14px] text-outline tracking-wider"
+          htmlFor="remember"
+        >
+          <Checkbox className="m-[15px]" name="remember" id="remember" />
+          zapamiętaj
+        </label>
+        <FilledButton>zaloguj się</FilledButton>
+      </div>
+    </form>
   );
 }

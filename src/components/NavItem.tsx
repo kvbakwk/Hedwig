@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import Icon from "./Icon";
+import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { Icon } from "./Icon";
 
 export default function NavItem({
   value,
@@ -18,25 +17,32 @@ export default function NavItem({
   page?: string;
   href: string;
 }) {
+  const router = useRouter();
   const pathname = usePathname();
+  const element = useRef(null);
   const [active, setActive] = useState(false);
-  useEffect(
-    () => setActive(pathname == page || page === undefined),
-    [pathname]
-  );
+  useEffect(() => {
+    console.log(pathname);
+    if (pathname == page || page === undefined) {
+      element.current.classList.add("bg-surface");
+      element.current.classList.add("shadow-md");
+    } else {
+      element.current.classList.remove("bg-surface");
+      element.current.classList.remove("shadow-md");
+    }
+    setActive(pathname == page || page === undefined);
+  }, [pathname]);
+
   return (
-    <Link
-      href={href}
-      className="relative flex lg:flex-row flex-col lg:justify-start md:justify-center items-center lg:gap-0 gap-1 xl:text-[22px] lg:text-xl text-xs lg:font-light font-medium xl:w-[250px] lg:w-[180px] md:w-[60px] lg:h-[70px] md:h-[60px] md:glass">
-      <div
-        className={`absolute z-0 w-16 h-8 bg-shadow rounded-full ${
-          active ? "block md:hidden" : "hidden"
-        }`}
-      />
-      <div className="z-10 relative flex justify-center items-center md:w-auto w-16 md:h-auto h-8 lg:px-[18px]">
-        <Icon icon={icon} fill={active && fillIcon} />
+    <div
+      className="flex items-center gap-[18px] font-extralight text-[22px] w-full h-[70px] p-[18px] rounded-2xl cursor-pointer hover:bg-surface"
+      ref={element}
+      onClick={() => router.push(href)}
+    >
+      <Icon className="fill">{icon}</Icon>
+      <div className="font-extralight text-on-surface-variant text-[22px]">
+        {value}
       </div>
-      <span className="md:hidden lg:contents">{value}</span>
-    </Link>
+    </div>
   );
 }

@@ -7,20 +7,22 @@ import Posts from "../Posts";
 
 import getUserPosts from "@app/api/getPostsByUser";
 import getPosts from "@app/api/getPosts";
+import { CircularProgress } from "@components/Progress";
+import { Icon } from "@components/Icon";
 
 export default function UserPosts({ user }) {
-  const params = useParams();
+  const params = useParams<{ user_id: string; option: string }>();
   const [posts, setPosts] = useState([]);
   const [direction, setDirection] = useState(false);
   const [sort, setSort] = useState("date");
 
   useEffect(() => {
     params.option === "posty"
-      ? getUserPosts(params.user_id, true, false, false).then((res) =>
+      ? getUserPosts(parseInt(params.user_id), true, false, false).then((res) =>
           setPosts(res)
         )
       : params.option === "odpowiedzi"
-      ? getUserPosts(params.user_id, false, true, false).then((res) =>
+      ? getUserPosts(parseInt(params.user_id), false, true, false).then((res) =>
           setPosts(res)
         )
       : params.option === "polubione"
@@ -70,50 +72,55 @@ export default function UserPosts({ user }) {
         <div className="flex justify-center items-center gap-[10px]">
           <span>sortuj według</span>
           <div
-            className="flex justify-center items-center w-[30px] h-[30px] rounded-lg cursor-pointer shadow-md glass-border"
-            onClick={() => setDirection(!direction)}>
+              className="flex justify-center items-center w-[36px] h-[30px] hover:bg-surface hover:shadow-md rounded-lg cursor-pointer"
+            onClick={() => setDirection(!direction)}
+          >
             {direction ? (
-              <span className="material-symbols-outlined">
-                arrow_upward_alt
-              </span>
+              <Icon>trending_up</Icon>
             ) : (
-              <span className="material-symbols-outlined">
-                arrow_downward_alt
-              </span>
+              <Icon>trending_down</Icon>
             )}
           </div>
         </div>
         <div className="flex justify-center items-center gap-[10px]">
           <div
-            className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
+            className={`flex justify-center items-center h-[30px] px-[15px] rounded-lg cursor-pointer transition-shadow ${
               sort === "replies"
-                ? "shadow-md glass-border"
-                : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
+                ? "bg-surface shadow-md"
+                : "hover:bg-surface hover:shadow-md"
             }`}
-            onClick={() => setSort("replies")}>
+            onClick={() => setSort("replies")}
+          >
             odpowiedzi
           </div>
           <div
             className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
               sort === "date"
-                ? "shadow-md glass-border"
-                : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
+                ? "bg-surface shadow-md"
+                : "hover:bg-surface hover:shadow-md"
             }`}
-            onClick={() => setSort("date")}>
+            onClick={() => setSort("date")}
+          >
             daty
           </div>
           <div
             className={`flex justify-center items-center px-[15px] h-[30px] rounded-lg cursor-pointer transition-shadow ${
               sort === "likes"
-                ? "shadow-md glass-border"
-                : "hover:shadow-md hover:glass-border border-[1px] border-transparent"
+                ? "bg-surface shadow-md"
+                : "hover:bg-surface hover:shadow-md"
             }`}
-            onClick={() => setSort("likes")}>
+            onClick={() => setSort("likes")}
+          >
             polubień
           </div>
         </div>
       </div>
       <Posts user={user} posts={sortPosts(posts)} />
+      {!posts.length && (
+        <div className="flex justify-center items-center text-on-surface-variant w-full h-[200px]">
+          brak postów
+        </div>
+      )}
     </>
   );
 }

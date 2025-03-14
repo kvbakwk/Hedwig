@@ -1,5 +1,7 @@
 import "@app/utils/globals.css";
 
+import { Metadata } from "next";
+
 import { redirect } from "next/navigation";
 import { loginCheck } from "@app/api/login";
 
@@ -13,21 +15,27 @@ import RightBarTitle from "@components/styled/auth/RightBarTitle";
 import RulesItem from "@components/auth/RulesItem";
 import CenterBar from "@components/styled/auth/CenterBar";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "schcool",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default async function RootAuthLayout({ children }) {
   if (await loginCheck()) redirect("/");
 
   return (
-    <html>
-      <head></head>
+    <html lang="pl" className="font-noto">
       <body>
-        <Container>
-          <LeftBar>
-            <LeftBarTitle>schcool</LeftBarTitle>
-            <Nav>
+        <div className="grid grid-cols-[1fr_500px_1fr] w-screen h-screen bg-surface-container">
+          <div className="flex flex-col justify-center items-center gap-[150px] w-full h-full bg-background">
+            <div className="font-bold text-primary text-[57px] text-center w-[250px] h-[70px]">
+              schcool.
+            </div>
+            <div className="flex flex-col gap-[10px] text-primary w-[270px] h-fit p-[10px]">
               <NavItem
                 value="logowanie"
                 icon={"account_circle"}
@@ -42,14 +50,22 @@ export default async function RootAuthLayout({ children }) {
                 href="/rejestracja"
                 fillIcon={true}
               />
-            </Nav>
-          </LeftBar>
-          <CenterBar>{children}</CenterBar>
-          <RightBar>
-            <RightBarTitle>schcool</RightBarTitle>
-            <RulesItem />
-          </RightBar>
-        </Container>
+            </div>
+          </div>
+          <div className="flex justify-center items-center w-full h-full">
+            {children}
+          </div>
+          <div className="grid grid-rows-[1fr_100px] w-full h-full">
+            <div className="flex flex-col justify-center items-center w-full h-full">
+              <RulesItem />
+            </div>
+            <div className="flex justify-center items-center gap-[10px] text-primary w-full h-[70px] mb-[30px] py-[10px] select-none">
+              <span className="font-semibold">simple.</span>
+              <span className="font-light">@</span>
+              <span className="font-semibold">2025</span>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   );

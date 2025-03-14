@@ -1,5 +1,3 @@
-import login from "@app/api/login";
-
 import Login from "@components/auth/login/Login";
 
 export const metadata = {
@@ -7,5 +5,5 @@ export const metadata = {
 };
 
 export default function LoginPage() {
-  return <Login login={login} />;
+  return <Login />;
 }

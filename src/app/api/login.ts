@@ -39,8 +39,8 @@ export default async function loginAPI(
 
   if (isValid) {
     const client: Pool = new Pool();
-    if (!cookies().has("device_id"))
-      cookies().set("device_id", uuid(), { secure: true, path: "/" });
+    if (!(await cookies()).has("device_id"))
+      (await cookies()).set("device_id", uuid(), { secure: true, path: "/" });
 
     const res: QueryResult = await client.query(
       "SELECT id FROM public.user WHERE email = $1 AND password = $2;",
@@ -54,7 +54,7 @@ export default async function loginAPI(
 
     await client.query("INSERT INTO public.user_device VALUES ($1, $2, $3);", [
       res.rows[0].id,
-      cookies().get("device_id").value,
+      (await cookies()).get("device_id").value,
       expireDate,
     ]);
     await client.end();
@@ -73,16 +73,16 @@ export default async function loginAPI(
 
 export async function loginCheck(): Promise<boolean> {
   const client: Pool = new Pool();
-  if (cookies().has("device_id")) {
+  if ((await cookies()).has("device_id")) {
     const res: QueryResult = await client.query(
       "SELECT user_id, expire_date FROM public.user_device WHERE device_id = $1;",
-      [cookies().get("device_id").value]
+      [(await cookies()).get("device_id").value]
     );
     if (res.rowCount > 0) {
       if (new Date(res.rows[0].expire_date) < new Date()) {
         await client.query(
           "DELETE FROM public.user_device WHERE device_id = $1;",
-          [cookies().get("device_id").value]
+          [(await cookies()).get("device_id").value]
         );
         await client.end();
         return false;
@@ -96,9 +96,9 @@ export async function loginCheck(): Promise<boolean> {
 
 export async function logout(): Promise<void> {
   const client: Pool = new Pool();
-  if (cookies().has("device_id")) {
+  if ((await cookies()).has("device_id")) {
     await client.query("DELETE FROM user_device WHERE device_id = $1;", [
-      cookies().get("device_id").value,
+      (await cookies()).get("device_id").value,
     ]);
   }
   await client.end();

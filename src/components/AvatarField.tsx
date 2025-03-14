@@ -1,4 +1,4 @@
-import Icon from "@components/Icon";
+import { Icon } from "@components/Icon";
 import { Dispatch, SetStateAction } from "react";
 
 export default function AvatarField({
@@ -10,10 +10,10 @@ export default function AvatarField({
 }) {
   return (
     <label
-      className="flex justify-center items-center w-[100px] h-[100px] mb-[10px] bg-background shadow-md glass-border rounded-full cursor-pointer"
+      className="flex justify-center items-center text-primary w-[100px] h-[100px] mb-[10px] rounded-full cursor-pointer"
       htmlFor="avatar">
       {(avatar === null || avatar.length === 0) && (
-        <Icon icon="add_photo_alternate" fill={false} />
+        <Icon>add_photo_alternate</Icon>
       )}
       {avatar !== null && avatar.length === 1 && (
         <img

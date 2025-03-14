@@ -6,7 +6,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      roboto: ["Roboto", "sans-serif"],
+      noto: ["Noto Sans", "sans-serif"],
     },
     extend: {
       screens: {
@@ -16,9 +16,15 @@ module.exports = {
         xl: "1440px",
       },
       colors: {
-        background: "rgb(var(--background)/1)",
-        foreground: "rgb(var(--foreground)/1)",
-        shadow: "rgb(var(--shadow)/1)",
+        'primary': 'var(--md-sys-color-primary)',
+        'surface': 'var(--md-sys-color-surface)',
+        'surface-container': 'var(--md-sys-color-surface-container)',
+        'on-surface': 'var(--md-sys-color-on-surface)',
+        'on-surface-variant': 'var(--md-sys-color-on-surface-variant)',
+        'error': 'var(--md-sys-color-error)',
+        'error-container': 'var(--md-sys-color-error-container)',
+        'on-error-container': 'var(--md-sys-color-on-error-container)',
+        'outline': 'var(--md-sys-color-outline)'
       },
       boxShadow: {
         none: "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
@@ -35,6 +41,7 @@ module.exports = {
       },
       transitionProperty: {
         radius: "border-radius",
+        icon: "font-variation-settings",
       },
     },
   },

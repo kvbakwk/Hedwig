@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import changePassword from "@app/api/changePassword";
 
-import TextField from "@components/TextField";
-import Button from "@components/Button";
+import { TextFieldOutlined } from "@components/TextField";
+import { FilledButton } from "@components/Button";
 
 export default function FormChangePassword({ user }) {
   const router = useRouter();
@@ -29,49 +29,46 @@ export default function FormChangePassword({ user }) {
       setNewPasswordErr(res.newPasswordErr);
       setNewPasswordValidErr(res.newPasswordValidErr);
       setSamePasswordErr(res.samePasswordErr);
-      if (res.change) router.push("/");
+      if (res.change) router.back();
     });
   };
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-[15px] w-full mt-[100px] py-[40px]"
+      className="flex flex-col justify-center items-center gap-[100px] w-full mt-[100px] py-[40px]"
       onSubmit={handleSubmit}
-      method="post">
-      <div className="flex flex-col justify-center items-center gap-[10px] w-[300px]">
-        <TextField
+      method="post"
+    >
+      <div className="flex flex-col justify-center items-center gap-[50px] w-[300px]">
+        <TextFieldOutlined
+          className="w-full"
           type="password"
           name="oldPassword"
-          placeholder="stare hasło"
-          error={oldPasswordErr}
-          errorMessage="stare hasło jest nieprawidłowe"
+          label="stare hasło"
+          error={oldPasswordErr || samePasswordErr}
+          errorText="wpisane hasło jest niepoprawne"
         />
+        <div className="flex flex-col justify-center items-center gap-[10px] w-[300px]">
+          <TextFieldOutlined
+            className="w-full"
+            type="password"
+            name="newPassword"
+            label="nowe hasło"
+            error={newPasswordErr}
+            errorText="wymagane: 8+ znaków, duża litera, liczba i znak"
+          />
+          <TextFieldOutlined
+            className="w-full"
+            type="password"
+            name="newPasswordValid"
+            label="powtórz nowe hasło"
+            error={newPasswordValidErr}
+            errorText="wpisane hasła nie są identyczne"
+          />
+        </div>
       </div>
-      <div className="w-[350px] h-[1px] bg-shadow"></div>
-      <div className="flex flex-col justify-center items-center gap-[10px] w-[300px]">
-        <TextField
-          type="password"
-          name="newPassword"
-          placeholder="nowe hasło"
-          error={newPasswordErr}
-          errorMessage="podane hasło jest za łatwe"
-        />
-        <TextField
-          type="password"
-          name="newPasswordValid"
-          placeholder="powtórz nowe hasło"
-          error={newPasswordValidErr}
-          errorMessage="podane hasła nie są identyczne"
-        />
-      </div>
-      <div
-        className={`flex-col justify-center items-center gap-[10px] text-white text-sm w-[320px] py-[20px] bg-red-300 rounded-md ${
-          samePasswordErr ? "flex" : "hidden"
-        }`}>
-        nowe hasło musi być inne niż to obecne
-      </div>
-      <div className="flex justify-center md:justify-end items-center w-[350px]">
-        <Button type="submit" value="potwierdź" />
+      <div className="flex justify-center md:justify-end items-center w-[500px]">
+        <FilledButton>potwierdź</FilledButton>
       </div>
     </form>
   );

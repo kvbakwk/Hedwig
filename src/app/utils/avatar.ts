@@ -1,7 +1,7 @@
-const DEFAULT_AVATAR_URL: string = "http://localhost/avatars/default.png";
-const ANONYMOUS_AVATAR_URL: string = "http://localhost/avatars/default.png";
+const DEFAULT_AVATAR_URL: string = "/avatars/default.png";
+const ANONYMOUS_AVATAR_URL: string = "/avatars/default.png";
 const USER_AVATAR_URL: (id: number) => string = (id: number): string =>
-  `http://localhost/avatars/${id}.png`;
+  `/${id}.png`;
 export { DEFAULT_AVATAR_URL, ANONYMOUS_AVATAR_URL, USER_AVATAR_URL };
 
 export default async function getAvatar(
@@ -9,11 +9,11 @@ export default async function getAvatar(
   anonymous: boolean
 ): Promise<string> {
   if (anonymous) {
-    return "http://localhost/avatars/anonymous.png";
+    return "/avatars/anonymous.png";
   }
 
-  return fetch(`http://localhost/avatars/${id}.png`).then((res) => {
-    if (res.status === 404) return "http://localhost/avatars/default.png";
-    return `http://localhost/avatars/${id}.png`;
+  return fetch(`https://3000-idx-hedwig-1723209036021.cluster-qtqwjj3wgzff6uxtk26wj7fzq6.cloudworkstations.dev/avatars/${id}.png`).then((res) => {
+    if (res.status === 404) return "/avatars/default.png";
+    return `/avatars/${id}.png`;
   });
 }

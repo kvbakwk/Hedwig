@@ -30,21 +30,24 @@ export default async function ProfileLayout({
   const profileUser = await getUserById(user_id);
 
   return (
-    <Container>
-      <Header>
+    <div className="relative w-[full] h-auto px-[15px]">
+      <div className="z-50 fixed top-[10px] flex items-center gap-[25px] text-primary text-[22px] w-[720px] h-[70px] pl-[25px] bg-surface rounded-2xl shadow-lg">
         <Back />
-        {user.id == user_id ? "twój profil użytkownika" : "profil użytkownika"}
-      </Header>
-      <Main>
-        <Profile>
+        <span className="text-on-surface">
+          {user.id == user_id
+            ? "twój profil użytkownika"
+            : "profil użytkownika"}
+        </span>
+      </div>
+      <div className="z-0 relative flex flex-col gap-[24px] w-full py-[90px] md:px-[5px]">
+        <div className="relative flex flex-col justify-start items-start gap-[5px] pl-[40px] pt-[100px] pb-[40px] mt-[60px] bg-surface rounded-2xl shadow-md">
           <ProfileAvatar user_id={user_id} />
-          <ProfileFullname>
-            {profileUser.firstname.toLowerCase()}{" "}
-            {profileUser.lastname.toLowerCase()}
-          </ProfileFullname>
-          <ProfileEmail>{profileUser.email}</ProfileEmail>
-        </Profile>
-        <Nav>
+          <span className="text-[20px]">
+            {profileUser.firstname} {profileUser.lastname}
+          </span>
+          <span className="text-gray-500 text-[16px]">{profileUser.email}</span>
+        </div>
+        <div className="flex justify-center items-center gap-[30px]">
           <NavItem href={`/uzytkownik/${user_id}/posty`}>posty</NavItem>
           <NavItem href={`/uzytkownik/${user_id}/odpowiedzi`}>
             odpowiedzi
@@ -60,9 +63,9 @@ export default async function ProfileLayout({
               </NavItem>
             </>
           )}
-        </Nav>
+        </div>
         {children}
-      </Main>
-    </Container>
+      </div>
+    </div>
   );
 }

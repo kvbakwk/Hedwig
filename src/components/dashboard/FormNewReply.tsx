@@ -4,8 +4,10 @@ import { useState, useRef, FormEventHandler } from "react";
 import { useRouter } from "next/navigation";
 
 import addPost from "@app/api/addPost";
+import { FilledTonalButton } from "@components/Button";
+import { Checkbox } from "@components/Checkbox";
 
-export default function FormNewReply({ user, parent_id }) {
+export default function FormNewReply({ user, parent_id, setShowReply }) {
   const router = useRouter();
   const [contentErr, setContentErr] = useState(false);
 
@@ -15,7 +17,7 @@ export default function FormNewReply({ user, parent_id }) {
     e.preventDefault();
 
     const content = e.currentTarget.elements["content"];
-    const anonymous = e.currentTarget.elements["anonymous"];
+    const anonymous = e.currentTarget.elements["anonymous_reply"];
 
     const res = await addPost(
       user.id,
@@ -26,6 +28,7 @@ export default function FormNewReply({ user, parent_id }) {
 
     if (res.add) {
       textareaElement.current.value = "";
+      setShowReply(false);
       router.refresh();
     }
     setContentErr(res.contentErr);
@@ -35,12 +38,14 @@ export default function FormNewReply({ user, parent_id }) {
     <form
       className="grid grid-rows-[1fr_15px_60px]"
       onSubmit={handleSubmit}
-      method="post">
+      method="post"
+    >
       <textarea
-        className="text-[22px] leading-10 h-[80px] mt-[20px] mx-[40px] border-b-[1px] border-[rgb(var(--shadow)/1)] outline-none resize-none"
+        className="text-on-surface-variant text-[18px] leading-8 h-[40px] mt-[20px] mx-[40px] bg-inherit outline-none resize-none"
         name="content"
         placeholder="odpowiedz..."
-        ref={textareaElement}></textarea>
+        ref={textareaElement}
+      ></textarea>
       <div className="flex justify-center items-center justify-self-end mr-[40px]">
         {contentErr && (
           <span className=" text-xs text-red-400">
@@ -50,15 +55,17 @@ export default function FormNewReply({ user, parent_id }) {
       </div>
       <div className="flex justify-center items-center gap-8 justify-self-end self-center mb-[15px] mr-[40px] select-none">
         <label
-          htmlFor="anonymous"
-          className="flex justify-center items-center gap-2">
-          <input type="checkbox" name="anonymous" id="anonymous" /> anonimowy
+          className="flex justify-center items-center text-[14px] text-outline tracking-wider"
+          htmlFor="anonymous_reply"
+        >
+          <Checkbox
+            className="m-[15px]"
+            name="anonymous_reply"
+            id="anonymous_reply"
+          />
+          anonimowy
         </label>
-        <input
-          className="text-lg text-[rgb(var(--background)/1)] p-[5px_18px] bg-[rgb(var(--foreground)/1)] rounded-full cursor-pointer"
-          type="submit"
-          value="opublikuj"
-        />
+        <FilledTonalButton>odpowiedz</FilledTonalButton>
       </div>
     </form>
   );

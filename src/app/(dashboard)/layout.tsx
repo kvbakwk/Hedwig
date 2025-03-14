@@ -1,62 +1,64 @@
 import "@app/utils/globals.css";
 
+import { Metadata } from "next";
+
 import { redirect } from "next/navigation";
 import { loginCheck } from "@app/api/login";
 import getUser from "@app/api/getUser";
 
-import { Suspense } from "react";
 import NavItem from "@components/NavItem";
 import EventsItem from "@components/dashboard/EventsItem";
-import ProfileItemLg from "@components/dashboard/ProfileItemLg";
-import ProfileItem from "@components/dashboard/ProfileItem";
-import Layout from "@components/styled/dashboard/Layout";
-import Container from "@components/styled/dashboard/Container";
-import CenterBar from "@components/styled/dashboard/CenterBar";
-import LeftBar from "@components/styled/dashboard/LeftBar";
-import LeftBarTitle from "@components/styled/dashboard/LeftBarTitle";
-import RightBar from "@components/styled/dashboard/RightBar";
-import RightBarTitle from "@components/styled/dashboard/RightBarTitle";
-import Nav from "@components/styled/dashboard/Nav";
+import User from "@components/dashboard/User";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "schcool",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
-export default async function RootDashboardLayout({ children }) {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   if (!(await loginCheck())) redirect("/logowanie");
 
-  const user = await getUser();
-
   return (
-    <html>
-      <head></head>
+    <html lang="pl" className="font-noto">
       <body>
-        <Suspense fallback={<></>}>
-          <Container>
-            <Layout>
-              <LeftBar>
-                <LeftBarTitle>schcool</LeftBarTitle>
-                <Nav>
-                  <NavItem
-                    value="główna"
-                    icon={"home"}
-                    fillIcon={true}
-                    page="/"
-                    href="/"
-                  />
-                </Nav>
-                <ProfileItem user={user} />
-                <ProfileItemLg user={user} />
-              </LeftBar>
-              <div></div>
-              <RightBar>
-                <RightBarTitle>główna</RightBarTitle>
-                <EventsItem />
-              </RightBar>
-            </Layout>
-            <CenterBar>{children}</CenterBar>
-          </Container>
-        </Suspense>
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="z-0 fixed top-0 left-0 grid grid-rows-[110px_1fr] w-[calc((100vw-750px)/2)] h-full bg-surface-container">
+            <div className="flex justify-center items-center font-bold text-primary text-[45px] tracking-tight">
+              schcool.
+            </div>
+            <div className="justify-self-center flex flex-col justify-between items-center w-[300px] h-full">
+              <div className="flex flex-col items-center gap-[10px] text-primary w-full mt-[30px] px-[30px] py-[10px]">
+                <NavItem
+                  value="główna"
+                  icon={"home"}
+                  fillIcon={true}
+                  page="/"
+                  href="/"
+                />
+              </div>
+              <User user={await getUser()} />
+            </div>
+          </div>
+          <div className="z-0 fixed top-0 right-0 grid grid-rows-[9fr_1fr] w-[calc((100vw-750px)/2)] h-full bg-surface-container">
+            <div className="justify-self-center flex flex-col justify-center items-center w-[300px]">
+              <EventsItem />
+            </div>
+            <div className="flex justify-center items-center gap-[10px] text-primary w-full h-[70px] mb-[30px] py-[10px] select-none">
+              <span className="font-semibold">simple.</span><span className="font-light">@</span><span className="font-semibold">2025</span>
+            </div>
+          </div>
+          <div className="z-10 w-[750px] min-h-screen bg-surface-container">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

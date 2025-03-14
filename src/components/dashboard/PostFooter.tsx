@@ -7,20 +7,47 @@ import like from "@app/api/likePost";
 import dislike from "@app/api/dislikePost";
 import save from "@app/api/savePost";
 import PostFooterOption from "./PostFooterOption";
+import { IconButton } from "@components/IconButton";
+import { Icon } from "@components/Icon";
 
-export default function PostFooter({ className, user, post, setReply }) {
+export default function PostFooter({
+  className,
+  user,
+  post,
+  showReply,
+  setShowReply,
+  isDetailed,
+}) {
   const router = useRouter();
   const [inProgress, setInProgress] = useState(false);
-  const [liked, setLiked] = useState(post.likes.find((id) => id === user.id));
-  const [disliked, setDisliked] = useState(
-    post.dislikes.find((id) => id === user.id)
+  const [liked, setLiked] = useState(
+    post.likes.find((id: number) => id === user.id)
   );
-  const [saved, setSaved] = useState(post.saves.find((id) => id === user.id));
+  const [disliked, setDisliked] = useState(
+    post.dislikes.find((id: number) => id === user.id)
+  );
+  const [saved, setSaved] = useState(
+    post.saves.find((id: number) => id === user.id)
+  );
   const [likesCount, setLikesCount] = useState(post.likes.length);
   const [dislikesCount, setDislikesCount] = useState(post.dislikes.length);
   const [repliesCount, setRepliesCount] = useState(post.replies.length);
 
-  const moreEl = useRef<HTMLDivElement>(null);
+  const moreButton = useRef(null);
+  const moreEl = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", (e: PointerEvent) => {
+      if (
+        moreEl.current &&
+        !moreEl.current.contains(e.target) &&
+        !moreButton.current.contains(e.target)
+      ) {
+        moreEl.current.classList.add("hidden");
+        moreEl.current.classList.remove("flex");
+      }
+    });
+  }, []);
 
   useEffect(() => {
     setLiked(post.likes.find((id) => id === user.id));
@@ -29,7 +56,7 @@ export default function PostFooter({ className, user, post, setReply }) {
     setLikesCount(post.likes.length);
     setDislikesCount(post.dislikes.length);
     setRepliesCount(post.replies.length);
-  }, [post]);
+  }, [post, showReply]);
 
   const handleLike = () => {
     setInProgress(true);
@@ -65,53 +92,60 @@ export default function PostFooter({ className, user, post, setReply }) {
         handleClick={() => (inProgress ? "" : handleLike())}
         icon="favorite"
         iconFilled={liked}
-        iconColor="text-[#FF0000]"
+        iconColor="text-error"
         count={likesCount}
       />
       <PostFooterOption
         handleClick={() => (inProgress ? "" : handleDislike())}
         icon="thumb_down"
         iconFilled={disliked}
-        iconColor="text-[#0047D0]"
+        iconColor="text-primary"
         count={dislikesCount}
       />
       <PostFooterOption
-        handleClick={() => (inProgress ? "" : setReply(post.id))}
+        handleClick={() => (inProgress ? "" : setShowReply(!showReply))}
         icon="reply"
         iconFilled={false}
         iconColor=""
         count={repliesCount}
       />
-      <div
-        className="flex justify-center items-center justify-self-center self-center w-[35px] h-[35px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
-        onClick={() => router.push(`/post/${post.id}`)}>
-        <span className={`material-symbols-outlined`}>open_in_new</span>
-      </div>
-      <div
-        className="flex justify-center items-center justify-self-center self-center w-[30px] h-[30px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-full"
+      {!isDetailed && (
+        <IconButton onClick={() => router.push(`/post/${post.id}`)}>
+          <Icon>open_in_new</Icon>
+        </IconButton>
+      )}
+      <IconButton
+        ref={moreButton}
         onClick={() => {
           moreEl.current.classList.toggle("hidden");
           moreEl.current.classList.toggle("flex");
-        }}>
-        <span className={`material-symbols-outlined`}>more_vert</span>
-      </div>
+        }}
+      >
+        <Icon>more_vert</Icon>
+      </IconButton>
       <div
-        className="absolute bottom-[-50%] md:bottom-[calc(100%+25px)] right-[40px] md:right-[-25px] hidden flex-col gap-[1px] font-light w-[150px] py-[8px] px-[4px] bg-[color:rgb(var(--background)/1)] glass-border shadow-md rounded-2xl"
-        ref={moreEl}>
+        className="absolute bottom-[calc(100%+10px)] right-0 hidden flex-col gap-[1px] font-medium text-primary text-sm w-[180px] py-[8px] bg-surface shadow-sm rounded-xl"
+        ref={moreEl}
+      >
         <div
-          className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg"
-          onClick={() => (inProgress ? "" : handleSave())}>
-          <span className={`material-symbols-outlined ${saved ? "fill" : ""}`}>
+          className="flex justify-start items-center gap-[8px] w-full h-[36px] px-[16px] hover:bg-surface-container cursor-pointer"
+          onClick={() => (inProgress ? "" : handleSave())}
+        >
+          <Icon
+            className={`text-on-surface-variant transition-icon ${
+              saved && "fill"
+            }`}
+          >
             bookmark
-          </span>
+          </Icon>
           {saved ? "zapisany" : "zapisz"}
         </div>
-        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg">
-          <span className="material-symbols-outlined">upload</span>
+        <div className="flex justify-start items-center gap-[8px] w-full h-[36px] px-[16px] hover:bg-surface-container cursor-pointer transition-icon">
+          <Icon className="text-on-surface-variant">upload</Icon>
           udostępnij
         </div>
-        <div className="flex justify-start items-center gap-[5px] w-full h-[30px] px-[16px] hover:bg-[rgb(var(--shadow)/1)] cursor-pointer transition-colors rounded-lg">
-          <span className="material-symbols-outlined">flag</span>
+        <div className="flex justify-start items-center gap-[8px] w-full h-[36px] px-[16px] hover:bg-surface-container cursor-pointer transition-icon">
+          <Icon className="text-on-surface-variant">flag</Icon>
           zgłoś
         </div>
       </div>

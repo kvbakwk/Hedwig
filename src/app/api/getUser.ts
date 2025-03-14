@@ -7,5 +7,5 @@ import {
 } from "@app/utils/db-actions/user";
 
 export default async function getUserAPI() {
-  return await getUser(await getId(cookies().get("device_id").value));
+  return await getUser(await getId((await cookies()).get("device_id").value));
 }

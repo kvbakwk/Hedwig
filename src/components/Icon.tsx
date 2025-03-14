@@ -1,18 +1,9 @@
-"use client";
+import React from "react";
+import { createComponent } from "@lit/react";
+import { MdIcon } from "@material/web/icon/icon";
 
-import { useEffect, useRef } from "react";
-
-export default function Icon({ icon, fill }: { icon: string; fill: boolean }) {
-  const iconEl = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (fill) iconEl.current.classList.add("fill");
-    else iconEl.current.classList.remove("fill");
-  }, [fill]);
-
-  return (
-    <span className="material-symbols-outlined" ref={iconEl}>
-      {icon}
-    </span>
-  );
-}
+export const Icon = createComponent({
+  tagName: "md-icon",
+  elementClass: MdIcon,
+  react: React,
+});
